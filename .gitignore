@@ -3,6 +3,7 @@
 # 自定义文件
 resources/report/*
 resources/log/*
+.idea
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
