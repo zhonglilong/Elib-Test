@@ -24,7 +24,6 @@ class TestLogin:
     @pytest.mark.flaky(reruns=3)
     def test_login(self):
         """ 登录成功 """
-        logger.info("aaaaaaaaaa")
         self.page.input_username(USERNAME)
         self.page.input_password(PASSWORD)
         self.page.click_login_btn()
