@@ -3,7 +3,7 @@ import allure
 from page.login_page import LoginPage
 from base.config import *
 from utils.driver_utils import DriverUtils
-from base.logging import logger
+from base.log_config import Logging
 
 # 登录
 @allure.feature('登录功能')
