@@ -4,7 +4,7 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 import logging
 
 # 基类
-class BaseAction(object):
+class BaseAction:
 
     def __init__(self, driver):
         self.driver = driver

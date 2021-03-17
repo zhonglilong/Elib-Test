@@ -3,6 +3,7 @@ import pytest
 import time
 from utils.driver_utils import DriverUtils
 from base.config import *
+from _pytest import terminal
 
 driver = None
 
@@ -15,3 +16,18 @@ def drivers():
     time.sleep(3)
     DriverUtils.quit_driver()
     return driver
+
+
+def pytest_terminal_summary(terminalreporter, exitstatus, config):
+    """ 收集测试结果 """
+    result = "#### total：{0}，passed：{1}，failed：{2} \n" \
+             "#### error：{3}，skipped：{4} \n" \
+             "#### time：{5} seconds".format(
+        terminalreporter._numcollected,
+        len(terminalreporter.stats.get('passed', [])),
+        len(terminalreporter.stats.get('failed', [])),
+        len(terminalreporter.stats.get('error', [])),
+        len(terminalreporter.stats.get('skipped', [])),
+        time.time() - terminalreporter._sessionstarttime
+    )
+    DING_MSG["markdown"]["text"] = result
