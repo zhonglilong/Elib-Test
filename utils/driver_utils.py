@@ -3,6 +3,7 @@ from utils.time_utils import TimeUtils
 from base.config import *
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+import random
 
 # 工具类
 class DriverUtils:
@@ -35,3 +36,7 @@ class DriverUtils:
         cls.__driver.find_element_by_xpath("//div[@class='el-scrollbar__view']/span[1]").click()
         cls.__driver.refresh()
         TimeUtils().sleep(1)
+
+    @classmethod
+    def ramdon_val(cls):
+        return ''.join(random.sample('abcdefghijklmnopqrstuvwxyz0123456789', 6))

@@ -1,3 +1,4 @@
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
@@ -8,7 +9,7 @@ class BaseAction:
 
     def __init__(self, driver):
         self.driver = driver
-        self.timeout = 5
+        self.timeout = 10
 
     # 查找单个元素
     def find_el(self, feature):
@@ -21,7 +22,6 @@ class BaseAction:
 
     # 查找多个元素
     def find_els(self, feature):
-
         by, value = feature
         try:
             return WebDriverWait(self.driver, self.timeout).until(
@@ -35,7 +35,14 @@ class BaseAction:
 
     # 输入
     def input(self, feature, content):
-        return self.find_el(feature).send_keys(content)
+        """ 先双击选中数据，再输入
+        :param feature: 元祖，包含 By.XPATH 和 定位路径
+        :param content: 输入的值
+        :return:
+        """
+        ele = self.find_el(feature)
+        self.chains().double_click(ele).perform()
+        return ele.send_keys(content)
 
     # 清除
     def clear(self, feature):
@@ -56,6 +63,9 @@ class BaseAction:
     # 浏览器后退
     def back(self):
         self.driver.back()
+
+    def chains(self):
+        return ActionChains(self.driver)
 
     def isElementPresent(self, feature):
         """ 判断是否有提示框，没有错误提示框为True，有错误提示框为False；分为2种情况：

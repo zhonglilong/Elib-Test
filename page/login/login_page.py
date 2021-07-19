@@ -8,24 +8,16 @@ ele = Element('base')
 class LoginPage(BasePage):
 
     def input_username(self, content):
-        """ 输入用户名
-        :param content :输入的用户名
-        :return: element
-        """
-        return self.input((By.XPATH, ele['登录用户名']), content)
+        """ 输入用户名 """
+        return self.input_text(path='登录用户名', content=content)
 
     def input_password(self, content):
-        """ 输入密码
-        :param content :输入的密码
-        :return: element
-        """
-        return self.input((By.XPATH, ele['登录密码']), content)
+        """ 输入密码 """
+        return self.input_text(path='登录密码', content=content)
 
     def click_login_btn(self):
-        """ 点击登录按钮
-        :return: element
-        """
-        return self.click((By.XPATH, ele['登录按钮']))
+        """ 点击登录按钮 """
+        self.click_btn(path='登录按钮')
 
     def verify_name(self, name):
         """ 验证操作员名称与config中的VERIFY值是否相等

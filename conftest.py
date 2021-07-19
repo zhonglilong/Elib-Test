@@ -7,6 +7,7 @@ from _pytest import terminal
 
 driver = None
 
+
 @pytest.fixture(scope='session', autouse=True)
 def drivers():
     global driver

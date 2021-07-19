@@ -7,28 +7,28 @@ from selenium import webdriver
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 日志目录
-LOG_PATH = os.path.join(BASE_DIR, 'resources/log/selenium.log')
+LOG_PATH = os.path.join(BASE_DIR, 'resources\\log\\selenium.log')
 
 # 页面元素目录
-ELEMENT_PATH = os.path.join(BASE_DIR, 'page/page_element')
+ELEMENT_PATH = os.path.join(BASE_DIR, 'page\\page_element')
 
 # 测试文件目录
 SCRIPT_PATH = os.path.join(BASE_DIR, 'scripts')
 
 # 测试报告目录
-TEMP_PATH = os.path.join(BASE_DIR, 'resources/report/temp')
-REPORT_PATH = os.path.join(BASE_DIR, 'resources/report/allure_report')
+TEMP_PATH = os.path.join(BASE_DIR, 'resources\\report\\temp')
+REPORT_PATH = os.path.join(BASE_DIR, 'resources\\report\\allure_report')
 
 
 # 业务系统地址
-URL = 'http://192.168.1.47:8080/elib/#/login'
-# URL = 'https://yun.library3.cn/elib/#/login'
-
+URL = 'http://183.6.161.170:8888/elib/#/login'    # 业务系统测试环境
+# URL = 'https://yun.library3.cn/elib/#/login'   # 业务系统正式环境
+# URL = 'http://183.6.161.170:8889/elib/#/login'
 
 # 运行环境
 # 只有docker和local两种
 RUN_ENV = 'docker'
-RUN_DOCKER_URL = 'http://127.0.0.1:5555/wd/hub'  # 这个是本地运行docker
+RUN_DOCKER_URL = 'http://47.107.119.146:5555/wd/hub'  # 这个是本地运行docker
 # RUN_DOCKER_URL = 'http://172.17.0.2:5555/wd/hub'   # 这个是jenkins运行docker
 
 

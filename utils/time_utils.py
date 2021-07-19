@@ -18,5 +18,10 @@ class TimeUtils:
         """
         time.sleep(times)
 
+    @classmethod
+    def today(cls):
+        return time.strftime("%Y-%m-%d", time.localtime())
+
+
 if __name__ == '__main__':
-    print(TimeUtils().get_stamp())
+    print(TimeUtils().today())

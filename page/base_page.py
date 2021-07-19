@@ -2,47 +2,51 @@
 from selenium.webdriver.common.by import By
 from base.base_action import BaseAction
 from base.base_element import Element
+from utils.time_utils import TimeUtils
 
 ele = Element('base')
 
 # 页面基类
 class BasePage(BaseAction):
 
-    def click_model(self, name):
-        """ 点击模块
-        :param name :模块名称（如采访、编目...）
-        :return: element
+    def input_text(self, path, content, param=None):
+        """ 输入框输入值
+        :param path: yaml文件中的 xpath名称
+        :param param: xpath 参数（可以是str，list）
+        :param content: 输入文本
+        :return:
         """
-        value = ele['模块'].format(name)
-        return self.click((By.XPATH, value))
+        # 判断 param 不为空
+        if param is not None:
+            # 判断传过来的是不是个list
+            if isinstance(param, list):
+                value = ele[path].format(*param)
+            else:
+                value = ele[path].format(str(param))
+        else:
+            value = ele[path]
+        self.input((By.XPATH, value), content)
 
-    def click_menu(self, name):
-        """ 点击菜单
-        :param name :菜单名称（如文献编目、文献移送...）
-        :return: element
+    def click_btn(self, path, param=None):
+        """ 点击按钮
+        :param path: yaml文件中的 xpath名称
+        :param param: xpath 参数（可以是str，list）
+        :return:
         """
-        value = ele['菜单'].format(name)
-        return self.click((By.XPATH, value))
-
-    def click_sub_menu(self, num, name):
-        """ 点击子菜单
-        :param num :排序（从上往下处于第几个菜单，如1,2,3...）
-        :param name :子菜单名称（如回溯建库...）
-        :return: element
-        """
-        value = ele['子菜单'].format(num, name)
-        return self.click((By.XPATH, value))
-
-    def click_sub_menu_btn(self, name):
-        """ 点击查询按钮（进F12定位看，有些相同按钮有空格）
-        :param name: 按钮文本
-        :return: element
-        """
-        value = ele['查询按钮'].format(name)
-        return self.click((By.XPATH, value))
+        # 判断 param 不为空
+        if param is not None:
+            # 判断传过来的是不是个list
+            if isinstance(param, list):
+                value = ele[path].format(*param)
+            else:
+                value = ele[path].format(str(param))
+        else:
+            value = ele[path]
+        self.click((By.XPATH, value))
 
     def sub_menu_alert(self):
         """ 判断是否有提示框
         :return: True or False
         """
+        TimeUtils().sleep(1)
         return self.isElementPresent((By.XPATH, ele['提示框']))
