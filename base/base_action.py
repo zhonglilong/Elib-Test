@@ -81,3 +81,19 @@ class BaseAction:
         except NoSuchElementException as e:
             return True
         return False
+
+    def isElementPop(self, feature):
+        """ 判断是否有弹窗，没有弹窗为False，有弹窗为True；分为2种情况：
+        - 如果找不到弹窗，就NoSuchElementException直接返回False
+        - 如果找到了提示框，返回True
+        PS：Python的find()方法，找不到返回-1，找到返回下标（int类型）
+        """
+        by, value = feature
+        try:
+            element = self.driver.find_element(by, value)
+            if str(element.get_attribute('class')).find("el-message-box") == -1:
+                return False
+            else:
+                return True
+        except NoSuchElementException as e:
+            return False

@@ -27,4 +27,5 @@ class TestLogin:
         self.page.input_username(USERNAME)
         self.page.input_password(PASSWORD)
         self.page.click_login_btn()
+        self.page.account_status_of_judge()
         assert self.page.verify_name(VERIFY)

@@ -50,3 +50,10 @@ class BasePage(BaseAction):
         """
         TimeUtils().sleep(1)
         return self.isElementPresent((By.XPATH, ele['提示框']))
+
+    def pop_window_to_judge(self):
+        """ 判断是否有弹窗
+        :return: True or False
+        """
+        TimeUtils().sleep(1)
+        return self.isElementPop((By.XPATH, ele['弹窗']))

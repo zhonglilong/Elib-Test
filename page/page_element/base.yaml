@@ -1,14 +1,16 @@
 登录:
  - 登录用户名: "//*[@placeholder='请输入用户名']"            # 用户名 输入框
- - 登录密码: "//*[@placeholder='请输入密码']"               # 密码 输入框
- - 登录按钮: "//*[@type='button']"                        # 登录按钮
+ - 登录密码: "//*[@placeholder='请输入密码']"                  # 密码 输入框
+ - 登录按钮: "//*[@type='button']"                                  # 登录按钮
+ - 确定按钮: "//*[@type='button'][2]/span"                     #确认登录
  - 操作员名称: "//*[@class='user']/span/button/span"       # 验证登录后右上角的名称是否正确
 全局:
  - 模块: "//*[@alt='{0}']"                               # 菜单上的模块
  - 菜单: "//span[contains(text(), '{0}')]"               # 左侧菜单
  - 子菜单: "//li[{0}]/ul/li[text()='{1}']"                # 左侧子菜单
  - 查询按钮: "//button/span[contains(text(), '{0}')]"     # 各个页面上的查询按钮
- - 提示框: "//div[@role='alert']"                         # 提示弹窗（不知道定位得到不...）
+ - 提示框: "//div[@role='alert']"                         # 提示框（不知道定位得到不...）
+ - 弹窗: "//*[@class='el-message-box']"                                        # 弹窗
  - 表格数据: "//*/tbody/tr"                           # 获取页面的数据
  - 筛选项: "//div[@class='header__line']/div[{0}]"                              # 筛选项
  - 筛选-单选列表: "//div[@x-placement='bottom-start']/div[1]/div[1]/ul/li/span[text()='{0}']"       # 点击 筛选项弹出的单选列表
@@ -21,3 +23,6 @@
    - 新增/编辑-输入: "//div[@*='width: 850px;']/div[2]/div[1]/div/div/form/div/div[2]/label[text()='{0}']/following-sibling::div/div/input"
    - 新增/编辑-按钮: "//div[@*='width: 850px;']/div[3]/div/div[2]/button/span[text()='{0}']"
    - 删除信息-确定: "//div[@aria-label='提示']/div/div[3]/button[{0}]"
+
+运营:
+ 荐购设置:

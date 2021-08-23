@@ -19,6 +19,11 @@ class LoginPage(BasePage):
         """ 点击登录按钮 """
         self.click_btn(path='登录按钮')
 
+    def account_status_of_judge(self):
+        """判断账号是否在被使用"""
+        if self.pop_window_to_judge():
+            self.click_btn(path='确定按钮')
+
     def verify_name(self, name):
         """ 验证操作员名称与config中的VERIFY值是否相等
         :param name :右上角的管理员名称

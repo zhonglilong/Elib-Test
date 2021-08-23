@@ -24,7 +24,7 @@ class TestReservationManagement:
     @allure.story('【预订单管理】查询成功分支')
     @allure.severity('critical')
     @allure.testcase("/elib/#/acquisition/tsydgl/yddgl")
-    @pytest.mark.skip
+    # @pytest.mark.skip
     def test_select(self):
         """ 测试 查询 功能 """
         self.page.click_btn(path='查询按钮', param='查询')

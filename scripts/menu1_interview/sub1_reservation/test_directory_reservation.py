@@ -47,7 +47,7 @@ class TestDirectoryReservation:
     @allure.story('【征订目录预订】筛选日期成功分支')
     @allure.severity('critical')
     @allure.testcase("/elib/#/acquisition/tsydgl/zdsmyd")
-    # @pytest.mark.skip
+    @pytest.mark.skip
     def test_select_date(self):
         """ 测试 筛选日期 功能"""
         self.page.click_btn(path='查询按钮', param='查询')
@@ -60,7 +60,7 @@ class TestDirectoryReservation:
     @allure.severity('critical')
     @allure.testcase("/elib/#/acquisition/tsydgl/zdsmyd")
     @pytest.mark.parametrize("name", [1, 2, 3])
-    # @pytest.mark.skip
+    @pytest.mark.skip
     def test_select_name(self, name):
         """ 测试 筛选征订目录名称 功能 """
         self.page.click_btn(path='查询按钮', param='查询')
@@ -74,7 +74,7 @@ class TestDirectoryReservation:
     @allure.testcase("/elib/#/acquisition/tsydgl/zdsmyd")
     @pytest.mark.flaky(reruns=3)
     @pytest.mark.run(order=1)
-    # @pytest.mark.skip
+    @pytest.mark.skip
     def test_add(self):
         """ 测试 新增征订目录 功能
         这个用例不能运行太快，去掉sleep会提示 ElementNotInteractableException
@@ -93,7 +93,7 @@ class TestDirectoryReservation:
     @allure.severity('critical')
     @allure.testcase("/elib/#/acquisition/tsydgl/zdsmyd")
     @pytest.mark.flaky(reruns=3)
-    # @pytest.mark.skip
+    @pytest.mark.skip
     def test_update(self):
         """ 测试 修改征订目录 功能 """
         TimeUtils().sleep(1)
@@ -111,7 +111,7 @@ class TestDirectoryReservation:
     @allure.severity('critical')
     @allure.testcase("/elib/#/acquisition/tsydgl/zdsmyd")
     @pytest.mark.run(order=-1)
-    # @pytest.mark.skip
+    @pytest.mark.skip
     def test_delete(self):
         """ 测试 删除征订目录 功能 """
         self.page.click_btn(path='查询按钮', param='查询')
@@ -124,7 +124,7 @@ class TestDirectoryReservation:
     @allure.story('【征订目录预订】查询成功分支')
     @allure.severity('critical')
     @allure.testcase("/elib/#/acquisition/tsydgl/zdsmlb?zdpcid=8b16efd1d55242378938fc2ff2cce293")
-    # @pytest.mark.skip
+    @pytest.mark.skip
     def test_select_list(self):
         """ 测试详情页的 查询 功能 """
         self.page.click_order_link()
