@@ -1,8 +1,11 @@
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from page.base_page import BasePage
 from base.base_element import Element
+import utils.ocr_utils as ocr
 
 ele = Element('base')
+
 
 # 登录页面
 class LoginPage(BasePage):
@@ -24,11 +27,12 @@ class LoginPage(BasePage):
         if self.pop_window_to_judge():
             self.click_btn(path='确定按钮')
 
-    def verify_name(self, name):
-        """ 验证操作员名称与config中的VERIFY值是否相等
-        :param name :右上角的管理员名称
-        :return: True or False
-        """
-        if self.text((By.XPATH, ele['操作员名称'])) == name:
-            return True
-        return False
+    def verify_name(self):
+        return self.text((By.XPATH, ele['操作员名称']))
+
+    def input_ocr(self):
+        if self.check_element((By.XPATH, ele['验证码']), type="img") is True:
+            self.screenshot("full_img.png", (By.XPATH, "//*[@placeholder='验证码']/following-sibling::span/span/img"))
+            return self.input((By.XPATH, ele['验证码']), ocr.picture_to_text())
+        else:
+            print("不需要输入验证码")

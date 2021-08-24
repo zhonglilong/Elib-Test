@@ -1,9 +1,9 @@
 # -*- coding:utf-8 -*-
-from utils.time_utils import TimeUtils
+from base.config import BASE_DIR
 from base.config import *
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-import random
+import random, os
 
 # 工具类
 class DriverUtils:
@@ -11,17 +11,20 @@ class DriverUtils:
     __driver = None
 
     @classmethod
-    def get_driver(cls):
+    def get_driver(cls, browser='chrome'):
+        cls.check_dir()
         """ 获取浏览器驱动 """
         if cls.__driver is None:
             if RUN_ENV == 'docker':
-                cls.__driver = webdriver.Remote(RUN_DOCKER_URL, desired_capabilities=DesiredCapabilities.CHROME)
+                if browser == 'chrome':
+                    cls.__driver = webdriver.Remote(RUN_DOCKER_URL, desired_capabilities=DesiredCapabilities.CHROME)
+                elif browser == 'firefox':
+                    cls.__driver = webdriver.Remote(RUN_DOCKER_URL, desired_capabilities=DesiredCapabilities.FIREFOX)
             else:
                 cls.__driver = webdriver.Chrome(options=CHROME_OPTIONS)
-            cls.__driver.get(URL)
+            cls.__driver.get(URL+"/elib/#/login")
             cls.__driver.maximize_window()
             cls.__driver.implicitly_wait(5)
-        else: pass
         return cls.__driver
 
     @classmethod
@@ -40,3 +43,18 @@ class DriverUtils:
     @classmethod
     def ramdon_val(cls):
         return ''.join(random.sample('abcdefghijklmnopqrstuvwxyz0123456789', 6))
+
+    @classmethod
+    def check_dir(cls):
+        if not os.path.exists(BASE_DIR+"\\resources"):
+            os.mkdir(BASE_DIR+"\\resources")
+        if not os.path.exists(BASE_DIR+"\\resources\\log"):
+            os.mkdir(BASE_DIR+"\\resources\\log")
+        if not os.path.exists(BASE_DIR+"\\resources\\picture"):
+            os.mkdir(BASE_DIR+"\\resources\\picture")
+        if not os.path.exists(BASE_DIR+"\\resources\\report"):
+            os.mkdir(BASE_DIR+"\\resources\\report")
+            if not os.path.exists(BASE_DIR+"\\resources\\report\\allure_report"):
+                os.mkdir(BASE_DIR+"\\resources\\report\\allure_report")
+            if not os.path.exists(BASE_DIR+"\\resources\\report\\temp"):
+                os.mkdir(BASE_DIR+"\\resources\\report\\temp")

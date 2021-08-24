@@ -6,6 +6,7 @@ from utils.time_utils import TimeUtils
 
 ele = Element('base')
 
+
 # 页面基类
 class BasePage(BaseAction):
 
@@ -49,7 +50,7 @@ class BasePage(BaseAction):
         :return: True or False
         """
         TimeUtils().sleep(1)
-        return self.isElementPresent((By.XPATH, ele['提示框']))
+        return self.check_element((By.XPATH, ele['提示框']))
 
     def pop_window_to_judge(self):
         """ 判断是否有弹窗

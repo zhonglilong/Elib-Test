@@ -2,8 +2,9 @@
  - 登录用户名: "//*[@placeholder='请输入用户名']"            # 用户名 输入框
  - 登录密码: "//*[@placeholder='请输入密码']"                  # 密码 输入框
  - 登录按钮: "//*[@type='button']"                                  # 登录按钮
- - 确定按钮: "//*[@type='button'][2]/span"                     #确认登录
+ - 确定按钮: "//*[@type='button'][2]/span"                     # 确认登录
  - 操作员名称: "//*[@class='user']/span/button/span"       # 验证登录后右上角的名称是否正确
+ - 验证码: "//*[@placeholder='验证码']"      # 验证码
 全局:
  - 模块: "//*[@alt='{0}']"                               # 菜单上的模块
  - 菜单: "//span[contains(text(), '{0}')]"               # 左侧菜单

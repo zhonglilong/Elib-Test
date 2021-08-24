@@ -21,11 +21,13 @@ class TestLogin:
     @allure.severity('critical')
     @allure.testcase("http://192.168.1.35:8080/elib/#/login")
     @pytest.mark.run(order=1)
-    # @pytest.mark.flaky(reruns=3)
+    @pytest.mark.flaky(reruns=3)
     def test_login(self):
         """ 登录成功 """
         self.page.input_username(USERNAME)
         self.page.input_password(PASSWORD)
         self.page.click_login_btn()
+        self.page.input_ocr()
         self.page.account_status_of_judge()
-        assert self.page.verify_name(VERIFY)
+        assert self.page.sub_menu_alert()
+        assert self.page.verify_name() == VERIFY

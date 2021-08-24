@@ -13,7 +13,7 @@ driver = None
 def drivers():
     global driver
     driver = DriverUtils.get_driver()
-    driver.get(URL)
+    # driver.get(URL+"/elib/#/login")
     yield driver
     time.sleep(3)
     DriverUtils.quit_driver()

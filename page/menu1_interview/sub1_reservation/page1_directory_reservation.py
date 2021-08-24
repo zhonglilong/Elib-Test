@@ -5,6 +5,7 @@ from base.base_element import Element
 
 ele = Element('base')
 
+
 # 采访-征订目录预订
 class DirectoryReservationPage(BasePage):
 
@@ -14,11 +15,11 @@ class DirectoryReservationPage(BasePage):
 
     def menu(self):
         """ 点击菜单: 图书预订处理 """
-        self.click_btn(path='菜单', param='图书预订处理')
+        self.click_btn(path='菜单', param='图书预订管理')
 
     def sub_menu(self):
         """ 点击子菜单: 征订目录预订"""
-        self.click_btn(path='子菜单', param=[1, '征订目录预订'])
+        self.click_btn(path='子菜单', param=[1, '征订书目预订'])
 
     def order(self):
         """ 获取征订目录数量
@@ -27,26 +28,26 @@ class DirectoryReservationPage(BasePage):
         """
         try:
             trs = self.find_els((By.XPATH, ele['表格数据']))
-            return len(trs)/2
+            return len(trs) / 2
         except:
             return 0
 
     def check_order(self):
         """ 勾选数据 """
         if self.order() > 0:
-            value = ele['表格数据'] + "["+str(self.order())+"]/td[1]/div/label"
+            value = ele['表格数据'] + "[" + str(self.order()) + "]/td[1]/div/label"
             self.click((By.XPATH, value))
 
     def click_order_link(self):
         """ 点击详情链接 """
         if self.order() > 0:
-            value = ele['表格数据'] + "["+str(self.order())+"]/td[3]/div/span"
+            value = ele['表格数据'] + "[" + str(self.order()) + "]/td[3]/div/span"
             self.click((By.XPATH, value))
 
     def double_click_order(self):
         """ 双击数据 """
         if self.order() > 0:
-            value = ele['表格数据'] + "["+str(self.order())+"]/td[4]"
+            value = ele['表格数据'] + "[" + str(self.order()) + "]/td[4]"
             self.chains().double_click(self.find_el((By.XPATH, value))).perform()
 
     def click_filter_list(self, name):
@@ -70,3 +71,4 @@ class DirectoryReservationPage(BasePage):
         :param name: 查询的征订目录名称
         """
         self.input_text(path='筛选-输入框', param='请输入征订目录', content=name)
+
