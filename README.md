@@ -6,3 +6,10 @@
 
 ## 其他 
 日后补充
+
+
+### 用例说明
+> 使用 @pytest.mark.自定义词 来区分运行的用例；除了以下4个必须的用例标记，可自由发挥
+- 登录用例：@pytest.mark.login
+- 悦读岛用例：@pytest.mark.yun
+- 业务系统用例：@pytest.mark.reading

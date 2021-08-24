@@ -22,6 +22,7 @@ class TestLogin:
     @allure.testcase("http://192.168.1.35:8080/elib/#/login")
     @pytest.mark.run(order=1)
     @pytest.mark.flaky(reruns=3)
+    @pytest.mark.login
     def test_login(self):
         """ 登录成功 """
         self.page.input_username(USERNAME)

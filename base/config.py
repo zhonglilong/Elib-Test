@@ -24,7 +24,7 @@ IMAGE_PATH = os.path.join(BASE_DIR, 'resources\\picture')
 
 
 # 业务系统地址
-URL = 'http://183.6.161.170:8888/elib/#/login'    # 业务系统测试环境
+URL = 'http://183.6.161.170:8889/elib/#/login'    # 业务系统测试环境
 # URL = 'https://yun.library3.cn/elib/#/login'   # 业务系统正式环境
 # URL = 'http://183.6.161.170:8889/elib/#/login'
 
@@ -64,9 +64,9 @@ CHROME_OPTIONS.add_argument('user-agent="Mozilla/5.0 (Windows NT 6.3; WOW64) App
 
 
 # 测试账号
-USERNAME = 'TJ'
+USERNAME = 'zhonglilong'
 PASSWORD = 'Td123456'
-VERIFY = '统计管理员'
+VERIFY = 'zll'
 
 if __name__ == '__main__':
     print(ELEMENT_PATH)

@@ -3,7 +3,7 @@ import pytest
 from base.config import *
 
 if __name__ == "__main__":
-    pytest.main([SCRIPT_PATH, '--alluredir', TEMP_PATH])
+    pytest.main(["-s", "-v", "-m login or yun", SCRIPT_PATH, '--alluredir', TEMP_PATH])
     os.system('allure generate '+TEMP_PATH+' -o '+REPORT_PATH+' --clean')
     print("test")
     if DING == 'yes':
