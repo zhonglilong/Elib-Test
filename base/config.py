@@ -30,8 +30,8 @@ URL = 'http://183.6.161.170:8889/elib/#/login'    # 业务系统测试环境
 
 # 运行环境
 # 只有docker和local两种
-RUN_ENV = 'local'
-RUN_DOCKER_URL = 'http://47.107.119.146:5555/wd/hub'  # 这个是本地运行docker
+RUN_ENV = 'docker'
+RUN_DOCKER_URL = 'http://127.0.0.1:5555/wd/hub'  # 这个是本地运行docker
 # RUN_DOCKER_URL = 'http://172.17.0.2:5555/wd/hub'   # 这个是jenkins运行docker
 
 
@@ -64,9 +64,9 @@ CHROME_OPTIONS.add_argument('user-agent="Mozilla/5.0 (Windows NT 6.3; WOW64) App
 
 
 # 测试账号
-USERNAME = 'zhonglilong'
+USERNAME = 'autotest'
 PASSWORD = 'Td123456'
-VERIFY = 'zll'
+VERIFY = '自动化测试'
 
 if __name__ == '__main__':
     print(ELEMENT_PATH)

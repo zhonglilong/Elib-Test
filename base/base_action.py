@@ -36,7 +36,13 @@ class BaseAction:
     def click(self, feature):
         return self.find_el(feature).click()
 
-    # 输入
+    # 选项框点击输入
+    def click_input(self, feature, content):
+        ele = self.find_el(feature)
+        self.chains().send_keys_to_element(ele, content).perform()
+        return self
+
+        # 输入
     def input(self, feature, content):
         """ 先双击选中数据，再输入
         :param feature: 元祖，包含 By.XPATH 和 定位路径
@@ -99,6 +105,13 @@ class BaseAction:
                     return True
             except NoSuchElementException as e:
                 return True
+        elif type == "button":
+            try:
+                element = self.driver.find_element(by, value)
+                if str(element.get_attribute('class')).find("el-button") == -1:
+                    return False
+            except NoSuchElementException as e:
+                return False
         else:
             try:
                 self.driver.find_element(by, value)

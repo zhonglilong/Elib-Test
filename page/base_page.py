@@ -58,3 +58,10 @@ class BasePage(BaseAction):
         """
         TimeUtils().sleep(1)
         return self.isElementPop((By.XPATH, ele['弹窗']))
+
+    def pop_sidewindow_to_judge(self):
+        """ 判断是否有侧边弹窗
+        :return: True or False
+        """
+        TimeUtils().sleep(1)
+        return self.check_element((By.XPATH, ele['侧边弹窗']))
