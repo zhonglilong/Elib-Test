@@ -75,7 +75,16 @@ class TestRecommendSet:
         self.page.click_btn(path='查询按钮', param='查询')
         assert self.page.sub_menu_alert() and self.page.order()
 
-        # 选择成员馆为lxy测试二号馆，是否启用选择否，书库选择京东书目，点击重置，无错误弹窗，此时信息为初始信息
+        # 选择成员馆为lxy测试二号馆，是否启用选择否，书库选择京东书目，点击重置，无错误弹窗
+        self.page.click_btn(path='右上按钮', param='1')
+        TimeUtils.sleep(1)
+        self.page.click_btn(path='复选框叉', param='成员馆')
+        self.page.side_click_filter_list(name='成员馆', value='lxy测试二号馆')
+        TimeUtils.sleep(1)
+        self.page.side_click_filter_button(name='是否启用', value='2')
+        self.page.side_click_filter_list(name='书库名称', value='京东书目')
+        self.page.click_btn(path='侧边弹窗底部按钮', param='重置')
+        assert self.page.sub_menu_alert()
 
     def test_sixsixsix(self):
         TimeUtils.sleep(2)
@@ -83,5 +92,10 @@ class TestRecommendSet:
         TimeUtils.sleep(1)
         self.page.click_btn(path='复选框叉', param='成员馆')
         self.page.side_click_filter_list(name='成员馆', value='lxy测试二号馆')
-        self.page.click_btn(path='侧边弹窗底部按钮', param='重置')
-        assert self.page.sub_menu_alert() # 找不到成员馆内选择了lxy测试二号馆 and self.page.find_el()
+        TimeUtils.sleep(1)
+        self.page.side_click_filter_button(name='是否启用', value='2')
+        self.page.side_click_filter_list(name='书库名称', value='京东书目')
+        TimeUtils.sleep(3)
+        self.page.click_btn(path='侧边弹窗底部按钮', param='保存')
+        TimeUtils.sleep(3)
+        assert self.page.sub_menu_alert()
