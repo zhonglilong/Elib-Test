@@ -4,7 +4,7 @@ from base.config import LOG_PATH
 
 
 # 设置日志配置
-def Logging():
+def LogConfig():
     # 创建日志器对象 / 设置日志级别
     logger = logging.getLogger()      # 默认日志器名称为 root
     logger.setLevel(level=logging.INFO)
@@ -14,7 +14,8 @@ def Logging():
     lf = logging.handlers.TimedRotatingFileHandler(filename=LOG_PATH, when="d", backupCount=3)    # 按天切割
 
     # 创建格式器对象
-    fmt = "%(asctime)s %(levelname)s [%(filename)s:%(funcName)s:%(lineno)d] - %(message)s"
+    # fmt = "%(asctime)s %(levelname)s [%(filename)s:%(funcName)s:%(lineno)d] - %(message)s"
+    fmt = "%(asctime)s %(levelname)s %(funcName)s - %(message)s"
     formatter = logging.Formatter(fmt=fmt)
 
     # 将格式器添加到处理器
@@ -24,3 +25,8 @@ def Logging():
     # 将处理器添加到日志器
     logger.addHandler(ls)
     logger.addHandler(lf)
+
+    ls.close()
+    lf.close()
+
+    return logger

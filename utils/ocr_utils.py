@@ -21,11 +21,13 @@ from base.config import IMAGE_PATH, URL
         百度ocr和pytesseract识别不是很一致   -->   用百度吧，pytesseract还是要训练过AI之后识别才高
     优点：处理干净，适用大部分验证码
 """
+
+
 def download_image():
-    src = URL+"/service/api/p/login/getVerify"
+    src = URL + "/service/api/p/login/getVerify"
     r = requests.get(url=src)
 
-    with open(IMAGE_PATH+'\\getVerify.png', 'wb') as i:
+    with open(IMAGE_PATH + '\\getVerify.png', 'wb') as i:
         i.write(r.content)
 
 
@@ -93,13 +95,13 @@ def interference_line(img):
     for y in range(1, w - 1):
         for x in range(1, h - 1):
             count = 0
-            if img[x, y-1] > 245:
+            if img[x, y - 1] > 245:
                 count = count + 1
-            if img[x, y+1] > 245:
+            if img[x, y + 1] > 245:
                 count = count + 1
-            if img[x-1, y] > 245:
+            if img[x - 1, y] > 245:
                 count = count + 1
-            if img[x+1, y] > 245:
+            if img[x + 1, y] > 245:
                 count = count + 1
             if count > 2:
                 img[x, y] = 255
@@ -128,7 +130,6 @@ def interference_line(img):
     #             count = count + 1
     #         if count > 4:
     #             pixdata[x, y] = 255
-
 
     # width = img.shape[1]
     # height = img.shape[0]
@@ -182,7 +183,8 @@ def interference_point(img, x=0, y=0):
                     if sum <= 2 * 245:
                         img[x, y] = 0
                 else:  # 最上非顶点,6邻域
-                    sum = int(img[x - 1, y]) + int(img[x - 1, y + 1]) + int(cur_pixel) + int(img[x, y + 1]) + int(img[x + 1, y]) + int(img[x + 1, y + 1])
+                    sum = int(img[x - 1, y]) + int(img[x - 1, y + 1]) + int(cur_pixel) + int(img[x, y + 1]) + int(
+                        img[x + 1, y]) + int(img[x + 1, y + 1])
                     if sum <= 3 * 245:
                         img[x, y] = 0
             elif y == width - 1:  # 最下面一行
@@ -196,24 +198,30 @@ def interference_point(img, x=0, y=0):
                     if sum <= 2 * 245:
                         img[x, y] = 0
                 else:  # 最下非顶点,6邻域
-                    sum = int(cur_pixel) + int(img[x - 1, y]) + int(img[x + 1, y]) + int(img[x, y - 1]) + int(img[x - 1, y - 1]) + int(img[x + 1, y - 1])
+                    sum = int(cur_pixel) + int(img[x - 1, y]) + int(img[x + 1, y]) + int(img[x, y - 1]) + int(
+                        img[x - 1, y - 1]) + int(img[x + 1, y - 1])
                     if sum <= 3 * 245:
                         img[x, y] = 0
             else:  # y不在边界
                 if x == 0:  # 左边非顶点
-                    sum = int(img[x, y - 1]) + int(cur_pixel) + int(img[x, y + 1]) + int(img[x + 1, y - 1]) + int(img[x + 1, y]) + int(img[x + 1, y + 1])
+                    sum = int(img[x, y - 1]) + int(cur_pixel) + int(img[x, y + 1]) + int(img[x + 1, y - 1]) + int(
+                        img[x + 1, y]) + int(img[x + 1, y + 1])
                     if sum <= 3 * 245:
                         img[x, y] = 0
                 elif x == height - 1:  # 右边非顶点
-                    sum = int(img[x, y - 1]) + int(cur_pixel) + int(img[x, y + 1]) + int(img[x - 1, y - 1]) + int(img[x - 1, y]) + int(img[x - 1, y + 1])
+                    sum = int(img[x, y - 1]) + int(cur_pixel) + int(img[x, y + 1]) + int(img[x - 1, y - 1]) + int(
+                        img[x - 1, y]) + int(img[x - 1, y + 1])
                     if sum <= 3 * 245:
                         img[x, y] = 0
                 else:  # 具备9领域条件的
-                    sum = int(img[x - 1, y - 1]) + int(img[x - 1, y]) + int(img[x - 1, y + 1]) + int(img[x, y - 1]) + int(cur_pixel) + int(img[x, y + 1]) + int(img[x + 1, y - 1]) + int(img[x + 1, y]) + int(img[x + 1, y + 1])
+                    sum = int(img[x - 1, y - 1]) + int(img[x - 1, y]) + int(img[x - 1, y + 1]) + int(
+                        img[x, y - 1]) + int(cur_pixel) + int(img[x, y + 1]) + int(img[x + 1, y - 1]) + int(
+                        img[x + 1, y]) + int(img[x + 1, y + 1])
                     if sum <= 4 * 245:
                         img[x, y] = 0
     cv2.imwrite(filename, img)
     return img
+
 
 def picture_to_text():
     im = get_dynamic_binary_image("getVerify.png")
@@ -221,7 +229,7 @@ def picture_to_text():
     interference_line(im)
     interference_point(im)
 
-    with open(IMAGE_PATH+'\\getVerify-interferenceline.png', 'rb') as f:
+    with open(IMAGE_PATH + '\\getVerify-interferenceline.png', 'rb') as f:
         img = base64.b64encode(f.read())
 
     token = requests.session().post(
@@ -230,7 +238,7 @@ def picture_to_text():
     ).json()
 
     res = requests.session().post(
-        url="https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic?access_token="+token['access_token'],
+        url="https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic?access_token=" + token['access_token'],
         data={"image": img},
         headers={'content-type': 'application/x-www-form-urlencoded'}
     )

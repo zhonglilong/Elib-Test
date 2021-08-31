@@ -3,10 +3,12 @@ import json
 import pytest
 import time
 from utils.driver_utils import DriverUtils
+from base.log_config import LogConfig
 from base.config import *
 from _pytest import terminal
 
 driver = None
+log = LogConfig()
 
 
 @pytest.fixture(scope='session', autouse=True)
@@ -20,10 +22,30 @@ def drivers():
     return driver
 
 
+@pytest.fixture(scope='session', autouse=True)
+def logger():
+    return log
+
+
 def pytest_configure(config):
     marker_list = ["login", "public", "yun", "reading"]  # 标签名集合
     for markers in marker_list:
         config.addinivalue_line("markers", markers)
+
+
+# @pytest.hookimpl(hookwrapper=True, tryfirst=True)
+# def pytest_runtest_makereport(item, call):
+#     # 获取钩子方法的调用结果
+#     out = yield
+#     # print('用例执行结果', out)
+#
+#     # 3. 从钩子方法的调用结果中获取测试报告
+#     report = out.get_result()
+#
+#     log.info('测试报告：%s' % report)
+#     log.info('步骤：%s' % report.when)
+#     log.info('nodeid：%s' % report.nodeid)
+#     log.info('执行结果: %s' % report.outcome)
 
 
 def pytest_terminal_summary(terminalreporter, exitstatus, config):

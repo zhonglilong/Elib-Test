@@ -7,6 +7,7 @@ from base.base_element import Element
 
 ele = Element('base')
 
+
 # 运营-荐购设置
 class RecommendSet(BasePage):
     def model(self):
@@ -71,4 +72,3 @@ class RecommendSet(BasePage):
         """ 获取侧边栏单选按钮，通过传入的值进行选择点击 """
         # 定位筛选项，根据传入的名字点击
         self.chains().click(self.find_el((By.XPATH, ele['新增/编辑-按钮'].format(name, value)))).perform()
-

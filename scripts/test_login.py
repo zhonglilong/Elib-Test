@@ -23,7 +23,7 @@ class TestLogin:
     @pytest.mark.run(order=1)
     @pytest.mark.flaky(reruns=3)
     @pytest.mark.login
-    def test_login(self):
+    def test_login(self, logger):
         """ 登录成功 """
         self.page.input_username(USERNAME)
         self.page.input_password(PASSWORD)

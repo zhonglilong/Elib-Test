@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import pytest
-from page.menu_operation.sub_stacks_maintenance.page_recommend_set import RecommendSet
+from page.menu8_operation.sub_stacks_maintenance.page_recommend_set import RecommendSet
 from utils.driver_utils import DriverUtils
 from utils.time_utils import TimeUtils
 

@@ -34,5 +34,3 @@ class LoginPage(BasePage):
         if self.check_element((By.XPATH, ele['验证码']), type="img") is True:
             self.screenshot("full_img.png", (By.XPATH, "//*[@placeholder='验证码']/following-sibling::span/span/img"))
             return self.input((By.XPATH, ele['验证码']), ocr.picture_to_text())
-        else:
-            print("不需要输入验证码")
