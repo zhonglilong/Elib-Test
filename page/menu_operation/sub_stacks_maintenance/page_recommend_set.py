@@ -45,6 +45,13 @@ class RecommendSet(BasePage):
         self.click_input((By.XPATH, value), name)
         self.chains().click(self.find_el((By.XPATH, ele['筛选-单选列表'].format(name)))).perform()
 
+    def click_select_list(self, name):
+        """ 点击按钮，选择选项 """
+        # 定位筛选项，根据传入的名字点击
+        self.chains().click(self.find_el((By.XPATH, ele['表格第一条数据操作列']))).perform()
+        value = ele['操作列选项'].format(name)
+        self.chains().click(self.find_el((By.XPATH, value))).perform()
+
     def side_click_filter_list(self, name, value):
         """ 获取侧边栏选项框，点击单选列表输入查询的值并点击 """
         # 定位筛选项，根据传入的名字点击

@@ -45,6 +45,23 @@ class BasePage(BaseAction):
             value = ele[path]
         self.click((By.XPATH, value))
 
+    def double_click_btn(self, path, param=None):
+        """ 双击按钮
+        :param path: yaml文件中的 xpath名称
+        :param param: xpath 参数（可以是str，list）
+        :return:
+        """
+        # 判断 param 不为空
+        if param is not None:
+            # 判断传过来的是不是个list
+            if isinstance(param, list):
+                value = ele[path].format(*param)
+            else:
+                value = ele[path].format(str(param))
+        else:
+            value = ele[path]
+        self.clicks((By.XPATH, value))
+
     def sub_menu_alert(self):
         """ 判断是否有提示框
         :return: True or False

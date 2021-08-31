@@ -36,6 +36,11 @@ class BaseAction:
     def click(self, feature):
         return self.find_el(feature).click()
 
+    # 双击
+    def clicks(self, feature):
+        ele = self.find_el(feature)
+        return self.chains().double_click(ele).perform()
+
     # 选项框点击输入
     def click_input(self, feature, content):
         ele = self.find_el(feature)
