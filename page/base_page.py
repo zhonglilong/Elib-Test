@@ -49,8 +49,6 @@ class BasePage(BaseAction):
             value = ele[path]
         self.click((By.XPATH, value), ctype=ctype)
 
-
-
     # def double_click_btn(self, path, param=None):
     #     """ 双击按钮
     #     :param path: yaml文件中的 xpath名称

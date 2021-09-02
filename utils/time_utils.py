@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 import time
 
+
 # 时间类
 class TimeUtils:
 
@@ -19,9 +20,11 @@ class TimeUtils:
         time.sleep(times)
 
     @classmethod
-    def today(cls):
+    def today(cls, istime=False):
+        if istime is True:
+            return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         return time.strftime("%Y-%m-%d", time.localtime())
 
 
 if __name__ == '__main__':
-    print(TimeUtils().today())
+    print(TimeUtils().today(istime=True))

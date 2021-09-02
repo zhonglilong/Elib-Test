@@ -53,7 +53,7 @@ class TestOrderProcess:
         self.page.click_btn(path='查询按钮', param="查询")
         assert self.page.sub_menu_alert()
 
-    @pytest.mark.zll
+    @pytest.mark.yun
     @pytest.mark.parametrize("isbn, ztm, cbs, cbrq", [(9787, "故宫怪兽", "中国", 2019), (5410, "秘密花园", "上海", 2018)])
     def test_select_bookmsg(self, isbn, ztm, cbs, cbrq):
         bookmsg = {"isbn": "ISBN", "ztm": "正题名", "cbs": "出版社", "cbrq": "出版日期"}
@@ -71,7 +71,21 @@ class TestOrderProcess:
             self.page.click_btn(path='查询按钮', param="查询")
             assert self.page.sub_menu_alert()
 
+    @pytest.mark.yun
+    @pytest.mark.parametrize("name", ["zll", "lidian"])
+    def test_select_operator(self, name):
+        self.page.click_filter_input("请输入", name)
+        time.sleep(1)
+        self.page.click_btn(path='查询按钮', param="查询")
+        assert self.page.sub_menu_alert()
 
+    @pytest.mark.zll
+    def test_select_date(self):
+        """ 测试 筛选日期 功能"""
+        self.page.click_filter_date("选择开始时间", TimeUtils().today(istime=True))
+        self.page.click_filter_date("选择结束时间", TimeUtils().today(istime=True))
+        self.page.click_btn(path='查询按钮', param='查询')
+        assert self.page.sub_menu_alert()
 
 
 

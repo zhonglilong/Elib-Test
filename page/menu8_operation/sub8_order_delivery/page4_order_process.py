@@ -31,6 +31,10 @@ class OrderProcessPage(BasePage):
         time.sleep(1)
         self.chains().click(self.find_el((By.XPATH, ele['筛选-单选列表'].format(name)))).perform()
 
-    def click_filter_input(self, param, ordername):
-        """ 获取 订购批次 输入框，输入值进行搜索 """
-        self.input_text(path='筛选-输入框', param=param, content=ordername, itype="clearinput")
+    def click_filter_input(self, param, content):
+        """ 获取输入框，输入值进行搜索 """
+        self.input_text(path='筛选-输入框', param=param, content=content, itype="clearinput")
+
+    def click_filter_date(self, param, content):
+        """ 获取输入框，输入值进行搜索 """
+        self.input_text(path='筛选-输入框', param=param, content=content)
