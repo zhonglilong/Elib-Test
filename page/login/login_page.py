@@ -33,4 +33,4 @@ class LoginPage(BasePage):
     def input_ocr(self):
         if self.check_element((By.XPATH, ele['验证码']), type="img") is True:
             self.screenshot("full_img.png", (By.XPATH, "//*[@placeholder='验证码']/following-sibling::span/span/img"))
-            return self.input((By.XPATH, ele['验证码']), ocr.picture_to_text())
+            return self.input_text(ele['验证码'], ocr.picture_to_text())

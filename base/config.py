@@ -22,7 +22,6 @@ REPORT_PATH = os.path.join(BASE_DIR, 'resources\\report\\allure_report')
 # 图片目录
 IMAGE_PATH = os.path.join(BASE_DIR, 'resources\\picture')
 
-
 # 业务系统地址
 URL = 'http://183.6.161.170:8889/elib/#/login'    # 业务系统测试环境
 # URL = 'https://yun.library3.cn/elib/#/login'   # 业务系统正式环境
@@ -30,9 +29,13 @@ URL = 'http://183.6.161.170:8889/elib/#/login'    # 业务系统测试环境
 
 # 运行环境
 # 只有docker和local两种
-RUN_ENV = 'docker'
+RUN_ENV = 'local'
 RUN_DOCKER_URL = 'http://127.0.0.1:5555/wd/hub'  # 这个是本地运行docker
-# RUN_DOCKER_URL = 'http://172.17.0.2:5555/wd/hub'   # 这个是jenkins运行docker
+
+# 测试账号
+USERNAME = 'zhonglilong'
+PASSWORD = 'Td123456'
+VERIFY = 'zll'
 
 
 # 是否推送钉钉（yes or no）
@@ -61,12 +64,6 @@ CHROME_OPTIONS.add_argument('disable-infobars')
 CHROME_OPTIONS.add_argument('profile.managed_default_content_settings.images')
 CHROME_OPTIONS.add_argument('lang=zh_CN.UTF-8')
 CHROME_OPTIONS.add_argument('user-agent="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36"')
-
-
-# 测试账号
-USERNAME = 'autotest'
-PASSWORD = 'Td123456'
-VERIFY = '自动化测试'
 
 if __name__ == '__main__':
     print(ELEMENT_PATH)

@@ -1,13 +1,7 @@
 # -*- coding:utf-8 -*-
 import base64
 import requests
-from PIL import Image
-from pytesseract import *
-from fnmatch import fnmatch
-from queue import Queue
-import matplotlib.pyplot as plt
 import cv2
-import numpy
 from base.config import IMAGE_PATH, URL
 
 """

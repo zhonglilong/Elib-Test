@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -14,8 +16,11 @@ class BaseAction:
         self.driver = driver
         self.timeout = 10
 
-    # 查找单个元素
     def find_el(self, feature):
+        """ element 显示等待 查找单个元素
+        :param feature:传递元祖 <xpath 和 定位字符>
+        :return: element
+        """
         by, value = feature
         try:
             return WebDriverWait(self.driver, self.timeout).until(
@@ -23,8 +28,11 @@ class BaseAction:
         except (NoSuchElementException, TimeoutException):
             logging.error("No Such Element：" + value)
 
-    # 查找多个元素
     def find_els(self, feature):
+        """ element 显示等待 查找多个元素
+        :param feature:传递元祖 <xpath 和 定位字符>
+        :return: elements
+        """
         by, value = feature
         try:
             return WebDriverWait(self.driver, self.timeout).until(
@@ -32,35 +40,61 @@ class BaseAction:
         except (NoSuchElementException, TimeoutException):
             logging.error("No Such Elements：" + value)
 
-    # 点击
-    def click(self, feature):
-        return self.find_el(feature).click()
+    def click(self, feature, ctype):
+        """ 点击事件
+        :param feature:传递元祖 <xpath 和 定位字符>
+        :param ctype:传递字符串，区分点击类型，分为单击（click）和双击（clicks）
+        :return: self
+        """
+        if ctype == "click":
+            return self.find_el(feature).click()
+        elif ctype == "clicks":
+            return self.chains().double_click(
+                self.find_el(feature)
+            ).perform()
+        else:
+            logging.error("No Such Click Type：" + ctype)
 
-    # 双击
-    def clicks(self, feature):
-        ele = self.find_el(feature)
-        return self.chains().double_click(ele).perform()
+    # # 双击
+    # def clicks(self, feature):
+    #     ele = self.find_el(feature)
+    #     self.chains().double_click(ele).perform()
+    #     return ele
 
-    # 选项框点击输入
-    def click_input(self, feature, content):
-        ele = self.find_el(feature)
-        self.chains().send_keys_to_element(ele, content).perform()
-        return self
+    # # 选项框点击输入
+    # def click_input(self, feature, content):
+    #     ele = self.find_el(feature)
+    #     # send_keys_to_element：可以看看源码，相当于先点击一下element才输入值
+    #     self.chains().send_keys_to_element(ele, content).perform()
+    #     return self
 
-        # 输入
-    def input(self, feature, content):
-        """ 先双击选中数据，再输入
-        :param feature: 元祖，包含 By.XPATH 和 定位路径
-        :param content: 输入的值
-        :return:
+    # 输入
+    def input(self, feature, content, itype):
+        """ 输入事件
+        :param feature: 传递元祖 <xpath 和 定位字符>
+        :param content: 传递字符串，输入的内容
+        :param itype: 传递字符串，区分输入类型，分为
+            直接输入（input）、单击后输入（clickinput）、双击后输入（clickinputs）、清除后输入（clearinput）
+        :return: self
         """
         ele = self.find_el(feature)
-        self.chains().double_click(ele).perform()
-        return ele.send_keys(content)
+        if itype == "input":
+            return ele.send_keys(content)
+        elif itype == "clickinput":
+            # send_keys_to_element：可以看看源码，相当于先点击一下element才输入值
+            self.chains().send_keys_to_element(ele, content).perform()
+        elif itype == "clickinputs":
+            self.chains().double_click(ele).perform()
+            return ele.send_keys(content)
+        elif itype == "clearinput":
+            ele.clear()
+            return ele.send_keys(content)
+        else:
+            logging.error("No Such input Type：" + itype)
 
-    # 清除
-    def clear(self, feature):
-        return self.find_el(feature).clear()
+    # # 清除
+    # def clear(self, feature):
+    #     return self.find_el(feature).clear()
 
     # 获取页面源代码
     def get_source(self):

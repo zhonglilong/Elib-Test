@@ -1,11 +1,9 @@
 # -*- coding:utf-8 -*-
-import json
 import pytest
 import time
 from utils.driver_utils import DriverUtils
 from base.log_config import LogConfig
 from base.config import *
-from _pytest import terminal
 
 driver = None
 log = LogConfig()
@@ -28,9 +26,16 @@ def logger():
 
 
 def pytest_configure(config):
-    marker_list = ["login", "public", "yun", "reading"]  # 标签名集合
+    marker_list = ["login", "public", "yun", "reading", "zll"]  # 标签名集合
     for markers in marker_list:
         config.addinivalue_line("markers", markers)
+
+
+def pytest_collection_modifyitems(items):
+    """ 解决pytest输出信息是乱码的问题 """
+    for item in items:
+        item.name = item.name.encode("utf-8").decode("unicode_escape")
+        item._nodeid = item.nodeid.encode("utf-8").decode("unicode_escape")
 
 
 # @pytest.hookimpl(hookwrapper=True, tryfirst=True)

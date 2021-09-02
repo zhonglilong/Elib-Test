@@ -7,6 +7,7 @@ from utils.time_utils import TimeUtils
 
 # 运营-荐购设置 测试用例
 class TestRecommendSet:
+
     @pytest.fixture(scope='function', autouse=True)
     def setup_class(self, drivers):
         self.page = RecommendSet(drivers)
@@ -55,7 +56,7 @@ class TestRecommendSet:
         # 成员馆设置为空点击保存，有错误弹窗
         self.page.click_btn(path='复选框叉', param='成员馆')
         self.page.click_btn(path='侧边弹窗底部按钮', param='保存')
-        assert self.page.sub_menu_alert() == False
+        assert self.page.sub_menu_alert() is False
 
         # 选择成员馆为lxy测试一号馆，是否启用选择否，书库选择京东书目，点击保存，无错误弹窗，查询成员馆lxy测试一号馆，无错误提示框，有数据
         TimeUtils.sleep(4)
@@ -73,7 +74,7 @@ class TestRecommendSet:
         TimeUtils.sleep(1)
         self.page.side_click_filter_list(name='成员馆', value='lxy测试一号馆')
         self.page.click_btn(path='侧边弹窗底部按钮', param='保存')
-        assert self.page.sub_menu_alert() == False
+        assert self.page.sub_menu_alert() is False
 
         # 选择成员馆为测试用一号馆，测试用二号馆，点击保存，无错误弹窗，查询成员馆测试用一号馆，无错误提示框，有数据
         TimeUtils.sleep(4)
@@ -102,7 +103,8 @@ class TestRecommendSet:
         self.page.click_filter_list(name='lxy测试一号馆', cont='1')
         self.page.click_btn(path='查询按钮', param='查询')
         TimeUtils.sleep(1)
-        self.page.double_click_btn(path='表格第一条数据', param=None)
+        # self.page.double_click_btn(path='表格第一条数据', param=None)
+        self.page.click_btn(path='表格第一条数据', ctype="clicks")
         assert self.page.sub_menu_alert()
         self.page.side_click_filter_button(name='是否启用', value='1')
         self.page.side_click_filter_list(name='书库名称', value='测试书库')

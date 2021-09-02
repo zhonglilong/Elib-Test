@@ -4,12 +4,14 @@ import hashlib
 import hmac
 import urllib.parse
 
+
 def md5_key(value):
     """ 禅道md5加密 """
     m = hashlib.md5()
     b = value.encode(encoding='utf-8')
     m.update(b)
     return m.hexdigest()
+
 
 def hmac_key(secret, string_to_sign):
     """ 钉钉加密 """

@@ -42,8 +42,9 @@ class RecommendSet(BasePage):
     def click_filter_list(self, name, cont):
         """ 获取单选列表，点击单选列表输入查询的值并点击 """
         # 定位筛选项，根据传入的名字点击
-        value = ele['筛选项'].format(cont)
-        self.click_input((By.XPATH, value), name)
+        # value = ele['筛选项'].format(["1", cont])
+        # self.click_input((By.XPATH, value), name)
+        self.input_text(path=ele['筛选项'], param=["1", cont], content=name, itype="clickinput")
         self.chains().click(self.find_el((By.XPATH, ele['筛选-单选列表'].format(name)))).perform()
 
     def click_select_list(self, name):
@@ -56,14 +57,16 @@ class RecommendSet(BasePage):
     def side_click_filter_list(self, name, value):
         """ 获取侧边栏选项框，点击单选列表输入查询的值并点击 """
         # 定位筛选项，根据传入的名字点击
-        self.click_input((By.XPATH, ele['新增/编辑-输入'].format(name)), value)
+        # self.click_input((By.XPATH, ele['新增/编辑-输入'].format(name)), value)
+        self.input_text(path=ele['新增/编辑-输入'], param=name, content=value, itype="clickinput")
         self.chains().click(self.find_el((By.XPATH, ele['筛选-单选列表'].format(value)))).perform()
 
     def side_clicks_filter_list(self, name, value):
         """ 获取侧边栏选项框，点击复选列表输入查询的值并点击 """
         # 定位筛选项，根据传入的名字点击
         for i in value:
-            self.click_input((By.XPATH, ele['新增/编辑-输入'].format(name) + '//div[@class="el-select__tags"]'), i)
+            # self.click_input((By.XPATH, ele['新增/编辑-输入'].format(name) + '//div[@class="el-select__tags"]'), i)
+            self.input_text(path=ele['新增/编辑-输入'] + '//div[@class="el-select__tags"]', param=name, content=i, itype="clickinput")
             time.sleep(2)
             self.chains().click(self.find_el((By.XPATH, ele['筛选-单选列表'].format(i)))).perform()
             time.sleep(2)
@@ -71,4 +74,4 @@ class RecommendSet(BasePage):
     def side_click_filter_button(self, name, value):
         """ 获取侧边栏单选按钮，通过传入的值进行选择点击 """
         # 定位筛选项，根据传入的名字点击
-        self.chains().click(self.find_el((By.XPATH, ele['新增/编辑-按钮'].format(name, value)))).perform()
+        self.chains().click(self.find_el((By.XPATH, ele['单选新增/编辑-按钮'].format(name, value)))).perform()
