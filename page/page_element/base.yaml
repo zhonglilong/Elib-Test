@@ -15,7 +15,7 @@
  - 侧边弹窗: "//div[@class='side__wrapper common__side_form']"     # 侧边弹窗
  - 侧边弹窗叉: "//i[@class='el-icon-close']"
  - 新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div"   # 可输入的框，传输入框名称
- - 单选新增/编辑-按钮: "//label[contains(text(),'{0}')]/following-sibling::div//label[{1}]"   # 单选按钮，传入参数名和值（从左到右为1，2，......）
+ - 新增/编辑-单选按钮: "//label[contains(text(),'{0}')]/following-sibling::div//label[{1}]"   # 单选按钮，传入参数名和值（从左到右为1，2，......）
  - 删除确定/取消: "//div[@aria-label='提示']/div/div[3]/button[{0}]"
  - 复选框叉: "//label[contains(text(),'{0}')]/following-sibling::div//span[@class='el-input__suffix']"
  - 侧边弹窗底部按钮: "//div[@class='edit__footer border']//span[contains(text(),'{0}')]"    #侧边弹窗底部的按钮

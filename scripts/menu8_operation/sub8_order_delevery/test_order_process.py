@@ -56,6 +56,7 @@ class TestOrderProcess:
     @pytest.mark.yun
     @pytest.mark.parametrize("isbn, ztm, cbs, cbrq", [(9787, "故宫怪兽", "中国", 2019), (5410, "秘密花园", "上海", 2018)])
     def test_select_bookmsg(self, isbn, ztm, cbs, cbrq):
+        """ 测试 筛选isbn，正题名，出版社，出版日期 """
         bookmsg = {"isbn": "ISBN", "ztm": "正题名", "cbs": "出版社", "cbrq": "出版日期"}
         for k, v in bookmsg.items():
             self.page.click_filter_list(4, str(v))
@@ -74,19 +75,24 @@ class TestOrderProcess:
     @pytest.mark.yun
     @pytest.mark.parametrize("name", ["zll", "lidian"])
     def test_select_operator(self, name):
+        """ 测试 筛选操作员 """
         self.page.click_filter_input("请输入", name)
         time.sleep(1)
         self.page.click_btn(path='查询按钮', param="查询")
         assert self.page.sub_menu_alert()
 
-    @pytest.mark.zll
+    @pytest.mark.yun
     def test_select_date(self):
-        """ 测试 筛选日期 功能"""
+        """ 测试 筛选操作时间 """
         self.page.click_filter_date("选择开始时间", TimeUtils().today(istime=True))
         self.page.click_filter_date("选择结束时间", TimeUtils().today(istime=True))
         self.page.click_btn(path='查询按钮', param='查询')
         assert self.page.sub_menu_alert()
 
+    @pytest.mark.zll
+    def test_add_order(self):
+        """ 测试 添加预订单 """
+        self.page.click_btn(path='右上按钮', param="2")
 
 
 
