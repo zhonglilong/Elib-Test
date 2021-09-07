@@ -38,6 +38,7 @@
    - 采访-表格数据: "//*/tbody/tr[{0}]/td[4]"    # 获取表格数据，{0}决定获取的数据
    - 采访-表格数据链接: "//*/tbody/tr[{0}]/td[3]/div/span"
    - 采访-表格数据勾选: "//*/tbody/tr[{0}]/td[1]/div/label"
-
 运营:
-  荐购设置:
+  订购处理:
+   - 运营-新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div/div/input"
+

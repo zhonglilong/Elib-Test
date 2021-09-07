@@ -90,9 +90,13 @@ class TestOrderProcess:
         assert self.page.sub_menu_alert()
 
     @pytest.mark.zll
-    def test_add_order(self):
+    @pytest.mark.parametrize("ordertype", ["1", "2", "3"])
+    def test_add_order(self, ordertype):
         """ 测试 添加预订单 """
         self.page.click_btn(path='右上按钮', param="2")
+        self.page.click_btn(path='新增/编辑-单选按钮', param=['订单类型', ordertype])
+        self.page.input_text(path='运营-新增/编辑-输入', param='期望复本数', content=ordertype)
+        self.page.click_btn(path='侧边弹窗底部按钮', param='确定')
 
 
 

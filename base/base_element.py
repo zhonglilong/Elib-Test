@@ -3,6 +3,7 @@ import os
 import yaml
 from base.config import ELEMENT_PATH
 
+
 class Element:
     """获取元素"""
 
@@ -28,10 +29,14 @@ def find_dict_value(dict_data, item):
             if isinstance(value, list):
                 for y in value:
                     for k, v in y.items():
-                        if k == item: return v
+                        if k == item:
+                            return v
             if isinstance(value, dict):
-                return find_dict_value(value, item)
+                # 如果直接return find_dict_value(value, item)，第一次循环"征订目录预订"后找不到就直接retuen None，后边的就不会继续循环
+                if find_dict_value(value, item) is not None:
+                    return find_dict_value(value, item)
+
 
 if __name__ == '__main__':
     search = Element('base')
-    print(search['模块'])
+    print(search['运营-新增/编辑-输入'])
