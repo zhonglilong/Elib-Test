@@ -11,7 +11,7 @@ def LogConfig():
 
     # 创建处理器对象: 输出到控制台 + 文件(按时间切割)
     ls = logging.StreamHandler()
-    lf = logging.handlers.TimedRotatingFileHandler(filename=LOG_PATH, when="d", backupCount=3)    # 按天切割
+    lf = logging.handlers.TimedRotatingFileHandler(filename=LOG_PATH+"\\selenium.log", when="d", backupCount=3)    # 按天切割
 
     # 创建格式器对象
     # fmt = "%(asctime)s %(levelname)s [%(filename)s:%(funcName)s:%(lineno)d] - %(message)s"

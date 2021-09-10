@@ -7,8 +7,6 @@ from utils.driver_utils import *
 def check_dir():
     if not os.path.exists(BASE_DIR + "\\resources\\log"):
         os.mkdir(BASE_DIR + "\\resources\\log")
-        file = open(BASE_DIR + "\\resources\\log\\selenium.log", 'w')
-        file.close()
     if not os.path.exists(BASE_DIR + "\\resources\\picture"):
         os.mkdir(BASE_DIR + "\\resources\\picture")
     if not os.path.exists(BASE_DIR + "\\resources\\report"):

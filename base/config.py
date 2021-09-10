@@ -7,7 +7,7 @@ from selenium import webdriver
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 日志目录
-LOG_PATH = os.path.join(BASE_DIR, 'resources\\log\\selenium.log')
+LOG_PATH = os.path.join(BASE_DIR, 'resources\\log')
 
 # 页面元素目录
 ELEMENT_PATH = os.path.join(BASE_DIR, 'page\\page_element')
@@ -29,8 +29,8 @@ URL = 'http://183.6.161.170:8889/elib/#/login'    # 业务系统测试环境
 
 # 运行环境
 # 只有docker和local两种
-RUN_ENV = 'local'
-RUN_DOCKER_URL = 'http://127.0.0.1:5555/wd/hub'  # 这个是本地运行docker
+RUN_ENV = 'docker'
+RUN_DOCKER_URL = 'http://47.107.119.146:5555/wd/hub'  # 这个是本地运行docker
 
 # 测试账号
 USERNAME = 'zhonglilong'
