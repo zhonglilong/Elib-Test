@@ -40,5 +40,5 @@
    - 采访-表格数据勾选: "//*/tbody/tr[{0}]/td[1]/div/label"
 运营:
   订购处理:
-   - 运营-新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div/div/input"
+   - 运营-新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div//div[@class='el-select__tags']/input"
 
