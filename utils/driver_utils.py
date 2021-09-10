@@ -11,7 +11,6 @@ class DriverUtils:
 
     @classmethod
     def get_driver(cls, browser='chrome'):
-        cls.check_dir()
         """ 获取浏览器驱动 """
         if cls.__driver is None:
             if RUN_ENV == 'docker':
@@ -43,15 +42,17 @@ class DriverUtils:
     def ramdon_val(cls):
         return ''.join(random.sample('abcdefghijklmnopqrstuvwxyz0123456789', 6))
 
-    @classmethod
-    def check_dir(cls):
-        if not os.path.exists(BASE_DIR + "\\resources\\log"):
-            os.mkdir(BASE_DIR + "\\resources\\log")
-        if not os.path.exists(BASE_DIR + "\\resources\\picture"):
-            os.mkdir(BASE_DIR + "\\resources\\picture")
-        if not os.path.exists(BASE_DIR + "\\resources\\report"):
-            os.mkdir(BASE_DIR + "\\resources\\report")
-            if not os.path.exists(BASE_DIR + "\\resources\\report\\allure_report"):
-                os.mkdir(BASE_DIR + "\\resources\\report\\allure_report")
-            if not os.path.exists(BASE_DIR + "\\resources\\report\\temp"):
-                os.mkdir(BASE_DIR + "\\resources\\report\\temp")
+    # @classmethod
+    # def check_dir(cls):
+    #     if not os.path.exists(BASE_DIR + "\\resources\\log"):
+    #         os.mkdir(BASE_DIR + "\\resources\\log")
+    #         file = open(BASE_DIR + "\\resources\\log\\selenium.log", 'w')
+    #         file.close()
+    #     if not os.path.exists(BASE_DIR + "\\resources\\picture"):
+    #         os.mkdir(BASE_DIR + "\\resources\\picture")
+    #     if not os.path.exists(BASE_DIR + "\\resources\\report"):
+    #         os.mkdir(BASE_DIR + "\\resources\\report")
+    #         if not os.path.exists(BASE_DIR + "\\resources\\report\\allure_report"):
+    #             os.mkdir(BASE_DIR + "\\resources\\report\\allure_report")
+    #         if not os.path.exists(BASE_DIR + "\\resources\\report\\temp"):
+    #             os.mkdir(BASE_DIR + "\\resources\\report\\temp")
