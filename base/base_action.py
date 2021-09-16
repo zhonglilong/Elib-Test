@@ -14,7 +14,7 @@ class BaseAction:
 
     def __init__(self, driver):
         self.driver = driver
-        self.timeout = 10
+        self.timeout = 5
 
     def find_el(self, feature):
         """ element 显示等待 查找单个元素
@@ -37,7 +37,7 @@ class BaseAction:
         try:
             return WebDriverWait(self.driver, self.timeout).until(
                 EC.presence_of_all_elements_located((by, value)))
-        except (NoSuchElementException, TimeoutException):
+        except(NoSuchElementException, TimeoutException):
             logging.error("No Such Elements：" + value)
 
     def click(self, feature):

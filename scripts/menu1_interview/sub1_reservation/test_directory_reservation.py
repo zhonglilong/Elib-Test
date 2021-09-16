@@ -26,7 +26,6 @@ class TestDirectoryReservation:
     @allure.story('【征订目录预订】查询成功分支')
     @allure.severity('critical')
     @allure.testcase("/elib/#/acquisition/tsydgl/zdsmyd")
-    # @pytest.mark.skip
     @pytest.mark.yun
     def test_select(self):
         """ 测试 查询 功能 """

@@ -21,14 +21,14 @@ class TestIndividualProperty:
     def teardown(self):
         DriverUtils.back_option()
 
-    @pytest.mark.skx1
+    @pytest.mark.skx
     def test_select(self, logger):
         """ 测试 查询 功能 """
         self.page.click_btn(path='查询按钮', param='查询')
         assert self.page.sub_menu_alert()
 
     @pytest.mark.parametrize("name", ["图书馆"])
-    @pytest.mark.skx1
+    @pytest.mark.skx
     def test_select_houses(self, name):
         """ 测试 筛选财产馆 功能"""
         self.page.click_btn(path='查询按钮', param='查询')
@@ -37,8 +37,8 @@ class TestIndividualProperty:
         assert self.page.sub_menu_alert()
 
     @pytest.mark.parametrize("name", ["全部"])
-    @pytest.mark.skx1
-    def test_select_advanced_orderr(self, name):
+    @pytest.mark.skx
+    def test_select_advanced_order(self, name):
         """ 测试 筛选财产藏址按“全部”查询 功能"""
         self.page.click_btn(path='查询按钮', param='查询')
         self.page.click_close_all("财产藏址", 2)
@@ -48,7 +48,7 @@ class TestIndividualProperty:
         assert self.page.sub_menu_alert()
 
     @pytest.mark.parametrize("name", ["全部", "编目", "在馆", "借出"])
-    @pytest.mark.skx1
+    @pytest.mark.skx
     def test_select_booksellers(self, name):
         """ 测试 筛选馆藏状态 ：“全部、编目、在馆、借出” 功能"""
         self.page.click_btn(path='查询按钮', param='查询')
@@ -59,7 +59,7 @@ class TestIndividualProperty:
         assert self.page.sub_menu_alert()
 
     @pytest.mark.parametrize("name", ["全部"])
-    @pytest.mark.skx1
+    @pytest.mark.skx
     def test_select_book_peoples(self, name):
         """ 测试 入库人  功能"""
         self.page.click_btn(path='查询按钮', param='查询')
@@ -69,7 +69,7 @@ class TestIndividualProperty:
         self.page.click_btn(path='查询按钮', param='查询')
         assert self.page.sub_menu_alert()
 
-    @pytest.mark.skx1
+    @pytest.mark.skx
     def test_select_date(self):
         """ 测试 筛选入库日期 功能"""
         self.page.click_btn(path='查询按钮', param='查询')
@@ -78,7 +78,7 @@ class TestIndividualProperty:
         assert self.page.sub_menu_alert()
 
     @pytest.mark.parametrize("start, end", [("s4", "s9"), ("s1", "s9")])
-    @pytest.mark.skx1
+    @pytest.mark.skx
     def test_select_items(self, start, end):
         """ 测试 筛选条形码 功能"""
         self.page.click_btn(path='查询按钮', param='查询')

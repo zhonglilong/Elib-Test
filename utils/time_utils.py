@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import time
+from datetime import datetime
 
 
 # 时间类
@@ -18,6 +19,14 @@ class TimeUtils:
         :return: 无返回
         """
         time.sleep(times)
+
+    @classmethod
+    def current_year(cls):
+        """
+        获取当前系统年的年份
+        :return:
+        """
+        return datetime.now().year
 
     @classmethod
     def today(cls, istime=False):
