@@ -1,4 +1,4 @@
-from selenium.common.exceptions import NoSuchElementException
+
 from selenium.webdriver.common.by import By
 from page.base_page import BasePage
 from base.base_element import Element
@@ -31,6 +31,6 @@ class LoginPage(BasePage):
         return self.text((By.XPATH, ele['操作员名称']))
 
     def input_ocr(self):
-        if self.check_element((By.XPATH, ele['验证码']), type="img") is True:
+        if self.check_element((By.XPATH, ele['验证码']), atype="img") is True:
             self.screenshot("full_img.png", (By.XPATH, "//*[@placeholder='验证码']/following-sibling::span/span/img"))
             return self.input_text(ele['验证码'], ocr.picture_to_text())
