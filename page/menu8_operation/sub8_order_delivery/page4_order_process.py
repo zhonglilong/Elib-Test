@@ -29,7 +29,8 @@ class OrderProcessPage(BasePage):
         """
         self.input_text(path='筛选项', param=["1", num], content=name, itype="clickinput")
         time.sleep(1)
-        self.chains().click(self.find_el((By.XPATH, ele['筛选-单选列表'].format(name)))).perform()
+        self.click_btn(path='筛选-单选列表', param=name)
+        # self.chains().click(self.find_el((By.XPATH, ele['筛选-单选列表'].format(name)))).perform()
 
     def click_filter_input(self, param, content):
         """ 获取输入框，输入值进行搜索 """

@@ -12,7 +12,6 @@
  - 查询按钮: "//button/span[contains(text(), '{0}')]"                              # 各个页面上的查询按钮
  - 提示框: "//div[@role='alert']"                                                          # 提示框（不知道定位得到不...）
  - 弹窗: "//*[@class='el-message-box']"                                             # 弹窗
- - 侧边弹窗: "//div[@class='side__wrapper common__side_form']"     # 侧边弹窗
  - 侧边弹窗叉: "//i[@class='el-icon-close']"
  - 新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div"   # 可输入的框，传输入框名称
  - 新增/编辑-单选按钮: "//label[contains(text(),'{0}')]/following-sibling::div//label[{1}]"   # 单选按钮，传入参数名和值（从左到右为1，2，......）
@@ -38,6 +37,9 @@
    - 采访-表格数据: "//*/tbody/tr[{0}]/td[4]"    # 获取表格数据，{0}决定获取的数据
    - 采访-表格数据链接: "//*/tbody/tr[{0}]/td[3]/div/span"
    - 采访-表格数据勾选: "//*/tbody/tr[{0}]/td[1]/div/label"
+编目:
+  编目管理:
+   - 编目-筛选项: "//div[@class='header__line'][{0}]/div[{1}]/div/input"
 运营:
   订购处理:
    - 运营-新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div/div/input"

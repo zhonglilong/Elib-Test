@@ -3,6 +3,7 @@ import allure
 from page.login.login_page import LoginPage
 from base.config import *
 from utils.driver_utils import DriverUtils
+import logging
 
 
 # 登录
@@ -23,7 +24,7 @@ class TestLogin:
     @pytest.mark.run(order=1)
     @pytest.mark.flaky(reruns=3)
     @pytest.mark.login
-    def test_login(self, logger):
+    def test_login(self):
         """ 登录成功 """
         self.page.input_username(USERNAME)
         self.page.input_password(PASSWORD)

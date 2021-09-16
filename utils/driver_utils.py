@@ -22,7 +22,7 @@ class DriverUtils:
                 cls.__driver = webdriver.Chrome(options=CHROME_OPTIONS)
             cls.__driver.get(URL + "/elib/#/login")
             cls.__driver.maximize_window()
-            cls.__driver.implicitly_wait(5)
+            cls.__driver.implicitly_wait(0.5)
         return cls.__driver
 
     @classmethod
@@ -37,22 +37,3 @@ class DriverUtils:
         cls.__driver.find_element_by_xpath("//div[@class='el-scrollbar__view']/span[1]").click()
         cls.__driver.refresh()
         TimeUtils().sleep(1)
-
-    @classmethod
-    def ramdon_val(cls):
-        return ''.join(random.sample('abcdefghijklmnopqrstuvwxyz0123456789', 6))
-
-    # @classmethod
-    # def check_dir(cls):
-    #     if not os.path.exists(BASE_DIR + "\\resources\\log"):
-    #         os.mkdir(BASE_DIR + "\\resources\\log")
-    #         file = open(BASE_DIR + "\\resources\\log\\selenium.log", 'w')
-    #         file.close()
-    #     if not os.path.exists(BASE_DIR + "\\resources\\picture"):
-    #         os.mkdir(BASE_DIR + "\\resources\\picture")
-    #     if not os.path.exists(BASE_DIR + "\\resources\\report"):
-    #         os.mkdir(BASE_DIR + "\\resources\\report")
-    #         if not os.path.exists(BASE_DIR + "\\resources\\report\\allure_report"):
-    #             os.mkdir(BASE_DIR + "\\resources\\report\\allure_report")
-    #         if not os.path.exists(BASE_DIR + "\\resources\\report\\temp"):
-    #             os.mkdir(BASE_DIR + "\\resources\\report\\temp")

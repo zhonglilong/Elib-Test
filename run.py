@@ -21,15 +21,6 @@ if __name__ == "__main__":
     # 先创建文件夹和文件
     check_dir()
 
-    pytest.main(["-s", "-m login or zhl", "-v", SCRIPT_PATH, '--alluredir', TEMP_PATH])
+    pytest.main(["-s", "-m login or yun", "-v", SCRIPT_PATH, '--alluredir', TEMP_PATH])
+    # pytest.main(["-s", "-m login or yun", "-v", SCRIPT_PATH])
     os.system('allure generate '+TEMP_PATH+' -o '+REPORT_PATH+' --clean')
-    if DING == 'yes':
-        """ 推送 dingding 消息 """
-        print(DING_MSG["markdown"]["text"])
-        # requests.post(
-        #     url=WEBHOOK,
-        #     params={'access_token': TOKEN, 'timestamp': TimeUtils().get_stamp(), 'sign': hmac_key(SECRCT, SIGN)},
-        #     headers={'Content-Type': 'application/json; charset=utf-8'},
-        #     json=DING_MSG,
-        #     verify=False
-        # )

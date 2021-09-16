@@ -4,12 +4,13 @@ import allure
 from page.menu1_interview.sub1_reservation.page1_directory_reservation import DirectoryReservationPage
 from utils.driver_utils import DriverUtils
 from utils.time_utils import TimeUtils
+from utils.common_utils import ramdon_val
 
 
 # 采访-征订目录预订 测试用例
 class TestDirectoryReservation:
 
-    @pytest.fixture(scope='function', autouse=True)
+    @pytest.fixture(scope="function", autouse=True)
     def setup_class(self, drivers):
         self.page = DirectoryReservationPage(drivers)
 
@@ -27,7 +28,7 @@ class TestDirectoryReservation:
     @allure.testcase("/elib/#/acquisition/tsydgl/zdsmyd")
     # @pytest.mark.skip
     @pytest.mark.yun
-    def test_select(self, logger):
+    def test_select(self):
         """ 测试 查询 功能 """
         self.page.click_btn(path='查询按钮', param='查询')
         assert self.page.sub_menu_alert()
@@ -86,7 +87,7 @@ class TestDirectoryReservation:
         TimeUtils().sleep(1)
         self.page.click_btn(path='右上按钮', param='1')
         TimeUtils().sleep(1)
-        self.page.input_text(path='采访-新增/编辑-输入', content=DriverUtils.ramdon_val(), param='征订目录', itype="clickinput")
+        self.page.input_text(path='采访-新增/编辑-输入', content=ramdon_val(), param='征订目录', itype="clickinput")
         TimeUtils().sleep(1)
         self.page.click_btn(path='采访-新增/编辑-按钮', param='保存')
         assert self.page.sub_menu_alert()
@@ -104,7 +105,7 @@ class TestDirectoryReservation:
         TimeUtils().sleep(1)
         self.page.double_click_order()
         TimeUtils().sleep(1)
-        self.page.input_text(path='采访-新增/编辑-输入', content=DriverUtils.ramdon_val(), param='征订目录', itype="clickinputs")
+        self.page.input_text(path='采访-新增/编辑-输入', content=ramdon_val(), param='征订目录', itype="clickinputs")
         TimeUtils().sleep(1)
         self.page.click_btn(path='采访-新增/编辑-按钮', param='保存')
         assert self.page.sub_menu_alert()

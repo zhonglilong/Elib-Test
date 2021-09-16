@@ -16,11 +16,11 @@ class DirectoryReservationPage(BasePage):
 
     def menu(self):
         """ 点击菜单: 图书预订处理 """
-        self.click_btn(path='菜单', param='图书预订管理')
+        self.click_btn(path='菜单', param='图书预订处理')
 
     def sub_menu(self):
         """ 点击子菜单: 征订目录预订"""
-        self.click_btn(path='子菜单', param=[1, '征订书目预订'])
+        self.click_btn(path='子菜单', param=[1, '征订目录预订'])
 
     def order(self):
         """ 获取征订目录数量
