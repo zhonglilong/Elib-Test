@@ -39,4 +39,4 @@ def find_dict_value(dict_data, item):
 
 if __name__ == '__main__':
     search = Element('base')
-    print(search['运营-新增/编辑-输入'])
+    print(search['筛选项'])
