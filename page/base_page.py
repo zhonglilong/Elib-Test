@@ -97,3 +97,23 @@ class BasePage(BaseAction):
         """
         TimeUtils().sleep(1)
         return self.check_element((By.XPATH, ele['弹窗']), atype='element')
+
+    def total_form_columns(self, feature):
+        '''获取表单的列数'''
+        columns = self.find_els(feature)
+        total_num = len(columns)
+        return total_num
+
+    def choose_target_title(self, feature):
+        '''获取名字，表格里面的直接返回，详情里面的处理一下再返回'''
+        result_title = self.text(feature)
+        special_symbol = '【'
+        if special_symbol in result_title:
+            return result_title[5:-1]
+        else:
+            return result_title
+
+    def order_status(self, feature):
+        '''获取属性'''
+        result = self.element_css_style(feature)
+        return result
