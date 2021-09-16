@@ -141,7 +141,9 @@ class BaseAction:
         elif atype == "pop":
             try:
                 element = self.driver.find_element(by, value)
-                if str(element.get_attribute('class')).find("el-message-box") == 1:
+                if str(element.get_attribute('class')).find("el-message-box") == -1:
+                    return False
+                else:
                     return True
             except NoSuchElementException as e:
                 return False

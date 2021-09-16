@@ -12,19 +12,19 @@
  - 查询按钮: "//button/span[contains(text(), '{0}')]"                              # 各个页面上的查询按钮
  - 提示框: "//div[@role='alert']"                                                          # 提示框（不知道定位得到不...）
  - 弹窗: "//*[@class='el-message-box']"                                             # 弹窗
+ - 侧边弹窗: "//div[@class='side__wrapper common__side_form']"     # 侧边弹窗
  - 侧边弹窗叉: "//i[@class='el-icon-close']"
  - 新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div"   # 可输入的框，传输入框名称
  - 新增/编辑-单选按钮: "//label[contains(text(),'{0}')]/following-sibling::div//label[{1}]"   # 单选按钮，传入参数名和值（从左到右为1，2，......）
  - 删除确定/取消: "//div[@aria-label='提示']/div/div[3]/button[{0}]"
  - 复选框叉: "//label[contains(text(),'{0}')]/following-sibling::div//span[@class='el-input__suffix']"
- - 已选项取消的叉: "//p[contains(text(),'{0}')]/../div[{1}]/div/span/span/i"
  - 侧边弹窗底部按钮: "//div[@class='edit__footer border']//span[contains(text(),'{0}')]"    #侧边弹窗底部的按钮
  - 表格数据: "//*/tbody/tr"                                                                # 获取页面的数据
  - 表格第一条数据: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[1]"
  - 表格第一条数据操作列: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[1]/td[contains(@class,'is-hidden')]"
  - 表格全选: "//div[@class='el-table__header-wrapper']//span[@class='el-checkbox__input is-checked']"
  - 操作列选项: "//div[@aria-hidden='false']//div[contains(text(),'{0}')]"
- - 筛选项: "//div[@class='header__line'][{0}]/div[{1}]"                               # 下拉的筛选项
+ - 筛选项: "//div[@class='header__line'][{0}]/div[{1}]"                               # 筛选项
  - 筛选-单选列表: "//div[@x-placement='bottom-start']/div[1]/div[1]/ul/li/span[contains(text(),'{0}')][1]"       # 点击 筛选项弹出的单选列表
  - 筛选-输入框: "//input[@placeholder='{0}']"                                   # 可输入选项框
  - 右上按钮: "//div[@class='header__ops']/button[{0}]"                    # 获取右上角的按钮，从左到右依次传1，2，3，......
@@ -38,9 +38,15 @@
    - 采访-表格数据: "//*/tbody/tr[{0}]/td[4]"    # 获取表格数据，{0}决定获取的数据
    - 采访-表格数据链接: "//*/tbody/tr[{0}]/td[3]/div/span"
    - 采访-表格数据勾选: "//*/tbody/tr[{0}]/td[1]/div/label"
-编目:
-  编目管理:
-   - 编目-筛选项: "//div[@class='header__line'][{0}]/div[{1}]/div/input"
+  图书验收处理:
+   - 采访-验收单-备注: "//label[@for='beizhu']/following-sibling::div/div/textarea"
+   - 验收确定/取消: "//div[@aria-label='批量验收']/div/div[3]/button/span[contains(text(),'{0}')]"
+   - 编目-简单模板/MARC编目: "//div[@class='tabs']/div[{0}]"
+   - 编目-简单模板-上方按钮: "//div[@class='el-scrollbar__view']/div[{0}]//button[@title='ALT+I']"
+   - 编目-简单模板-筛选项:  "//div[@class='c-tmms']//div[@class='el-select el-select--mini'][{0}]/div[1]//input[@type='text']"# 获取筛选项输入框，从左到右依次传1，2，3，......
+   - 编目-MARC编目-筛选项:  "//div[@class='c-marcms']//span[contains(text(), '分编类型')]/following-sibling::div[{0}]"# 获取筛选项输入框，从左到右依次传1，2，3，......
+   - 编目-MARC编目-上方按钮: "//div[@class='c-marcms']//div[@class='header']/div//span[contains(text(),'{0}')]"
+   - 右下角按钮: "//div[@class='editor__footer']/div//span[contains(text(),'{0}')]"   
 运营:
   订购处理:
    - 运营-新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div//div[@class='el-select__tags']/input"

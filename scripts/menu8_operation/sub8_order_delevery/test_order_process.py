@@ -89,7 +89,7 @@ class TestOrderProcess:
         self.page.click_btn(path='查询按钮', param='查询')
         assert self.page.sub_menu_alert()
 
-    @pytest.mark.zhl
+    @pytest.mark.yun
     @pytest.mark.parametrize("ordertype", ["1", "2", "3"])
     def test_add_order(self, ordertype):
         """ 测试 添加预订单 """

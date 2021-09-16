@@ -21,6 +21,6 @@ if __name__ == "__main__":
     # 先创建文件夹和文件
     check_dir()
 
-    pytest.main(["-s", "-m login or yun", "-v", SCRIPT_PATH, '--alluredir', TEMP_PATH])
+    pytest.main(["-s", "-m login or reading", "-v", SCRIPT_PATH, '--alluredir', TEMP_PATH])
     # pytest.main(["-s", "-m login or yun", "-v", SCRIPT_PATH])
     os.system('allure generate '+TEMP_PATH+' -o '+REPORT_PATH+' --clean')

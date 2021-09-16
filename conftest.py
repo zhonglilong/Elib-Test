@@ -15,7 +15,7 @@ def drivers():
     driver = DriverUtils.get_driver()
     # driver.get(URL+"/elib/#/login")
     yield driver
-    time.sleep(1)
+    time.sleep(2)
     DriverUtils.quit_driver()
     return driver
 
@@ -26,7 +26,7 @@ def logger():
 
 
 def pytest_configure(config):
-    marker_list = ["login", "public", "yun", "reading", "zll", "zhl"]  # 标签名集合
+    marker_list = ["login", "public", "yun", "reading", "zll", "zhl", "skx", "skx1"]  # 标签名集合
     for markers in marker_list:
         config.addinivalue_line("markers", markers)
 
