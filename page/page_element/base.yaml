@@ -13,7 +13,7 @@
  - 提示框: "//div[@role='alert']"                                                          # 提示框（不知道定位得到不...）
  - 弹窗: "//*[@class='el-message-box']"                                             # 弹窗
  - 侧边弹窗: "//div[@class='side__wrapper common__side_form']"     # 侧边弹窗
- - 侧边弹窗叉: "//i[@class='el-icon-close']"
+   侧边弹窗叉: "//i[@class='el-icon-close']"
  - 新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div"   # 可输入的框，传输入框名称
  - 新增/编辑-单选按钮: "//label[contains(text(),'{0}')]/following-sibling::div//label[{1}]"   # 单选按钮，传入参数名和值（从左到右为1，2，......）
  - 删除确定/取消: "//div[@aria-label='提示']/div/div[3]/button[{0}]"
@@ -33,6 +33,7 @@
  - 列设置按钮: "//div[@class='header__line']/div[5]/span[contains(text(),'{0}')]"   #点击 上方那个列设置的
  - 列设置里面的选项: "//ul[@class='list-group']/span/li[contains(text(),'{0}')]"    #点击 列设置里面的选项
  - 列设置里面的全选: "//*/ul/li[@class='el-dropdown-menu__item el-dropdown-menu__item--divided']"    #点击 列设置里面的全选
+ - 分页: "//span[@class='page__count']"    # 使用elements查找，一个页面有2个，分别是xx页/xx条数据，有的页面会有4个，自己做好判断
 采访:
   征订目录预订:
     # 新增信息-输入定位: "//label[text()='{0}']/following-sibling::div/div/input"    # 获取左边的文本，定位到右边的输入框

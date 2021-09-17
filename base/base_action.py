@@ -148,6 +148,15 @@ class BaseAction:
                     return True
             except NoSuchElementException as e:
                 return False
+        elif atype == "dialog":
+            try:
+                element = self.driver.find_element(by, value)
+                if str(element.get_attribute('class')).find("el-dialog__wrapper") == -1:
+                    return False
+                else:
+                    return True
+            except NoSuchElementException as e:
+                return False
         elif atype == "element":
             try:
                 self.driver.find_element(by, value)

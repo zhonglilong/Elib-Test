@@ -98,6 +98,13 @@ class BasePage(BaseAction):
         TimeUtils().sleep(1)
         return self.check_element((By.XPATH, ele['弹窗']), atype='element')
 
+    def dialog_exist(self):
+        """ 判断是否有弹窗，用于判断拼音生成多音字选择的弹窗
+        :return: True or False
+        """
+        TimeUtils().sleep(1)
+        return self.check_element((By.XPATH, ele['弹窗']), atype='dialog')
+
     def total_form_columns(self, feature):
         '''获取表单的列数'''
         columns = self.find_els(feature)

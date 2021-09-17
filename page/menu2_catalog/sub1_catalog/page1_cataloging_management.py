@@ -44,4 +44,7 @@ class CatalogingManagementPage(BasePage):
         """ 获取输入框，输入值进行搜索 """
         self.input_text(path='筛选-输入框', param=param, content=content, itype="clearinput")
 
+    def verify_select_pageNum(self):
+        """  """
+
 
