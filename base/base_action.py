@@ -155,3 +155,6 @@ class BaseAction:
                 return False
         return False
 
+    # 获取当前组件样式内容
+    def element_css_style(self, feature):
+        return self.find_el(feature).get_attribute("class")
