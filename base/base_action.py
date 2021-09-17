@@ -124,21 +124,29 @@ class BaseAction:
             photo = photo.crop((left, top, right, bottom))
             photo.save(IMAGE_PATH + "\\getVerify.png")
 
-    def check_element(self, feature, atype="alert"):
-        """ 判断是否有组件存在，根据type判断组件类型
+    def check_element(self, feature, atype="redAlert"):
+        """ 判断是否有组件存在，根据atype判断组件类型
         判断是否有提示框，没有错误提示框为True，有错误提示框为False；分为2种情况：
         - 如果找不到提示框，就NoSuchElementException直接返回False
         - 如果找到了提示框，判断是不是错误信息，是的话返回False
         PS：Python的find()方法，找不到返回-1，找到返回下标（int类型）
         """
         by, value = feature
-        if atype == "alert":
+        if atype == "redAlert":
             try:
                 element = self.driver.find_element(by, value)
                 if str(element.get_attribute('class')).find("el-message--error") == -1:
                     return True
             except NoSuchElementException as e:
                 return True
+        elif atype == "yellowAlert":
+            try:
+                element = self.driver.find_element(by, value)
+                if str(element.get_attribute('class')).find("el-message--warning") == 1:
+                    print(111)
+                    return True
+            except NoSuchElementException as e:
+                return False
         elif atype == "pop":
             try:
                 element = self.driver.find_element(by, value)
@@ -151,9 +159,7 @@ class BaseAction:
         elif atype == "dialog":
             try:
                 element = self.driver.find_element(by, value)
-                if str(element.get_attribute('class')).find("el-dialog__wrapper") == -1:
-                    return False
-                else:
+                if element is not None:
                     return True
             except NoSuchElementException as e:
                 return False

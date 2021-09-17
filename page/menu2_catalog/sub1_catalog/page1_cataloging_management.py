@@ -45,6 +45,6 @@ class CatalogingManagementPage(BasePage):
         self.input_text(path='筛选-输入框', param=param, content=content, itype="clearinput")
 
     def verify_select_pageNum(self):
-        """  """
+        """ 获取分页，为0时，判断有没有弹窗 """
 
 

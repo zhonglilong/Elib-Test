@@ -10,7 +10,8 @@
  - 菜单: "//span[contains(text(), '{0}')]"                                                  # 左侧菜单
  - 子菜单: "//li[{0}]/ul/li[text()='{1}']"                                                     # 左侧子菜单
  - 查询按钮: "//button/span[contains(text(), '{0}')]"                              # 各个页面上的查询按钮
- - 提示框: "//div[@role='alert']"                                                          # 提示框（不知道定位得到不...）
+ - 提示框: "//div[@role='alert']"                                                          # 提示框
+ - 提示框文本: "//div[@role='alert']/p"
  - 弹窗: "//*[@class='el-message-box']"                                             # 弹窗
  - 侧边弹窗: "//div[@class='side__wrapper common__side_form']"     # 侧边弹窗
    侧边弹窗叉: "//i[@class='el-icon-close']"
@@ -63,6 +64,7 @@
 编目:
  编目管理:
    - 编目-筛选项: "//div[@class='header__line'][{0}]/div[{1}]/div[{2}]"
+   - 编目-拼音弹窗: "//*[@aria-label='拼音字段生成多音字选择']"
 运营:
   订购处理:
    - 运营-新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div//div[@class='el-select__tags']/input"
