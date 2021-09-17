@@ -31,7 +31,7 @@ class TestCatalogingManagement:
         assert self.page.sub_menu_alert()
 
     @pytest.mark.reading
-    @pytest.mark.zll
+    @pytest.mark.yun
     @pytest.mark.parametrize("libname", ["CS馆"])
     def test_select_lib(self, libname):
         """ 测试 成员馆查询 功能 """
@@ -48,11 +48,11 @@ class TestCatalogingManagement:
         ])
     @pytest.mark.zll
     def test_select_bookmsg(self, isbn, ztm, flh, zrz, ztc, cbrq, yz, cbs, cbd, jg, qtzrz, qtzrzdztm, isrc, cb, tm, dgh, tyskh):
-        bookmsg = {"isbn": "ISBN", "ztm": "正题名", "flh": "分类号", "zrz": "责任者", "ztc": "主题词",
+        bookmsg = {"ztm": "正题名", "flh": "分类号", "zrz": "责任者", "ztc": "主题词",
                    "cbrq": "出版日期", "yz": "语种", "cbs": "出版社", "cbd": "出版地", "jg": "价格", "qtzrz": "其他责任者",
-                   "qtzrzdztm": "其他责任者的正题名", "isrc": "ISRC", "cb": "从编", "tm": "题名", "dgh": "订购号", "tyskh": "统一书刊号"}
+                   "qtzrzdztm": "其他责任者的正题名", "isrc": "ISRC", "cb": "丛编", "tm": "题名", "dgh": "订购号", "tyskh": "统一书刊号", "isbn": "ISBN"}
         for k, v in bookmsg.items():
-            self.page.click_filter_list([1, 3], str(v))
+            self.page.click_filter_list([1, 3, 1], str(v))
             time.sleep(1)
             if k is "isbn":
                 self.page.click_filter_input("请输入搜索关键词", isbn)

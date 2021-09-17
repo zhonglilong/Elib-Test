@@ -63,7 +63,8 @@ class BaseAction:
         return ele.send_keys(content)
 
     def clearinput(self, feature, content):
-        ele = self.find_el(feature).clear()
+        ele = self.find_el(feature)
+        ele.clear()
         return ele.send_keys(content)
 
     def select(self, feature):
