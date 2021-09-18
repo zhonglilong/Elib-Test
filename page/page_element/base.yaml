@@ -23,6 +23,7 @@
  - 侧边弹窗底部按钮: "//div[@class='edit__footer border']//span[contains(text(),'{0}')]"    #侧边弹窗底部的按钮
  - 表格数据: "//*/tbody/tr"                                                                # 获取页面的数据
  - 表格第一条数据: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[1]"
+ - 表格第*条数据: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[{0}]"
  - 表格第一条数据操作列: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[1]/td[contains(@class,'is-hidden')]"
  - 表格全选: "//div[@class='el-table__header-wrapper']//span[@class='el-checkbox__input is-checked']"
  - 操作列选项: "//div[@aria-hidden='false']//div[contains(text(),'{0}')]"
@@ -55,12 +56,20 @@
   图书验收处理:
    - 采访-验收单-备注: "//label[@for='beizhu']/following-sibling::div/div/textarea"
    - 验收确定/取消: "//div[@aria-label='批量验收']/div/div[3]/button/span[contains(text(),'{0}')]"
-   - 编目-简单模板/MARC编目: "//div[@class='tabs']/div[{0}]"
-   - 编目-简单模板-上方按钮: "//div[@class='el-scrollbar__view']/div[{0}]//button[@title='ALT+I']"
-   - 编目-简单模板-筛选项:  "//div[@class='c-tmms']//div[@class='el-select el-select--mini'][{0}]/div[1]//input[@type='text']"# 获取筛选项输入框，从左到右依次传1，2，3，......
+   - 编目-简单编目/MARC编目: "//div[@class='tabs']/div[{0}]"
+   - 编目-简单编目-添加父记录: "//div[@class='el-scrollbar__view']/div[1]//button[@title='ALT+I']"
+   - 编目-简单编目-查看连接记录: "//div[@class='el-scrollbar__view']/div[1]//button[@title='ALT+V']"
+   - 编目-简单编目-筛选项:  "//div[@class='c-tmms']//div[@class='el-select el-select--mini'][{0}]/div[1]//input[@type='text']"# 获取筛选项输入框，从左到右依次传1，2，3，......
    - 编目-MARC编目-筛选项:  "//div[@class='c-marcms']//span[contains(text(), '分编类型')]/following-sibling::div[{0}]"# 获取筛选项输入框，从左到右依次传1，2，3，......
    - 编目-MARC编目-上方按钮: "//div[@class='c-marcms']//div[@class='header']/div//span[contains(text(),'{0}')]"
-   - 右下角按钮: "//div[@class='editor__footer']/div//span[contains(text(),'{0}')]"
+   - 编目-右下角按钮: "//div[@class='editor__footer']//button[@type='button']/span[contains(text(),'{0}')]"
+   - 编目弹窗-按钮: "//div[@aria-label='拼音字段生成多音字选择']//button[@type='button']/span[contains(text(),'确定')]"
+   - 父记录-移除: "//div[@style='display: flex;']//button[@type='button']"
+   - 移除-确定: "//*[@class='el-message-box']//*[@type='button']/span[contains(text(),'确定')]"
+   - 添加父记录-查询输入框: "//div[@aria-label='添加父记录']//div[@class='header__line']/div[{0}]//input[@type='text']"  # 获取筛选项以及输入框，从左到右依次传1，2，3，......
+   - 添加父记录-查询: "//div[@aria-label='添加父记录']//div[@class='header__line']/button"
+   - 添加父记录-确认: "//*[@class='el-dialog__wrapper']/div/div[3]/span/button[1]/span"
+   - 添加父记录-取消: "//*[@class='el-dialog__wrapper']/div/div[3]/span/button[2]/span"
    - 按钮: "//div[@class='header__ops']/button[1]/span[contains(text(),'新增')]"
 运营:
   订购处理:

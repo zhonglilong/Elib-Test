@@ -99,6 +99,6 @@ class ReceivingReportPage(BasePage):
             TimeUtils().sleep(2)
             self.click_btn(path='查询按钮', param='查询')
             TimeUtils().sleep(2)
-            self.click_btn(path='表格第一条数据操作列', ctype='moveClick')
+            self.click_btn(path='表格第一条数据操作列', ctype='moveclick')
             TimeUtils().sleep(2)
             self.click_btn(path='操作列选项', param='编辑')

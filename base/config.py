@@ -31,10 +31,12 @@ RUN_ENV = 'local'
 RUN_DOCKER_URL = 'http://127.0.0.1:5555/wd/hub'  # 这个是本地运行docker
 
 # 测试账号
-USERNAME = 'zll'
+# USERNAME = 'zll'
+# PASSWORD = 'Td123456'
+# VERIFY = 'zll'
+USERNAME = 'lxh'
 PASSWORD = 'Td123456'
-VERIFY = 'zll'
-
+VERIFY = '小黑'
 
 
 # Chrome 设置

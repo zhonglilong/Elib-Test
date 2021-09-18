@@ -59,6 +59,10 @@ class BasePage(BaseAction):
             return self.clicks((
                 By.XPATH, check_param(path=path, param=param)
             ))
+        elif ctype == "moveclick":
+            return self.moveclick((
+                By.XPATH, check_param(path=path, param=param)
+            ))
         else:
             logging.error("No Such Click Type：" + ctype)
 

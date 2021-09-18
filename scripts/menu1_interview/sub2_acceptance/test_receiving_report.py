@@ -7,6 +7,7 @@ import time
 from utils.driver_utils import DriverUtils
 from utils.time_utils import TimeUtils
 from page.menu1_interview.sub2_acceptance.page1_receiving_report import ReceivingReportPage
+from utils.common_utils import ramdon_val
 
 # 采访-图书验收处理-验收单管理  测试用例
 class TestReceivingReport:
@@ -59,7 +60,6 @@ class TestReceivingReport:
             assert self.page.sub_menu_alert()
 
     # @pytest.mark.zhl
-    @pytest.mark.reading
     def test_select_date(self):
         """ 测试 筛选日期 功能"""
         self.page.click_btn(path='查询按钮', param='查询')
@@ -87,7 +87,7 @@ class TestReceivingReport:
         TimeUtils().sleep(1)
         self.page.click_btn(path='右上按钮', param='1')
         TimeUtils().sleep(1)
-        self.page.input_text(path='采访-新增/编辑-输入', content=DriverUtils.ramdon_val(), param='验收单', itype="clickinput")
+        self.page.input_text(path='采访-新增/编辑-输入', content=ramdon_val(), param='验收单', itype="clickinput")
         TimeUtils().sleep(1)
         self.page.click_btn(path='采访-新增/编辑-按钮', param='保存')
         assert self.page.sub_menu_alert()
@@ -98,7 +98,7 @@ class TestReceivingReport:
         TimeUtils().sleep(2)
         self.page.click_compile_Details()
         TimeUtils().sleep(2)
-        self.page.input_text(path='采访-验收单-备注', content="老弟好", param='验收单', itype="clearinput")
+        self.page.input_text(path='采访-验收单-备注', content=ramdon_val(), param='验收单', itype="clearinput")
         TimeUtils().sleep(2)
         self.page.click_btn(path='采访-新增/编辑-按钮', param='保存')
         assert self.page.sub_menu_alert()
@@ -154,7 +154,7 @@ class TestReceivingReport:
         self.page.click_receipt_Details()
         TimeUtils().sleep(2)
         self.page.click_compile_Details()
-        self.page.input_text(path='采访-验收单-备注', content="老弟好", param='验收单', itype="clearinput")
+        self.page.input_text(path='采访-验收单-备注', content=ramdon_val(), param='验收单', itype="clearinput")
         self.page.click_btn(path='采访-新增/编辑-按钮', param='保存')
         assert self.page.sub_menu_alert()
 

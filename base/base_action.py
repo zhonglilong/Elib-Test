@@ -47,6 +47,12 @@ class BaseAction:
     def clicks(self, feature):
         return self.chains().double_click(self.find_el(feature)).perform()
 
+    def moveclick(self, feature):
+        ele = self.find_el(feature)
+        return self.chains().move_to_element(
+            ele
+        ).click(ele).perform()
+
     def input(self, feature, content):
         ele = self.find_el(feature)
         return ele.send_keys(content)
