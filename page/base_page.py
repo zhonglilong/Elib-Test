@@ -82,7 +82,13 @@ class BasePage(BaseAction):
         :return: True or False
         """
         TimeUtils().sleep(1)
-        return self.check_element((By.XPATH, ele['提示框']), atype='alert')
+        return self.check_element((By.XPATH, ele['提示框']), atype='redAlert')
+
+    def yellow_alert_exist(self):
+        """ 判断是否有黄色提示框，有的话输出内容 """
+        TimeUtils().sleep(1)
+        if self.check_element((By.XPATH, ele['提示框']), atype='yellowAlert'):
+            return self.output_text(path='提示框文本', otype='text')
 
     def pop_window_to_judge(self):
         """ 判断是否有弹窗
@@ -97,6 +103,13 @@ class BasePage(BaseAction):
         """
         TimeUtils().sleep(1)
         return self.check_element((By.XPATH, ele['弹窗']), atype='element')
+
+    def dialog_exist(self):
+        """ 判断是否有弹窗，用于判断拼音生成多音字选择的弹窗
+        :return: True or False
+        """
+        TimeUtils().sleep(1)
+        return self.check_element((By.XPATH, ele['编目-拼音弹窗']), atype='dialog')
 
     def total_form_columns(self, feature):
         '''获取表单的列数'''

@@ -15,11 +15,11 @@ class CatalogingManagementPage(BasePage):
         self.click_btn(path='模块', param='编目')
 
     def menu(self):
-        """ 点击菜单: 图书预订处理 """
+        """ 点击菜单: 文献编目 """
         self.click_btn(path='菜单', param='文献编目')
 
     def sub_menu(self):
-        """ 点击子菜单: 征订目录预订"""
+        """ 点击子菜单: 编目管理"""
         self.click_btn(path='子菜单', param=[1, '编目管理'])
 
     def click_filter_list(self, num, name):
@@ -27,7 +27,7 @@ class CatalogingManagementPage(BasePage):
         :param num: 定位筛选项
         :param name: 选择的馆名 / 状态 / 图书信息
         """
-        self.input_text(path='筛选项', param=num, content=name, itype="clickinput")
+        self.input_text(path='编目-筛选项', param=num, content=name, itype="clickinput")
         time.sleep(1)
         self.click_btn(path='筛选-单选列表', param=name)
 
@@ -43,5 +43,8 @@ class CatalogingManagementPage(BasePage):
     def click_filter_input(self, param, content):
         """ 获取输入框，输入值进行搜索 """
         self.input_text(path='筛选-输入框', param=param, content=content, itype="clearinput")
+
+    def verify_select_pageNum(self):
+        """ 获取分页，为0时，判断有没有弹窗 """
 
 

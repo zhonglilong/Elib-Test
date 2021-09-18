@@ -28,6 +28,11 @@
  - 筛选-单选列表: "//div[@x-placement='bottom-start']/div[1]/div[1]/ul/li/span[contains(text(),'{0}')][1]"       # 点击 筛选项弹出的单选列表
  - 筛选-输入框: "//input[@placeholder='{0}']"                                   # 可输入选项框
  - 右上按钮: "//div[@class='header__ops']/button[{0}]"                    # 获取右上角的按钮，从左到右依次传1，2，3，......
+ - 表格标题头: "//*/thead[@class='has-gutter']/tr/th"                                             # 获取页面的数据
+ - 表格某一行的数据: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[{0}]"   #随机一行数据，自己传参
+ - 列设置按钮: "//div[@class='header__line']/div[5]/span[contains(text(),'{0}')]"   #点击 上方那个列设置的
+ - 列设置里面的选项: "//ul[@class='list-group']/span/li[contains(text(),'{0}')]"    #点击 列设置里面的选项
+ - 列设置里面的全选: "//*/ul/li[@class='el-dropdown-menu__item el-dropdown-menu__item--divided']"    #点击 列设置里面的全选
 采访:
   征订目录预订:
     # 新增信息-输入定位: "//label[text()='{0}']/following-sibling::div/div/input"    # 获取左边的文本，定位到右边的输入框
@@ -38,6 +43,13 @@
    - 采访-表格数据: "//*/tbody/tr[{0}]/td[4]"    # 获取表格数据，{0}决定获取的数据
    - 采访-表格数据链接: "//*/tbody/tr[{0}]/td[3]/div/span"
    - 采访-表格数据勾选: "//*/tbody/tr[{0}]/td[1]/div/label"
+  预订单管理:
+   - 采访-清空订单信息-确定: "//div[@aria-label='提示']/div/div[3]/button[{0}]"               #点击确定按钮
+   - 预订单标题名: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[{0}]/td[3]"   #随机一行的数据的预订单的名字
+   - 预订单详情内的标题: "//div[@class='c-content-header']/div/span"                         #点击某个预订单，获取预订单名字
+   - 设为工作预订单列: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[{0}]/td[10]/div/span/i"    #点击随机一行的五角星列
+   - 催缺信息页标题: "//*/div[@class='p-acq_cqxx']/div[1]/div[1]/div[1]/span[2]"    #获取催缺信息页标题
+   - 表格某一行的勾选框: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[{0}]/td[1]"   #随机一行数据的勾选框，自己传参
   图书验收处理:
    - 采访-验收单-备注: "//label[@for='beizhu']/following-sibling::div/div/textarea"
    - 验收确定/取消: "//div[@aria-label='批量验收']/div/div[3]/button/span[contains(text(),'{0}')]"
