@@ -36,6 +36,10 @@ class BasePage(BaseAction):
             return self.clearinput((
                 By.XPATH, check_param(path=path, param=param)
             ), content)
+        elif itype == "clearallinput":
+            return self.clear_all_input((
+                By.XPATH, check_param(path=path, param=param)
+            ), content)
         else:
             logging.error("No Such input Type：" + itype)
 

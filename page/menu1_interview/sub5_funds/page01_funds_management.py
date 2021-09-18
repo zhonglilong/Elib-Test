@@ -40,6 +40,11 @@ class FundsManagementPage(BasePage):
         # 定位筛选项，根据传入的名字点击
         self.click_btn(path='筛选-单选列表', param=name)
 
+    def double_click_order(self):
+        """ 双击数据 """
+        if self.order() > 0:
+            self.click_btn(path='采访-表格数据', param=self.order(), ctype="clicks")
+
     def input_filter_date(self, start, end):
         """ 获取 开始日期 和 结束日期，输入值
         :param start: 开始日期

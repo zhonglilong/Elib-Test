@@ -61,4 +61,4 @@ class AdvanceOrderPage(BasePage):
         """
         获取复选项框内已选项的叉
         """
-        self.click_btn(path='已选项叉', param=[text, num])
+        self.click_btn(path='已选项取消的叉', param=[text, num])

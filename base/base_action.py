@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from PIL import Image
 from base.config import IMAGE_PATH
+from selenium.webdriver.common.keys import Keys
 import logging
 
 
@@ -44,9 +45,7 @@ class BaseAction:
         return self.find_el(feature).click()
 
     def clicks(self, feature):
-        return self.chains().double_click(
-            self.find_el(feature)
-        ).perform()
+        return self.chains().double_click(self.find_el(feature)).perform()
 
     def input(self, feature, content):
         ele = self.find_el(feature)
@@ -63,8 +62,14 @@ class BaseAction:
         return ele.send_keys(content)
 
     def clearinput(self, feature, content):
+        """ 备注：此方法在执行貌似会报错，无法清除文本后再输入，可选择以下方法 clear_all_input """
+        ele = self.find_el(feature).clear()
+        return ele.send_keys(content)
+
+    def clear_all_input(self, feature, content):
+        """通过键盘全选输入框文本"""
         ele = self.find_el(feature)
-        ele.clear()
+        ele.send_keys(Keys.CONTROL, 'a')
         return ele.send_keys(content)
 
     def select(self, feature):

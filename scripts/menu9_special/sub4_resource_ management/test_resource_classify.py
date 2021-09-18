@@ -37,7 +37,7 @@ class TestResourceClassify:
         self.page.click_btn(path='查询按钮', param='查询')
         assert self.page.sub_menu_alert()
 
-    @pytest.mark.parametrize("text", [random_val()])
+    @pytest.mark.parametrize("text", [ramdon_val()])
     @pytest.mark.skx
     def test_add(self, text):
         """ 测试 新增 功能
@@ -59,19 +59,20 @@ class TestResourceClassify:
         self.page.click_btn(path='特色-删除弹框-确定/取消', param='2')
         assert self.page.sub_menu_alert()
 
-    @pytest.mark.parametrize("text", [random_val()])
-    @pytest.mark.skx1
+    @pytest.mark.parametrize("text", [ramdon_val()])
+    @pytest.mark.skx
     def test_redact(self, text):
         """ 测试 编辑 功能
         """
         self.page.click_btn(path='查询按钮', param='查询')
         self.page.click_btn(path='表格第一条数据')
+        time.sleep(1)
         self.page.click_btn(path='右上按钮', param='2')
         time.sleep(1)
         self.page.input_text(path='新增/编辑-输入', content=text, param='分类名称', itype="clearallinput")
         assert self.page.sub_menu_alert()
 
-    @pytest.mark.parametrize("text", [random_val()])
+    @pytest.mark.parametrize("text", [ramdon_val()])
     @pytest.mark.skx
     def test_add_del(self, text):
         """ 测试 新增后删除功能

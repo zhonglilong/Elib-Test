@@ -14,10 +14,12 @@
  - 弹窗: "//*[@class='el-message-box']"                                             # 弹窗
  - 侧边弹窗: "//div[@class='side__wrapper common__side_form']"     # 侧边弹窗
  - 侧边弹窗叉: "//i[@class='el-icon-close']"
- - 新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div"   # 可输入的框，传输入框名称
+# - 新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div"   # 可输入的框，传输入框名称
+ - 新增/编辑-输入: "//label[text()='{0}']/../div/div/input"   # 可输入的框，传输入框名称
  - 新增/编辑-单选按钮: "//label[contains(text(),'{0}')]/following-sibling::div//label[{1}]"   # 单选按钮，传入参数名和值（从左到右为1，2，......）
  - 删除确定/取消: "//div[@aria-label='提示']/div/div[3]/button[{0}]"
  - 复选框叉: "//label[contains(text(),'{0}')]/following-sibling::div//span[@class='el-input__suffix']"
+ - 已选项取消的叉: "//p[contains(text(),'{0}')]/../div[{1}]/div/span/span/i"
  - 侧边弹窗底部按钮: "//div[@class='edit__footer border']//span[contains(text(),'{0}')]"    #侧边弹窗底部的按钮
  - 表格数据: "//*/tbody/tr"                                                                # 获取页面的数据
  - 表格第一条数据: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[1]"
@@ -58,8 +60,14 @@
    - 编目-简单模板-筛选项:  "//div[@class='c-tmms']//div[@class='el-select el-select--mini'][{0}]/div[1]//input[@type='text']"# 获取筛选项输入框，从左到右依次传1，2，3，......
    - 编目-MARC编目-筛选项:  "//div[@class='c-marcms']//span[contains(text(), '分编类型')]/following-sibling::div[{0}]"# 获取筛选项输入框，从左到右依次传1，2，3，......
    - 编目-MARC编目-上方按钮: "//div[@class='c-marcms']//div[@class='header']/div//span[contains(text(),'{0}')]"
-   - 右下角按钮: "//div[@class='editor__footer']/div//span[contains(text(),'{0}')]"   
+   - 右下角按钮: "//div[@class='editor__footer']/div//span[contains(text(),'{0}')]"
+   - 按钮: "//div[@class='header__ops']/button[1]/span[contains(text(),'新增')]"
 运营:
   订购处理:
    - 运营-新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div//div[@class='el-select__tags']/input"
+
+特色:
+  资源管理:
+  - 特色-删除弹框-确定/取消: "//div[@aria-label='删除分类']/div/div[3]/button[{0}]"
+
 

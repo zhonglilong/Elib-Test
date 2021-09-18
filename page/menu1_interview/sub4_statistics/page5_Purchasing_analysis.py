@@ -45,7 +45,7 @@ class PurchasingAnalysisPage(BasePage):
         """ 获取 年份，输入值
         :param start: 开始日期
         """
-        self.input_text(path='筛选-输入框', param='选择年', content=date, itype='clearinput')
+        self.input_text(path='筛选-输入框', param='选择年', content=date, itype='clearallinput')
 
     def click_close_all(self, text, num):
         """
