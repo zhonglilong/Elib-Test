@@ -102,6 +102,7 @@ class BaseAction:
     def text(self, feature):
         return self.find_el(feature).text
 
+    # 获取属性值
     def attribute(self, feature, label):
         return self.find_el(feature).get_attribute(label)
 
@@ -180,7 +181,3 @@ class BaseAction:
             except NoSuchElementException:
                 return False
         return False
-
-    # 获取当前组件样式内容
-    def element_css_style(self, feature):
-        return self.find_el(feature).get_attribute("class")

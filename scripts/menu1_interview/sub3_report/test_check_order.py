@@ -53,7 +53,6 @@ class TestCheckkOrder:
         self.page.click_btn(path='查询按钮', param="查询")
         assert self.page.sub_menu_alert()
 
-    @pytest.mark.reading
     @pytest.mark.skx
     def test_select_date(self):
         """ 测试 筛选验收日期 功能"""
