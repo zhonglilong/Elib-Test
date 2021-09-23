@@ -114,7 +114,7 @@ class TestAdvanceOrder:
     @pytest.mark.yun
     def test_empty_order(self):
         '''测试 勾选预订单，点击上方的清空订单按钮功能'''
-        self.page.click_btn(path='查询按钮',param='查询')
+        self.page.click_btn(path='查询按钮', param='查询')
         TimeUtils().sleep(1)
         self.page.check_order()
         TimeUtils().sleep(1)
@@ -156,7 +156,7 @@ class TestAdvanceOrder:
         self.page.click_btn(path='查询按钮', param='查询')
         TimeUtils().sleep()
         target_data_title = self.page.find_order_name_param(path='预订单标题名',param='2')
-        self.page.click_btn(path='表格某一行的勾选框',param='2')
+        self.page.click_btn(path='表格某一行的勾选框', param='2')
         TimeUtils().sleep(1)
         self.page.click_btn(path='右上按钮', param='3')
         TimeUtils().sleep(1)

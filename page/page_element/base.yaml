@@ -10,7 +10,8 @@
  - 菜单: "//span[contains(text(), '{0}')]"                                                  # 左侧菜单
  - 子菜单: "//li[{0}]/ul/li[text()='{1}']"                                                     # 左侧子菜单
  - 查询按钮: "//button/span[contains(text(), '{0}')]"                              # 各个页面上的查询按钮
- - 提示框: "//div[@role='alert']"                                                          # 提示框（不知道定位得到不...）
+ - 提示框: "//div[@role='alert']"                                                          # 提示框
+ - 提示框文本: "//div[@role='alert']/p"
  - 弹窗: "//*[@class='el-message-box']"                                             # 弹窗
  - 侧边弹窗: "//div[@class='side__wrapper common__side_form']"     # 侧边弹窗
  - 侧边弹窗叉: "//i[@class='el-icon-close']"
@@ -35,6 +36,7 @@
  - 列设置按钮: "//div[@class='header__line']/div[5]/span[contains(text(),'{0}')]"   #点击 上方那个列设置的
  - 列设置里面的选项: "//ul[@class='list-group']/span/li[contains(text(),'{0}')]"    #点击 列设置里面的选项
  - 列设置里面的全选: "//*/ul/li[@class='el-dropdown-menu__item el-dropdown-menu__item--divided']"    #点击 列设置里面的全选
+ - 分页: "//span[@class='page__count']"    # 使用elements查找，一个页面有2个，分别是xx页/xx条数据，有的页面会有4个，自己做好判断
 采访:
   征订目录预订:
     # 新增信息-输入定位: "//label[text()='{0}']/following-sibling::div/div/input"    # 获取左边的文本，定位到右边的输入框
@@ -61,7 +63,15 @@
    - 编目-MARC编目-筛选项:  "//div[@class='c-marcms']//span[contains(text(), '分编类型')]/following-sibling::div[{0}]"# 获取筛选项输入框，从左到右依次传1，2，3，......
    - 编目-MARC编目-上方按钮: "//div[@class='c-marcms']//div[@class='header']/div//span[contains(text(),'{0}')]"
    - 右下角按钮: "//div[@class='editor__footer']/div//span[contains(text(),'{0}')]"
-   - 按钮: "//div[@class='header__ops']/button[1]/span[contains(text(),'新增')]"
+编目:
+ 编目管理:
+   - 编目-筛选项: "//div[@class='header__line'][{0}]/div[{1}]/div[{2}]"
+   - 编目-筛选项输入框: "//div[@class='header__line'][{0}]/div[{1}]/div[{2}]/input"
+   - 编目-表格-创建人: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr/td[16]/div"
+   - 编目-筛选项数量: "//div[@class='header__line'][{0}]/div"                        # 查看筛选项数量，传值选择第一行筛选项或第二行筛选项
+   - 编目-加减筛选项按钮: "//i[@class='{0}']"                                        # 根据class定位筛选项加减按钮，传的值有el-icon-remove，el-icon-circle-plus
+   - 编目-勾选框: "//input[@true-value='{0}']"                                      # 审校、推荐的勾选框（非数据勾选框，别用错了），传的值为 已审核，已推荐
+   - 编目-拼音弹窗: "//*[@aria-label='拼音字段生成多音字选择']"
 运营:
   订购处理:
    - 运营-新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div//div[@class='el-select__tags']/input"
