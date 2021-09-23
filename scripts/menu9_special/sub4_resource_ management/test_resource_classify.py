@@ -45,7 +45,7 @@ class TestResourceClassify:
         time.sleep(1)  # 这里必须延迟后才能点击
         self.page.click_btn(path='右上按钮', param='1')
         time.sleep(1)  # 这里必须延迟后才能点击
-        self.page.input_text(path='新增/编辑-输入', content=text, param='分类名称')
+        self.page.input_text(path='新增/编辑-输入框', content=text, param='分类名称')
         self.page.click_btn(path='侧边弹窗底部按钮', param='保存')
         assert self.page.sub_menu_alert()
 
@@ -69,7 +69,7 @@ class TestResourceClassify:
         time.sleep(1)
         self.page.click_btn(path='右上按钮', param='2')
         time.sleep(1)
-        self.page.input_text(path='新增/编辑-输入', content=text, param='分类名称', itype="clearallinput")
+        self.page.input_text(path='新增/编辑-输入框', content=text, param='分类名称', itype="clearallinput")
         assert self.page.sub_menu_alert()
 
     @pytest.mark.parametrize("text", [ramdon_val()])
@@ -80,7 +80,7 @@ class TestResourceClassify:
         time.sleep(1)  # 这里必须延迟后才能点击
         self.page.click_btn(path='右上按钮', param='1')
         time.sleep(1)  # 这里必须延迟后才能点击
-        self.page.input_text(path='新增/编辑-输入', content=text, param='分类名称')
+        self.page.input_text(path='新增/编辑-输入框', content=text, param='分类名称')
         self.page.click_btn(path='侧边弹窗底部按钮', param='保存')
         self.page.click_btn(path='查询按钮', param='查询')
         time.sleep(2)
