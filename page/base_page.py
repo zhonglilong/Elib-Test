@@ -138,3 +138,13 @@ class BasePage(BaseAction):
         '''获取属性'''
         result = self.element_css_style(feature)
         return result
+
+    def orders_status(self, feature):
+        '''获取属性'''
+        result = self.element_sle_style(feature)
+        return result
+
+    def orders_status_title(self, feature):
+        '''获取属性'''
+        result = self.element_tle_style(feature)
+        return result

@@ -185,3 +185,9 @@ class BaseAction:
     # 获取当前组件样式内容
     def element_css_style(self, feature):
         return self.find_el(feature).get_attribute("class")
+
+    def element_sle_style(self, feature):
+        return self.find_el(feature).get_attribute("style")
+
+    def element_tle_style(self, feature):
+        return self.find_el(feature).get_attribute("title")
