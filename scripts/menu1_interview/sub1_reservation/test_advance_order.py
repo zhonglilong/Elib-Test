@@ -211,7 +211,7 @@ class TestAdvanceOrder:
         TimeUtils().sleep(2)
         self.page.click_btn(path='列设置按钮', param='列设置')
         TimeUtils().sleep(2)
-        self.page.click_btn(path='列设置里面的全选',param=None,ctype='click')
+        self.page.click_btn(path='列设置里面的全选',ctype='click')
         TimeUtils().sleep(2)
         after_operation_columns = self.page.total_form_exist_columns()      #全选，恢复12条
         TimeUtils().sleep(2)
