@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 import pytest
 import allure
-from page.menu1_interview.sub1_reservation.page3_advance_order import AdvanceOrderPage
+from page.menu1_interview.sub1_reservation.page2_advance_order import AdvanceOrderPage
 from utils.driver_utils import DriverUtils
 from utils.common_utils import ramdon_val
 from utils.time_utils import TimeUtils
@@ -10,7 +10,7 @@ import time
 from base.base_action import BaseAction
 
 
-# 采访-图书预订管理-预订单管理 测试用例
+# 采访-图书预订处理-预订单管理 测试用例
 class TestAdvanceOrder:
 
     @pytest.fixture(scope='function', autouse=True)
@@ -39,18 +39,17 @@ class TestAdvanceOrder:
         self.page.click_btn(path='采访-新增/编辑-按钮',param='保存')
         assert  self.page.sub_menu_alert()
 
-    #二：查询区
-    @pytest.mark.run(order=1)
+    # 二：查询区
     @pytest.mark.yun
-    @pytest.mark.parametrize("ydd, ss", [(00, "新华书店"), (2, "京东")])
+    @pytest.mark.parametrize("ydd, ss", [(1, "新华书店"), (2, "京东")])
     def test_select_ordermsg(self, ydd, ss):
         """ 测试 条件筛选（预订单和书商）筛选预订单(ydd) 书商(ss) """
         ordermsg = {"ydd": "预订单", "ss": "书商"}
         for k, v in ordermsg.items():
             self.page.click_filter_firstlist(1, str(v))
-            #//筛选项：div[@class='header__line'][{0}]/div[{1}]  导入“1”进去 //div[@class='header__line'][1]/div[1]
-            #导入“1”进去 //div[@class='header__line'][1]/div[1] -->选择框
-            #//div[@class='header__line'][1]/div[2] -->输入框
+            # //筛选项：div[@class='header__line'][{0}]/div[{1}]  导入“1”进去 //div[@class='header__line'][1]/div[1]
+            # 导入“1”进去 //div[@class='header__line'][1]/div[1] -->选择框
+            # //div[@class='header__line'][1]/div[2] -->输入框
             time.sleep(1)
             if k is "ydd":
                 self.page.click_filter_firstinput("请输入搜索关键词", ydd)
@@ -114,7 +113,7 @@ class TestAdvanceOrder:
     @pytest.mark.yun
     def test_empty_order(self):
         '''测试 勾选预订单，点击上方的清空订单按钮功能'''
-        self.page.click_btn(path='查询按钮',param='查询')
+        self.page.click_btn(path='查询按钮', param='查询')
         TimeUtils().sleep(1)
         self.page.check_order()
         TimeUtils().sleep(1)
@@ -125,7 +124,7 @@ class TestAdvanceOrder:
         assert self.page.sub_menu_alert()
 
     #五：其它
-    @pytest.mark.csx
+    @pytest.mark.yun
     def test_view_details(self):
         '''测试 跳转到详情页 点击下方的操作的详情按钮功能，通过判断标题名是否一样，验证是否成功'''
         self.page.click_btn(path='查询按钮',param='查询')
@@ -156,7 +155,7 @@ class TestAdvanceOrder:
         self.page.click_btn(path='查询按钮', param='查询')
         TimeUtils().sleep()
         target_data_title = self.page.find_order_name_param(path='预订单标题名',param='2')
-        self.page.click_btn(path='表格某一行的勾选框',param='2')
+        self.page.click_btn(path='表格某一行的勾选框', param='2')
         TimeUtils().sleep(1)
         self.page.click_btn(path='右上按钮', param='3')
         TimeUtils().sleep(1)
@@ -172,7 +171,7 @@ class TestAdvanceOrder:
         TimeUtils().sleep(1)
         self.page.click_btn(path='右上按钮', param='5')
         TimeUtils().sleep(1)
-        result = self.page.judge_by_url_and_status_code('http://183.6.161.170:8889/serviceapi/e/interview/file/ydsmE')      #(此url为导出文件时的目标接口)
+        result = self.page.judge_by_url_and_status_code('http://192.168.1.35:8080/serviceapi/e/interview/file/ydsmE')      #(此url为导出文件时的目标接口)
         assert result
 
     @pytest.mark.yun
@@ -187,6 +186,7 @@ class TestAdvanceOrder:
         self.page.click_btn(path='列设置里面的选项', param='成员馆',ctype='click')
         TimeUtils().sleep(2)
         after_operation_columns = self.page.total_form_exist_columns() + 1
+        self.page.refresh()  # 刷新页面
         TimeUtils().sleep(2)
         assert before_operation_columns == after_operation_columns
 
@@ -222,11 +222,8 @@ class TestAdvanceOrder:
         '''测试 点击设为工作预订单,通过弹出窗口判断和class是否为on判断'''
         self.page.click_btn(path='查询按钮', param='查询')
         TimeUtils().sleep(2)
-        self.page.click_btn(path='设为工作预订单列',param='6')
-        judge_result = self.page.verify_order_status(path='设为工作预订单列',param='6')
+        self.page.click_btn(path='设为工作预订单列', param='3')
+        judge_result = self.page.verify_order_status(path='设为工作预订单列', param='5',label='class')
         assert 'on' in judge_result
         assert self.page.sub_menu_alert()
-
-
-
 

@@ -86,16 +86,19 @@ class BasePage(BaseAction):
             logging.info("请检查参数是否正确")
 
     def sub_menu_alert(self):
-        """ 判断是否有提示框
+        """ 判断是否有红色提示框，没有返回Ture，有返回false
         :return: True or False
         """
         TimeUtils().sleep(1)
         return self.check_element((By.XPATH, ele['提示框']), atype='redAlert')
 
-    def yellow_alert_exist(self):
-        """ 判断是否有黄色提示框，有的话输出内容 """
+    def alert_exist(self, atype):
+        """ 判断是否有提示框，有的话输出内容
+        :param atype: 要获取的提示框颜色，目前只可以选yellowAlert，greenAlert
+        :return: 文本(str)
+        """
         TimeUtils().sleep(1)
-        if self.check_element((By.XPATH, ele['提示框']), atype='yellowAlert'):
+        if self.check_element((By.XPATH, ele['提示框']), atype=atype):
             return self.output_text(path='提示框文本', otype='text')
 
     def pop_window_to_judge(self):
@@ -105,12 +108,14 @@ class BasePage(BaseAction):
         TimeUtils().sleep(1)
         return self.check_element((By.XPATH, ele['弹窗']), atype='pop')
 
-    def element_exist(self):
+    def element_exist(self, path, param):
         """ 判断是否存在
         :return: True or False
         """
         TimeUtils().sleep(1)
-        return self.check_element((By.XPATH, ele['弹窗']), atype='element')
+        return self.check_element((
+            By.XPATH, check_param(path=path, param=param)
+        ), atype='element')
 
     def dialog_exist(self):
         """ 判断是否有弹窗，用于判断拼音生成多音字选择的弹窗
@@ -134,7 +139,15 @@ class BasePage(BaseAction):
         else:
             return result_title
 
-    def order_status(self, feature):
-        '''获取属性'''
-        result = self.element_css_style(feature)
+    def css_status(self, feature, label):
+        '''获取当前组件样式内容'''
+        result = self.attribute(feature, label)
         return result
+
+    def pagenum(self):
+        """ 获取当前分页参数 """
+        ele_list = list()
+        ele = self.find_els((By.XPATH, check_param(path='分页')))
+        for e in ele:
+            ele_list.append(e.text)
+        return ele_list

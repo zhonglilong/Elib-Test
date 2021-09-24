@@ -69,7 +69,8 @@ class BaseAction:
 
     def clearinput(self, feature, content):
         """ 备注：此方法在执行貌似会报错，无法清除文本后再输入，可选择以下方法 clear_all_input """
-        ele = self.find_el(feature).clear()
+        ele = self.find_el(feature)
+        ele.clear()
         return ele.send_keys(content)
 
     def clear_all_input(self, feature, content):
@@ -107,6 +108,7 @@ class BaseAction:
     def text(self, feature):
         return self.find_el(feature).text
 
+    # 获取属性值
     def attribute(self, feature, label):
         return self.find_el(feature).get_attribute(label)
 
@@ -153,17 +155,21 @@ class BaseAction:
         elif atype == "yellowAlert":
             try:
                 element = self.driver.find_element(by, value)
-                if str(element.get_attribute('class')).find("el-message--warning") == 1:
-                    print(111)
+                if str(element.get_attribute('class')).find("el-message--warning") >= 0:
+                    return True
+            except NoSuchElementException as e:
+                return False
+        elif atype == "greenAlert":
+            try:
+                element = self.driver.find_element(by, value)
+                if str(element.get_attribute('class')).find("el-message--success") >= 0:
                     return True
             except NoSuchElementException as e:
                 return False
         elif atype == "pop":
             try:
                 element = self.driver.find_element(by, value)
-                if str(element.get_attribute('class')).find("el-message-box") == -1:
-                    return False
-                else:
+                if str(element.get_attribute('class')).find("el-message-box") >= 0:
                     return True
             except NoSuchElementException as e:
                 return False
@@ -181,7 +187,3 @@ class BaseAction:
             except NoSuchElementException:
                 return False
         return False
-
-    # 获取当前组件样式内容
-    def element_css_style(self, feature):
-        return self.find_el(feature).get_attribute("class")
