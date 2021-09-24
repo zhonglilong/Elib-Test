@@ -149,6 +149,20 @@ class BookingAcceptancePage(BasePage):
         target_row = ele[path].format(param)
         return self.order_status((By.XPATH, target_row))
 
+    def account_parent_style(self, path, param=None):
+        """获取设为添加'查询'style属性
+           判断书目信息查询是否存在重复信息
+        """
+        target_row = ele[path].format(param)
+        return self.orders_status((By.XPATH, target_row))
+
+    def account_parent_title(self, path, param=None):
+        """获取设为添加'校审'title属性
+           判断书目信息查询是否存在重复信息
+        """
+        target_row = ele[path].format(param)
+        return self.orders_status_title((By.XPATH, target_row))
+
     def click_filter_parent(self, num, name):
         """ 父记录
         获取单选列表，点击单选列表指定的值
@@ -162,6 +176,46 @@ class BookingAcceptancePage(BasePage):
     def click_parent_input(self, param, content):
         """ 获取输入框，输入值进行搜索 """
         self.input_text(path='添加父记录-查询输入框', param=param, content=content, itype="clearinput")
+
+    def click_copy(self):
+        """ 书目信息 点击【复制】按钮 """
+        self.click_btn(path='右上按钮', param="3")
+        # 点击编目【复制】按钮
+        self.click_btn(path='编目-右下角按钮', param="复制")
+
+    def click_added(self):
+        """ 书目信息 点击【新增】按钮 """
+        self.click_btn(path='右上按钮', param="3")
+        TimeUtils().sleep(2)
+        # 点击编目【新增】按钮
+        self.click_btn(path='编目-右下角按钮', param="新增")
+
+    def click_refer(self):
+        """ 书目信息 点击【查询】按钮 """
+        self.click_btn(path='右上按钮', param="3")
+        TimeUtils().sleep(2)
+        # 点击编目【查询】按钮
+        self.click_btn(path='编目-右下角按钮', param="查询")
+
+    def click_add_fields(self):
+        """ 书目信息 MARC编目 点击【添加字段】按钮 """
+        self.click_btn(path='右上按钮', param="3")
+        TimeUtils().sleep(2)
+        self.click_btn(path='编目-简单编目/MARC编目', param="2")
+        TimeUtils().sleep(2)
+        # 点击编目【查询】按钮
+        self.click_btn(path='编目-MARC编目-上方按钮', param="添加字段")
+
+    def click_delete_fields(self):
+        """ 书目信息 MARC编目 点击【删除字段】按钮 """
+        self.click_btn(path='右上按钮', param="3")
+        TimeUtils().sleep(2)
+        self.click_btn(path='编目-简单编目/MARC编目', param="2")
+        TimeUtils().sleep(2)
+        self.click_btn(path='编目-MARC编目-字段识别', param="11")
+        TimeUtils().sleep(2)
+        # 点击编目【删除字段】按钮
+        self.click_btn(path='编目-MARC编目-上方按钮', param="删除字段")
 
 
 

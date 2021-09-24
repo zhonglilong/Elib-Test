@@ -6,6 +6,7 @@ import pytest
 import time
 from utils.driver_utils import DriverUtils
 from utils.time_utils import TimeUtils
+from utils.common_utils import ramdon_val
 from page.menu1_interview.sub2_acceptance.page2_booking_acceptance import BookingAcceptancePage
 
 # 采访-图书验收处理-预订验收  测试用例
@@ -124,7 +125,6 @@ class TestBookingAcceptance:
         assert self.page.sub_menu_alert()
 
     # @pytest.mark.zhl
-    # @pytest.mark.parametrize("isbn, ztm, flh, zrz, cbs, isrc",[("1", "罗小黑", "J649", "方光光", "天津人民出版社", "%")])
     def test_parent_record(self):
         """ 测试 书目信息 父记录连接 """
         element = "el-button el-button--primary el-button--mini is-disabled"
@@ -150,7 +150,6 @@ class TestBookingAcceptance:
         assert self.page.sub_menu_alert()
 
     # @pytest.mark.zhl
-    # @pytest.mark.parametrize("isbn, ztm, flh, zrz, cbs, isrc",[("1", "罗小黑", "J649", "方光光", "天津人民出版社", "%")])
     def test_refer_record(self):
         """ 测试 书目信息 查询父记录 解除连接 """
         element = "el-button el-button--primary el-button--mini is-disabled"
@@ -176,7 +175,7 @@ class TestBookingAcceptance:
         self.page.click_btn(path='编目-右下角按钮', param="保存")
         assert self.page.sub_menu_alert()
 
-    @pytest.mark.zhl
+    # @pytest.mark.zhl
     @pytest.mark.parametrize("isbn, ztm, flh, zrz, cbs, isrc", [("1", "罗小黑", "J649", "方光光", "天津人民出版社", "%")])
     def test_parent_refer(self, isbn, ztm, flh, zrz, cbs, isrc):
         """ 测试 书目信息 父记录连接查询 """
@@ -221,5 +220,118 @@ class TestBookingAcceptance:
             TimeUtils().sleep(2)
             self.page.click_btn(path='添加父记录-查询')
         self.page.click_btn(path='添加父记录-取消')
+        self.page.click_btn(path='编目-右下角按钮', param="保存")
+        assert self.page.sub_menu_alert()
+
+    # @pytest.mark.zhl
+    def test_new_information(self):
+        """ 测试 书目信息 新增 """
+        TimeUtils().sleep(2)
+        self.page.click_added()
+        TimeUtils().sleep(2)
+        self.page.input_text(path='简单编目-书目信息输入', param="11", content=ramdon_val(), itype="clickinputs")
+        TimeUtils().sleep(2)
+        self.page.click_btn(path='编目-右下角按钮', param="保存")
+        assert self.page.sub_menu_alert()
+
+    # @pytest.mark.zhl
+    def test_style_information(self):
+        """ 测试 书目信息 查询 """
+        element = "display: none;"
+        TimeUtils().sleep(2)
+        self.page.click_refer()
+        TimeUtils().sleep(2)
+        classname = self.page.account_parent_style(path='编目-图书信息查询结果')
+        if element in classname:
+            self.page.click_btn(path='编目-图书信息查询结果勾选')
+            TimeUtils().sleep(2)
+            self.page.click_btn(path='编目-图书信息查询合并按钮')
+            TimeUtils().sleep(2)
+            self.page.click_btn(path='编目-图书信息合并提示窗口')
+        TimeUtils().sleep(2)
+        self.page.click_btn(path='编目-右下角按钮', param="保存")
+        assert self.page.sub_menu_alert()
+
+    # @pytest.mark.zhl
+    def test_parent_reviser(self):
+        """ 测试 书目信息 审校 """
+        element = "ALT + O"
+        TimeUtils().sleep(2)
+        self.page.click_btn(path='右上按钮', param="3")
+        classname = self.page.account_parent_style(path='编目-取消审校定位元素')
+        TimeUtils().sleep(2)
+        if element in classname:
+            self.page.click_btn(path='编目-右下角按钮', param="取消审校")
+            TimeUtils().sleep(2)
+            self.page.click_btn(path='编目-审校/取消审校窗口确定')
+            TimeUtils().sleep(2)
+            self.page.click_btn(path='编目-右下角按钮', param="保存")
+            TimeUtils().sleep(2)
+        self.page.click_btn(path='编目-右下角按钮', param="审校")
+        TimeUtils().sleep(2)
+        self.page.click_btn(path='编目-审校/取消审校窗口确定')
+        assert self.page.sub_menu_alert()
+
+    # @pytest.mark.zhl
+    def test_add_fields(self):
+        """ 测试 MARC编目 添加字段 """
+        TimeUtils().sleep(2)
+        self.page.click_add_fields()
+        TimeUtils().sleep(2)
+        self.page.input_text(path='编目-MARC编目-字段识别', param="2", content="110", itype="clickinputs")
+        TimeUtils().sleep(2)
+        self.page.input_text(path='编目-MARC编目-字段内容', param="2", content="▼a" + ramdon_val(), itype="clickinputs")
+        TimeUtils().sleep(2)
+        self.page.click_btn(path='编目-右下角按钮', param="保存")
+        TimeUtils().sleep(2)
+        self.page.click_btn(path='编目-右下角按钮', param="保存")
+        assert self.page.sub_menu_alert()
+
+    # @pytest.mark.zhl
+    def test_delete_fields(self):
+        """ 测试 MARC编目 删除字段 重置恢复 """
+        TimeUtils().sleep(2)
+        self.page.click_delete_fields()
+        TimeUtils().sleep(2)
+        self.page.click_btn(path='编目-MARC编目-上方按钮', param="重置")
+        TimeUtils().sleep(2)
+        self.page.click_btn(path='编目-粘贴网页MARC-重置恢复')
+        TimeUtils().sleep(2)
+        self.page.click_btn(path='编目-右下角按钮', param="保存")
+        assert self.page.sub_menu_alert()
+
+    # @pytest.mark.zhl
+    def test_marc_cope(self):
+        """ 测试 MARC编目 粘贴网页MARC """
+        TimeUtils().sleep(2)
+        self.page.click_btn(path='右上按钮', param="3")
+        TimeUtils().sleep(2)
+        self.page.click_btn(path='编目-简单编目/MARC编目', param="2")
+        TimeUtils().sleep(2)
+        self.page.click_btn(path='编目-MARC编目-上方按钮', param="粘贴网页MARC")
+        TimeUtils().sleep(2)
+        self.page.input_text(path='编目-粘贴网页MARC-书目信息输入', content=
+        "000    nam0 2200241   450" +"\n" +
+        "001    011420239" +"\n" +
+        "005    20210923114053.0" +"\n" +
+        "010    |a978-7-302-58350-9|dCNY39.00" +"\n" +
+        "100    |a20210923d2021    em y0chiy50      ea" +"\n" +
+        "101 0  |achi" +"\n" +
+        "102    |aCN|b110000" +"\n" +
+        "105    |aa   z   000yy" +"\n" +
+        "106    |ar" +"\n" +
+        "200 1  |a人工智能导论|9ren gong zhi neng dao lun|f马月坤，陈昊主编" +"\n" +
+        "210    |a北京|c清华大学出版社|d2021" +"\n" +
+        "215    |a263页|c图|d26cm" +"\n" +
+        "300    |a人工智能通识教材" +"\n" +
+        "330    |a全书共13章，第1章介绍人工智能的基本概念、发展简史，并着重介绍了人工智能的主要研究内容与各种应用，以开阔读者的视野，引导读者进入人工智能各个研究领域；第2-6章阐述人工智能的基本原理和技术基础，重点论述知识图谱、自然语言处理、智能语音、计算机视觉、机器学习和神经网络等关键通用技术，为后续章节介绍行业应用做知识储备和技术铺垫；第7-12章介绍人工智能目前在行业中的应用，包括智能交通、智能商务、智能司法、智能教育、智能医疗、其他行业智能应用等6个模块，读者可以专业需要选择其中几个行业应用案例进行重点学习，感受到人工智能在专业中的融合；第13章介绍当前人工智能研究存在的热点问题和伦理争议。" +"\n" +
+        "606 0  |a人工智能|j教材" +"\n" +
+        "690    |aTP18|v5" +"\n" +
+        "701  0 |a马月坤|9ma yue kun|4主编" +"\n" +
+        "701  0 |a陈昊|9chen hao|4主编" +"\n" +
+        "801  0 |aCN|b91MARC|c20210923" , itype="clickinputs")
+        TimeUtils().sleep(2)
+        self.page.click_btn(path='编目-粘贴网页MARC-确定')
+        TimeUtils().sleep(2)
         self.page.click_btn(path='编目-右下角按钮', param="保存")
         assert self.page.sub_menu_alert()
