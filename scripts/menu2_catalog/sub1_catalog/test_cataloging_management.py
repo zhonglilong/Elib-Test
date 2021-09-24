@@ -4,7 +4,10 @@ import time
 
 import pytest
 import allure
+from selenium.webdriver.common.by import By
+
 from page.menu2_catalog.sub1_catalog.page1_cataloging_management import CatalogingManagementPage
+from utils.common_utils import ramdon_val
 from utils.driver_utils import DriverUtils
 from utils.time_utils import TimeUtils
 
@@ -135,9 +138,11 @@ class TestCatalogingManagement:
         if text == '更多筛选':
             self.page.click_btn(path='筛选项', param=['1', '5'])
             assert self.page.output_text(path='筛选项', param=['1', '5']) == '隐藏筛选'
+            assert self.page.verify_display(path='筛选项', param=['2', '5']) is True
         elif text == '隐藏筛选':
             self.page.click_btn(path='筛选项', param=['1', '5'])
             assert self.page.output_text(path='筛选项', param=['1', '5']) == '更多筛选'
+            assert self.page.verify_display(path='筛选项', param=['2', '5']) is False
         else:
             logging.error("获取字符串不正确")
         assert self.page.sub_menu_alert()
@@ -167,6 +172,7 @@ class TestCatalogingManagement:
     @pytest.mark.parametrize("staff", ["创建人", "编目人", "审校人"])
     @pytest.mark.parametrize("value", ["吴君", "zll", "zhl"])
     def test_select_staff(self, staff, value):
+        """ 测试 查询操作员 功能 """
         self.page.verify_filter_items()
         self.page.click_filter_list([2, 2, 1], staff)
         self.page.click_filter_list([2, 3, 1], value)

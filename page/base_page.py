@@ -148,3 +148,11 @@ class BasePage(BaseAction):
         '''获取属性'''
         result = self.element_tle_style(feature)
         return result
+
+    def pagenum(self):
+        """ 获取当前分页参数 """
+        ele_list = list()
+        ele = self.find_els((By.XPATH, check_param(path='分页')))
+        for e in ele:
+            ele_list.append(e.text)
+        return ele_list
