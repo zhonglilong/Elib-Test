@@ -81,11 +81,18 @@ class CatalogingManagementPage(BasePage):
     def input_filter_date(self, start, end):
         self.input_text(path='筛选-输入框', param='起始日期', content=start)
         self.input_text(path='筛选-输入框', param='结束日期', content=end)
+    #
+    # def total_form_exist_columns(self):
+    #     """ 定位标题头，返回列数 """
 
-    def total_form_exist_columns(self):
-        """ 定位标题头，返回列数 """
+    def columns_data(self, num=-1):
         time.sleep(1)
-        return len(self.find_els((By.XPATH, check_param(path='表格标题头'))))
+        element = self.find_els((By.XPATH, check_param(path='表格标题头')))
+        if num == -1: return len(element)
+        elif num >= 0: return element[num].click()
+
+
+
     #
     # def click_recommend_list(self):
     #     self.click_btn(path='编目-推荐多选列表')

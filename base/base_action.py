@@ -153,8 +153,14 @@ class BaseAction:
         elif atype == "yellowAlert":
             try:
                 element = self.driver.find_element(by, value)
-                if str(element.get_attribute('class')).find("el-message--warning") == 1:
-                    print(111)
+                if str(element.get_attribute('class')).find("el-message--warning") >= 0:
+                    return True
+            except NoSuchElementException as e:
+                return False
+        elif atype == "greenAlert":
+            try:
+                element = self.driver.find_element(by, value)
+                if str(element.get_attribute('class')).find("el-message--success") >= 0:
                     return True
             except NoSuchElementException as e:
                 return False

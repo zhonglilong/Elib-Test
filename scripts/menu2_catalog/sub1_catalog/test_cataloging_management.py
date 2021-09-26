@@ -201,7 +201,7 @@ class TestCatalogingManagement:
     @pytest.mark.parametrize("column", [("成员馆", "ISBN", "分类号"), ("正题名", "责任者")])
     def test_select_column(self, column):
         """ 测试 列设置 功能 """
-        before_columns = self.page.total_form_exist_columns()
+        before_columns = self.page.columns_data()
         self.page.click_btn(path='筛选项', param=[1, 6])
         time.sleep(1)
         for c in column:
@@ -209,7 +209,7 @@ class TestCatalogingManagement:
             time.sleep(2)
         self.page.click_btn(path='查询按钮', param="查询")
         time.sleep(2)
-        operating_columns = self.page.total_form_exist_columns()
+        operating_columns = self.page.columns_data()
         assert before_columns > operating_columns
         assert self.page.sub_menu_alert()
 
@@ -220,7 +220,7 @@ class TestCatalogingManagement:
         time.sleep(2)
         self.page.click_btn(path='查询按钮', param="查询")
         time.sleep(2)
-        after_columns = self.page.total_form_exist_columns()
+        after_columns = self.page.columns_data()
         assert before_columns == after_columns
         assert self.page.sub_menu_alert()
 
@@ -266,6 +266,7 @@ class TestCatalogingManagement:
                     assert str(self.page.alert_exist(atype='greenAlert')).find("操作成功") is not -1
                     assert self.page.sub_menu_alert()
                     assert self.page.verify_checkbox('已推荐') is True
+                    assert self.page.verify_display(path='编目-拼音/推荐弹窗', param='图书推荐') is False
             else: pytest.fail('没有弹出/找到 图书推荐 这个弹窗')
         else: pytest.skip('没有数据 或者 第一条数据已被勾选')
 
@@ -299,5 +300,36 @@ class TestCatalogingManagement:
                 assert self.page.verify_display(path='编目-拼音/推荐弹窗', param='图书推荐') is False
             else: pytest.fail('没有弹出/找到 图书推荐 这个弹窗')
         else: pytest.skip('没有数据 或者 第一条数据已被勾选')
+
+    @pytest.mark.reading
+    def test_recommend_multi_select(self):
+        """ 测试 勾选荐购(多本书) 功能 """
+        if self.page.pagenum()[0] != 0:
+            self.page.columns_data(num=0)
+            time.sleep(1)
+            self.page.click_btn(path='编目-右上更多/导出按钮', param='1')
+            time.sleep(1)
+            self.page.click_btn(path='编目-更多/导出单选列表', param='1')
+            # 是否弹出 图书推荐 这个窗口
+            time.sleep(1)
+            if self.page.dialog_exist('图书推荐'):
+                self.page.click_btn(path='编目-推荐多选列表')
+                # 多选列表是否有值
+                if self.page.element_exist(path='编目-推荐多选列表-是否存在'):
+                    self.page.click_btn(path='编目-推荐关闭按钮')
+                    pytest.skip('请在 设置-图书推荐 中添加推荐主题')
+                else:
+                    self.page.click_btn(path='编目-推荐多选列表-值')
+                    self.page.input_text(path='编目-推荐备注', content=ramdon_val(), itype='clickinput')
+                    self.page.click_btn(path='菜单', param='推 荐')
+                    assert str(self.page.alert_exist(atype='greenAlert')).find("操作成功") is not -1
+                    assert self.page.sub_menu_alert()
+                    assert self.page.verify_checkbox('已推荐') is True
+                    assert self.page.verify_display(path='编目-拼音/推荐弹窗', param='图书推荐') is False
+            else:
+                pytest.fail('没有弹出/找到 图书推荐 这个弹窗')
+        else:
+            pytest.skip('没有数据')
+
 
 
