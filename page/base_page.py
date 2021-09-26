@@ -86,16 +86,19 @@ class BasePage(BaseAction):
             logging.info("请检查参数是否正确")
 
     def sub_menu_alert(self):
-        """ 判断是否有提示框
+        """ 判断是否有红色提示框，没有返回Ture，有返回false
         :return: True or False
         """
         TimeUtils().sleep(1)
         return self.check_element((By.XPATH, ele['提示框']), atype='redAlert')
 
-    def yellow_alert_exist(self):
-        """ 判断是否有黄色提示框，有的话输出内容 """
+    def alert_exist(self, atype):
+        """ 判断是否有提示框，有的话输出内容
+        :param atype: 要获取的提示框颜色，目前只可以选yellowAlert，greenAlert
+        :return: 文本(str)
+        """
         TimeUtils().sleep(1)
-        if self.check_element((By.XPATH, ele['提示框']), atype='yellowAlert'):
+        if self.check_element((By.XPATH, ele['提示框']), atype=atype):
             return self.output_text(path='提示框文本', otype='text')
 
     def pop_window_to_judge(self):
@@ -105,25 +108,27 @@ class BasePage(BaseAction):
         TimeUtils().sleep(1)
         return self.check_element((By.XPATH, ele['弹窗']), atype='pop')
 
-    def element_exist(self):
+    def element_exist(self, path, param=None):
         """ 判断是否存在
         :return: True or False
         """
         TimeUtils().sleep(1)
-        return self.check_element((By.XPATH, ele['弹窗']), atype='element')
+        return self.check_element((
+            By.XPATH, check_param(path=path, param=param)
+        ), atype='element')
 
-    def dialog_exist(self):
-        """ 判断是否有弹窗，用于判断拼音生成多音字选择的弹窗
+    def dialog_exist(self, param):
+        """ 判断是否有弹窗，用于判断拼音生成多音字选择的弹窗 和 图书推荐
         :return: True or False
         """
         TimeUtils().sleep(1)
-        return self.check_element((By.XPATH, ele['编目-拼音弹窗']), atype='dialog')
+        return self.check_element((
+            By.XPATH, check_param(path='编目-拼音/推荐弹窗', param=param)
+        ), atype='dialog')
 
     def total_form_columns(self, feature):
-        '''获取表单的列数'''
-        columns = self.find_els(feature)
-        total_num = len(columns)
-        return total_num
+        """ 获取表单的列数 """
+        return len(self.find_els(feature))
 
     def choose_target_title(self, feature):
         '''获取名字，表格里面的直接返回，详情里面的处理一下再返回'''

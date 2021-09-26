@@ -66,14 +66,31 @@ class CatalogingManagementPage(BasePage):
             time.sleep(1)
 
     def verify_checkbox(self, param):
-        return self.select((By.XPATH, check_param(path='编目-勾选框', param=param)))
+        return self.select((By.XPATH, check_param(path='编目-审校/推荐-是否勾选', param=param)))
 
-    def verify_staff(self):
+    def verify_checkbox_collection(self):
+        return self.select((By.XPATH, check_param(path='编目-零馆藏书目-是否勾选')))
+
+    def verify_data(self, param):
         ele_list = list()
-        elements = self.find_els((By.XPATH, check_param(path='编目-表格-创建人')))
+        elements = self.find_els((By.XPATH, check_param(path='编目-表格-数据', param=param)))
         for element in elements:
             ele_list.append(element.text)
         return ele_list
 
-    # def verify_filter_display(self, path, param=None):
-    #     return self.display((By.XPATH, check_param(path=path, param=param)))
+    def input_filter_date(self, start, end):
+        self.input_text(path='筛选-输入框', param='起始日期', content=start)
+        self.input_text(path='筛选-输入框', param='结束日期', content=end)
+
+    def total_form_exist_columns(self):
+        """ 定位标题头，返回列数 """
+        time.sleep(1)
+        return len(self.find_els((By.XPATH, check_param(path='表格标题头'))))
+    #
+    # def click_recommend_list(self):
+    #     self.click_btn(path='编目-推荐多选列表')
+    #     time.sleep(1)
+    #     self.click_btn(path='筛选-单选列表', param=name)
+
+    def verify_display(self, path, param=None):
+        return self.display((By.XPATH, check_param(path=path, param=param)))
