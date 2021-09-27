@@ -68,15 +68,16 @@ class BaseAction:
         return ele.send_keys(content)
 
     def clearinput(self, feature, content):
-        """ 备注：此方法在执行貌似会报错，无法清除文本后再输入，可选择以下方法 clear_all_input """
-        ele = self.find_el(feature).clear()
-        return ele.send_keys(content)
-
-    def clear_all_input(self, feature, content):
-        """通过键盘全选输入框文本"""
+        """ 通过键盘全选输入框文本 """
         ele = self.find_el(feature)
-        ele.send_keys(Keys.CONTROL, 'a')
+        ele.clear()
         return ele.send_keys(content)
+    #
+    # def clear_all_input(self, feature, content):
+    #     """ 通过键盘全选输入框文本 """
+    #     ele = self.find_el(feature)
+    #     ele.send_keys(Keys.CONTROL, 'a')
+    #     return ele.send_keys(content)
 
     def select(self, feature):
         """ 是否被选中
