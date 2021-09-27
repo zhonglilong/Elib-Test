@@ -86,12 +86,14 @@ class CatalogingManagementPage(BasePage):
     #     """ 定位标题头，返回列数 """
 
     def columns_data(self, num=-1):
+        """ num为-1，返回标题头数量；num为其他数，获得对应的点击 """
         time.sleep(1)
         element = self.find_els((By.XPATH, check_param(path='表格标题头')))
         if num == -1: return len(element)
-        elif num >= 0: return element[num].click()
-
-
+        elif num == 0: return element[num].click()
+        # 本来想输出文本的，但是又要加一条xpath路径就算了...
+        else:
+            logging.error("num传值只能为-1或0")
 
     #
     # def click_recommend_list(self):

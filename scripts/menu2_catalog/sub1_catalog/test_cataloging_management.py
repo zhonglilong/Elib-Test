@@ -7,7 +7,7 @@ import allure
 from selenium.webdriver.common.by import By
 
 from page.menu2_catalog.sub1_catalog.page1_cataloging_management import CatalogingManagementPage
-from utils.common_utils import ramdon_val
+from utils.common_utils import ramdon_val, check_download
 from utils.driver_utils import DriverUtils
 from utils.time_utils import TimeUtils
 
@@ -266,7 +266,7 @@ class TestCatalogingManagement:
                     assert str(self.page.alert_exist(atype='greenAlert')).find("操作成功") is not -1
                     assert self.page.sub_menu_alert()
                     assert self.page.verify_checkbox('已推荐') is True
-                    assert self.page.verify_display(path='编目-拼音/推荐弹窗', param='图书推荐') is False
+                    assert self.page.verify_display(path='编目-拼音/推荐/分编弹窗', param='图书推荐') is False
             else: pytest.fail('没有弹出/找到 图书推荐 这个弹窗')
         else: pytest.skip('没有数据 或者 第一条数据已被勾选')
 
@@ -297,12 +297,12 @@ class TestCatalogingManagement:
                 time.sleep(1)
                 assert self.page.verify_checkbox('已推荐') is False
                 assert self.page.sub_menu_alert()
-                assert self.page.verify_display(path='编目-拼音/推荐弹窗', param='图书推荐') is False
+                assert self.page.verify_display(path='编目-拼音/推荐/分编弹窗', param='图书推荐') is False
             else: pytest.fail('没有弹出/找到 图书推荐 这个弹窗')
         else: pytest.skip('没有数据 或者 第一条数据已被勾选')
 
     @pytest.mark.reading
-    def test_recommend_multi_select(self):
+    def test_recommend_multi_checked(self):
         """ 测试 勾选荐购(多本书) 功能 """
         if self.page.pagenum()[0] != 0:
             self.page.columns_data(num=0)
@@ -325,11 +325,64 @@ class TestCatalogingManagement:
                     assert str(self.page.alert_exist(atype='greenAlert')).find("操作成功") is not -1
                     assert self.page.sub_menu_alert()
                     assert self.page.verify_checkbox('已推荐') is True
-                    assert self.page.verify_display(path='编目-拼音/推荐弹窗', param='图书推荐') is False
-            else:
-                pytest.fail('没有弹出/找到 图书推荐 这个弹窗')
+                    assert self.page.verify_display(path='编目-拼音/推荐/分编弹窗', param='图书推荐') is False
+            else: pytest.fail('没有弹出/找到 图书推荐 这个弹窗')
+        else: pytest.skip('没有数据')
+
+    @pytest.mark.reading
+    def test_recommend_multi_unchecked(self):
+        """ 测试 取消勾选荐购(多本书) 功能 """
+        if self.page.pagenum()[0] != 0 and self.page.verify_checkbox('已推荐') is True:
+            self.page.columns_data(num=0)
+            time.sleep(1)
+            self.page.click_btn(path='编目-右上更多/导出按钮', param='1')
+            time.sleep(1)
+            self.page.click_btn(path='编目-更多/导出单选列表', param='2')
+            time.sleep(1)
+            assert self.page.verify_checkbox('已推荐') is False
+            assert self.page.sub_menu_alert()
+            assert self.page.verify_display(path='编目-拼音/推荐/分编弹窗', param='图书推荐') is False
+        else: pytest.skip('没有数据 或者 第一条数据未被勾选')
+
+    @pytest.mark.reading
+    def test_recommend_multi_cancel(self):
+        """ 测试 荐购未勾选取消勾选 功能 """
+        if self.page.pagenum()[0] != 0 and self.page.verify_checkbox('已推荐') is False:
+            self.page.click_btn(path='表格第一条数据')
+            self.page.click_btn(path='编目-右上更多/导出按钮', param='1')
+            self.page.click_btn(path='编目-更多/导出单选列表', param='2')
+            assert self.page.verify_checkbox('已推荐') is False
+            assert self.page.sub_menu_alert()
+            assert str(self.page.alert_exist(atype='yellowAlert')).find("选中的书籍中没有已推荐的书籍") is not -1
+            assert self.page.verify_display(path='编目-拼音/推荐/分编弹窗', param='图书推荐') is False
+        else: pytest.skip('没有数据 或者 第一条数据已被勾选')
+
+    @pytest.mark.reading
+    @pytest.mark.parametrize("marcfbType", ["MARC21西文图书", "CNMARC中文图书"])
+    def test_multi_marcfb_type(self, marcfbType):
+        """ 测试 修改多条数据 marc分编类型 """
+        if self.page.pagenum()[0] != 0:
+            self.page.click_btn(path='表格第一条数据')
+            self.page.click_btn(path='编目-右上更多/导出按钮', param='1')
+            self.page.click_btn(path='编目-更多/导出单选列表', param='3')
+            # 是否弹出 修改分编类型 这个窗口
+            if self.page.dialog_exist('修改分编类型'):
+                self.page.input_text(path='编目-修改分编类型-筛选项', content=marcfbType)
+                time.sleep(1)
+                self.page.click_btn(path='编目-修改分编类型-单选列表', param=marcfbType)
+                time.sleep(1)
+                self.page.click_btn(path='编目-修改分编类型-按钮', param='确定')
+                assert str(self.page.alert_exist(atype='greenAlert')).find("操作成功") is not -1
+                assert self.page.sub_menu_alert()
+            else: pytest.fail('没有弹出/找到 修改分编类型 这个弹窗')
+        else: pytest.skip('没有数据 或者 第一条数据已被勾选')
+
+    @pytest.mark.zll
+    def test_download_marc_utf8(self):
+        """ 测试 下载文件 """
+        if self.page.pagenum()[0] != 0:
+            self.page.click_btn(path='编目-右上更多/导出按钮', param='2')
+            self.page.click_btn(path='编目-更多/导出单选列表', param='1')
+            assert check_download(f="书目信息.ISO")
         else:
-            pytest.skip('没有数据')
-
-
-
+            pytest.skip('没有数据 或者 第一条数据已被勾选')

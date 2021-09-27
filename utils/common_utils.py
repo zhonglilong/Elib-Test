@@ -1,6 +1,10 @@
 # -*- coding:utf-8 -*-
+import logging
 import random
+import time
+
 from base.base_element import Element
+from utils.driver_utils import *
 
 ele = Element('base')
 
@@ -24,3 +28,16 @@ def check_param(path, param=None):
     else:
         value = ele[path]
     return value
+
+
+def check_download(f, load=1):
+    try:
+        if os.path.exists(FILE_PATH):
+            time.sleep(int(load))
+            for file in os.listdir(FILE_PATH):
+                if f in file:
+                    return True
+            return False
+    except Exception:
+        logging.info("file is not exist")
+        return False

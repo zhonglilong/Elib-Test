@@ -123,7 +123,7 @@ class BasePage(BaseAction):
         """
         TimeUtils().sleep(1)
         return self.check_element((
-            By.XPATH, check_param(path='编目-拼音/推荐弹窗', param=param)
+            By.XPATH, check_param(path='编目-拼音/推荐/分编弹窗', param=param)
         ), atype='dialog')
 
     def total_form_columns(self, feature):
