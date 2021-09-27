@@ -390,4 +390,4 @@ class TestCatalogingManagement:
             assert check_download(f="书目信息", load='2')
             time.sleep(2)
         else:
-            pytest.skip('没有数据 或者 第一条数据已被勾选')
+            pytest.skip('没有数据')

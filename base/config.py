@@ -22,6 +22,9 @@ REPORT_PATH = os.path.join(BASE_DIR, 'resources\\report\\allure_report')
 # 图片目录
 IMAGE_PATH = os.path.join(BASE_DIR, 'resources\\picture')
 
+# 文件目录
+FILE_PATH = os.path.join(BASE_DIR, 'resources\\file')
+
 # 业务系统地址
 URL = 'http://192.168.1.35:8080/elib/#/login'    # 业务系统环境
 
@@ -46,6 +49,14 @@ CHROME_OPTIONS.add_argument('disable-infobars')
 CHROME_OPTIONS.add_argument('profile.managed_default_content_settings.images')
 CHROME_OPTIONS.add_argument('lang=zh_CN.UTF-8')
 CHROME_OPTIONS.add_argument('user-agent="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36"')
+CHROME_OPTIONS.add_experimental_option('prefs', {
+    'download.default_directory': FILE_PATH,         # 设置下载路径，路径不存在会自动创建
+    'download.prompt_for_download': False,           # 是否弹窗询问
+    'safebrowsing.enabled': False,                   # 是否提示安全警告
+    # Boolean that records if the download directory was changed by an
+    # upgrade a unsafe location to a safe location.
+    'download.directory_upgrade': False              # 记录下下载目录是否被更改？
+})
 
 if __name__ == '__main__':
     print(SCRIPT_PATH)
