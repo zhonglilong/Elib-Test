@@ -378,13 +378,16 @@ class TestCatalogingManagement:
         else: pytest.skip('没有数据 或者 第一条数据已被勾选')
 
     @pytest.mark.zll
-    def test_download_marc_utf8(self):
+    @pytest.mark.parametrize("num", ["1", "2", "3", "4"])
+    def test_download_marc_utf8(self, num):
         """ 测试 下载文件 """
         clear_download()
         if self.page.pagenum()[0] != 0:
-            time.sleep(1)
+            time.sleep(2)
             self.page.click_btn(path='编目-右上更多/导出按钮', param='2')
-            self.page.click_btn(path='编目-更多/导出单选列表', param='1')
-            assert check_download(f="书目信息.ISO")
+            time.sleep(2)
+            self.page.click_btn(path='编目-更多/导出单选列表', param=num)
+            assert check_download(f="书目信息", load='2')
+            time.sleep(2)
         else:
             pytest.skip('没有数据 或者 第一条数据已被勾选')

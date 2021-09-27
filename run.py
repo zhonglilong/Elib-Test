@@ -9,6 +9,8 @@ def check_dir():
         os.makedirs(BASE_DIR + "\\resources\\log")
     if not os.path.exists(BASE_DIR + "\\resources\\picture"):
         os.makedirs(BASE_DIR + "\\resources\\picture")
+    if not os.path.exists(BASE_DIR + "\\resources\\file"):
+        os.makedirs(BASE_DIR + "\\resources\\file")
     if not os.path.exists(BASE_DIR + "\\resources\\report"):
         os.makedirs(BASE_DIR + "\\resources\\report")
         if not os.path.exists(BASE_DIR + "\\resources\\report\\allure_report"):
