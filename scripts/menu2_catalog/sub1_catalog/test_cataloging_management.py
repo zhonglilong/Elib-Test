@@ -7,7 +7,7 @@ import allure
 from selenium.webdriver.common.by import By
 
 from page.menu2_catalog.sub1_catalog.page1_cataloging_management import CatalogingManagementPage
-from utils.common_utils import ramdon_val, check_download
+from utils.common_utils import ramdon_val, check_download, clear_download
 from utils.driver_utils import DriverUtils
 from utils.time_utils import TimeUtils
 
@@ -380,7 +380,9 @@ class TestCatalogingManagement:
     @pytest.mark.zll
     def test_download_marc_utf8(self):
         """ 测试 下载文件 """
+        clear_download()
         if self.page.pagenum()[0] != 0:
+            time.sleep(1)
             self.page.click_btn(path='编目-右上更多/导出按钮', param='2')
             self.page.click_btn(path='编目-更多/导出单选列表', param='1')
             assert check_download(f="书目信息.ISO")

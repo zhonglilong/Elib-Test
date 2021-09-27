@@ -31,6 +31,11 @@ def check_param(path, param=None):
 
 
 def check_download(f, load=1):
+    """ 检测是否下载指定文件
+    :param f: 文件名（可只输入部分）
+    :param load: 等待文件时间
+    :return: True 或 False
+    """
     try:
         if os.path.exists(FILE_PATH):
             time.sleep(int(load))
@@ -41,3 +46,11 @@ def check_download(f, load=1):
     except Exception:
         logging.info("file is not exist")
         return False
+
+
+def clear_download():
+    """ 清空文件夹FILE_PATH """
+    for file in os.listdir(FILE_PATH):
+        if len(file) > 0:
+            os.remove(FILE_PATH + "\\" + file)
+
