@@ -10,6 +10,7 @@ import logging
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions
 import requests
+from utils.common_utils import check_param
 
 ele = Element('base')
 
@@ -79,17 +80,13 @@ class AdvanceOrderPage(BasePage):
         """ 获取输入框，输入值进行搜索 """
         self.input_text(path='筛选-输入框', param=param, content=content, itype="clickinputs")
 
-    def input_filter_date(self, start, end):
-        """ 获取 开始日期 和 结束日期，输入值
-        :param start: 开始日期
-        :param end: 结束日期
-        """
-        self.input_text(path='筛选-输入框', param='开始日期', content=start)
-        self.input_text(path='筛选-输入框', param='结束日期', content=end)
-
-    def click_filter_input(self, content):
+    def click_filter_input(self, path, param, content):
         """ 获取输入框，输入值进行搜索 """
-        self.input_text(path='列设置里面的全选A', content=content, itype="clearinput")
+        self.input_text(path=path, param=param, content=content, itype="clickinputs")
+
+    def check_state_param(self, path, param):
+        '''通过确认查询出的数据的目标列的值，确认是否搜索正确。'''
+        return self.choose_target_title((By.XPATH, check_param(path=path, param=param)))
 
     def click_select_list(self, name):
         """ 点击按钮，选择选项 """

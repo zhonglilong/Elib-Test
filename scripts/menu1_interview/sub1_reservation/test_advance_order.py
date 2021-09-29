@@ -64,9 +64,15 @@ class TestAdvanceOrder:
     def test_select_date(self):
         """ 测试 条件筛选（创建时间） 筛选日期 功能"""
         self.page.click_btn(path='查询按钮', param='查询')
-        self.page.input_filter_date(start=TimeUtils().today(), end=TimeUtils().today())
+        start_time = TimeUtils().long_ago_time(month_num=1, fulltime=False)
+        self.page.click_filter_input(path='筛选-输入框', param='开始日期', content=start_time)
+        TimeUtils().sleep(2)
+        end_time = TimeUtils().today(istime=False)
+        self.page.click_filter_input(path='筛选-输入框', param='结束日期', content=end_time)
         self.page.click_btn(path='查询按钮', param='查询')
-        assert self.page.sub_menu_alert()
+        TimeUtils().sleep(2)
+        target_time = self.page.check_state_param(path='随机一行中随机一列的值', param=[1, 7])
+        assert TimeUtils().check_time_state(start_time, end_time, target_time, same_time=False)
 
     #三：修改区
     @pytest.mark.flaky(reruns=3)

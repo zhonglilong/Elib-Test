@@ -9,6 +9,7 @@ from base.base_action import BaseAction
 import logging
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions
+from utils.common_utils import check_param
 import requests
 
 ele = Element('base')
@@ -83,14 +84,20 @@ class RecommendedByReadersPage(BasePage):
         time.sleep(1)
         self.chains().click(self.find_el((By.XPATH, ele['筛选-单选列表'].format(name)))).perform()
 
+    def click_time_filter_input(self, path, param, content):
+        """ 获取输入框，输入值进行搜索 """
+        self.input_text(path=path, param=param, content=content, itype="clickinputs")
+
+    def check_state_param(self, path, param):
+        '''通过确认查询出的数据的目标列的值，确认是否搜索正确。'''
+        return self.choose_target_title((By.XPATH, check_param(path=path, param=param)))
+
     def input_filter_date(self, start, end):
         """ 获取 开始日期 和 结束日期，输入值
         :param start: 开始日期
         :param end: 结束日期
         """
-        # self.input_text(path='筛选-输入框', param='选择开始时间', content=start, itype="clickinputs")
-        # self.input_text(path='筛选-输入框', param='选择结束时间', content=end, itype="clickinputs")
-        self.input_text(path='筛选-输入框', param='选择开始时间', content=start)
+        self.input_text(path='筛选-输入框', param='选择开始时间', content=start, )
         self.input_text(path='筛选-输入框', param='选择结束时间', content=end)
 
     def click_filter_input(self, name):

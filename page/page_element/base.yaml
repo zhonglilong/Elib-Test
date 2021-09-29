@@ -36,9 +36,9 @@
  - 表格某一行的数据: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[{0}]"   #随机一行数据，自己传参
  - 列设置按钮: "//div[@class='header__line']/div/span[contains(text(),'{0}')]"   #点击 上方那个列设置的
  - 列设置里面的选项: "//ul[@class='list-group']/span/li[contains(text(),'{0}')]"    #点击 列设置里面的选项
-# - 列设置里面的全选: "//*/ul/li[@class='el-dropdown-menu__item el-dropdown-menu__item--divided']"    #点击 列设置里面的全选
  - 列设置里面的全选: "//ul[@class='list-group']/following-sibling::li"                               # 点击 列设置里面的全选
  - 分页: "//span[@class='page__count']"    # 使用elements查找，一个页面有2个，分别是xx页/xx条数据，有的页面会有4个，自己做好判断
+ - 弹出窗口-叉: "//*[contains(@aria-label,'{0}')]//button[@aria-label='Close']/i"    #根据弹出的窗口的唯一标题名，找它的叉
 采访:
   征订目录预订:
     # 新增信息-输入定位: "//label[text()='{0}']/following-sibling::div/div/input"    # 获取左边的文本，定位到右边的输入框
@@ -123,6 +123,9 @@
    - 编目-修改分编类型-按钮: "//*[contains(@aria-label,'修改分编类型')]/div[3]/span/div[2]/button/span[text()='{0}']"
  文献移送:
    - 编目-已交送列: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[{0}]/td[7]"  #获取已经交送列的值
+ 编目统计:
+   - 随机一行中随机一列的值: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[{0}]/td[{1}]"  #获取目标行的目标列的值
+   - 书标打印-弹出窗口: "//*[contains(@aria-label,'{0}')]"  #根据标题匹配窗口
 运营:
   订购处理:
    - 运营-新增/编辑-输入: "//label[contains(text(),'{0}')]/following-sibling::div//div[@class='el-select__tags']/input"

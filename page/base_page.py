@@ -136,6 +136,11 @@ class BasePage(BaseAction):
         else:
             return result_title
 
+    def css_status(self, feature, label):
+        '''获取当前组件样式内容，label可为class，style，title'''
+        result = self.attribute(feature, label)
+        return result
+
     def order_status(self, feature):
         '''获取属性'''
         result = self.element_css_style(feature)

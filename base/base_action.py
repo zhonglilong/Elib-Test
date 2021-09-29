@@ -108,6 +108,7 @@ class BaseAction:
     def text(self, feature):
         return self.find_el(feature).text
 
+    #获取属性值，例如class、style、title的值
     def attribute(self, feature, label):
         return self.find_el(feature).get_attribute(label)
 
