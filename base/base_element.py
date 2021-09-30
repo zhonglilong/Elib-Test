@@ -7,9 +7,9 @@ from base.config import ELEMENT_PATH
 class Element:
     """获取元素"""
 
-    def __init__(self, name):
-        self.file_name = '%s.yaml' % name
-        self.element_path = os.path.join(ELEMENT_PATH, self.file_name)
+    def __init__(self, name, ytype='dict'):
+        self.t = ytype
+        self.element_path = os.path.join(ELEMENT_PATH, '%s.yaml' % name)
         if not os.path.exists(self.element_path):
             raise FileNotFoundError("%s 文件不存在！" % self.element_path)
         with open(self.element_path, encoding='utf-8') as f:
@@ -17,7 +17,8 @@ class Element:
 
     def __getitem__(self, item):
         """获取属性"""
-        return find_dict_value(self.data, item)
+        yaml_dict = {"dict": find_dict_value(self.data, item), "json": find_json_value(self.data, item)}
+        return yaml_dict[self.t]
 
 
 def find_dict_value(dict_data, item):
@@ -37,6 +38,12 @@ def find_dict_value(dict_data, item):
                     return find_dict_value(value, item)
 
 
+def find_json_value(dict_data, item):
+    return dict_data[item]
+
+
 if __name__ == '__main__':
-    search = Element('base')
-    print(search['筛选项'])
+    # search = Element('base')
+    # print(search['筛选项'])
+    m = Element("model", ytype='json')
+    print(m["marc"])
