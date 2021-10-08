@@ -15,7 +15,7 @@ class Element:
         with open(self.element_path, encoding='utf-8') as f:
             self.data = yaml.safe_load(f)
 
-    def __getitem__(self, item):
+    def __getitem__(self, item="dict"):
         """获取属性"""
         yaml_dict = {"dict": find_dict_value(self.data, item), "json": find_json_value(self.data, item)}
         return yaml_dict[self.t]

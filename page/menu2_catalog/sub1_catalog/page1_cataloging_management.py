@@ -4,8 +4,8 @@ from page.base_page import BasePage
 from base.base_element import Element
 from utils.common_utils import check_param
 import logging, time
-
-ele = Element('base', ytype='dict')
+#
+# ele = Element('base', ytype='dict')
 
 
 # 编目-编目管理

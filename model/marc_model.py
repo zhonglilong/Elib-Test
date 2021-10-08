@@ -436,8 +436,6 @@ class MARCModel(object):
         return self.lyzzztm
 
 
-
-
 if __name__ == "__main__":
     # aa = {"isbn": "111"}
     # a = MARCModel(**aa)

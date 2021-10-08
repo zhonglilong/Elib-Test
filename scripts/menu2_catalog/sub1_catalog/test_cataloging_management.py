@@ -425,7 +425,8 @@ class TestCatalogingManagement:
     @pytest.mark.zll
     def test_marcEdit_add(self, value):
         """ 测试 简单编目 新增书目 功能 """
-        # print(value)
+        print(value)
+
         
 
         # print(marcs.get_isbn())
