@@ -44,45 +44,45 @@ class MARCModel(object):
 
     def __init__(self, **kwargs):
         for k, v in kwargs.items():
-            self.set_isbn(v) if k is "isbn" and v is not None else self.isbn
-            self.set_issn(v) if k is "issn" and v is not None else self.issn
-            self.set_isrc(v) if k is "isrc" and v is not None else self.isrc
-            self.set_ztm(v) if k is "ztm" and v is not None else self.ztm
-            self.set_zrz(v) if k is "zrz" and v is not None else self.zrz
-            self.set_cbs(v) if k is "cbs" and v is not None else self.cbs
-            self.set_cbd(v) if k is "cbd" and v is not None else self.cbd
-            self.set_cbrq(v) if k is "cbrq" and v is not None else self.cbrq
-            self.set_cbzq(v) if k is "cbzq" and v is not None else self.cbzq
-            self.set_fj(v) if k is "fj" and v is not None else self.fj
-            self.set_flh(v) if k is "flh" and v is not None else self.flh
-            self.set_tyskh(v) if k is "tyskh" and v is not None else self.tyskh
-            self.set_gndgh(v) if k is "gndgh" and v is not None else self.gndgh
-            self.set_gwdgh(v) if k is "gwdgh" and v is not None else self.gwdgh
-            self.set_smkzh(v) if k is "smkzh" and v is not None else self.smkzh
-            self.set_yz(v) if k is "yz" and v is not None else self.yz
-            self.set_ym(v) if k is "ym" and v is not None else self.ym
-            self.set_bc(v) if k is "bc" and v is not None else self.bc
-            self.set_jg(v) if k is "jg" and v is not None else self.jg
-            self.set_qkjg(v) if k is "qkjg" and v is not None else self.qkjg
-            self.set_cc(v) if k is "cc" and v is not None else self.cc
-            self.set_ybzlbs(v) if k is "ybzlbs" and v is not None else self.ybzlbs
-            self.set_ybxfz(v) if k is "ybxfz" and v is not None else self.ybxfz
-            self.set_ztc(v) if k is "ztc" and v is not None else self.ztc
-            self.set_zy(v) if k is "zy" and v is not None else self.zy
-            self.set_cbtm(v) if k is "cbtm" and v is not None else self.cbtm
-            self.set_cbzrz(v) if k is "cbzrz" and v is not None else self.cbzrz
-            self.set_ztmpy(v) if k is "ztmpy" and v is not None else self.ztmpy
-            self.set_zrzpy(v) if k is "zrzpy" and v is not None else self.zrzpy
-            self.set_fjm(v) if k is "fjm" and v is not None else self.fjm
-            self.set_ftm(v) if k is "ftm" and v is not None else self.ftm
-            self.set_fjh(v) if k is "fjh" and v is not None else self.fjh
-            self.set_bltm(v) if k is "bltm" and v is not None else self.bltm
-            self.set_qtzrz(v) if k is "qtzrz" and v is not None else self.qtzrz
-            self.set_bbysmsfz(v) if k is "bbysmsfz" and v is not None else self.bbysmsfz
-            self.set_blztm(v) if k is "blztm" and v is not None else self.blztm
-            self.set_fmtm(v) if k is "fmtm" and v is not None else self.fmtm
-            self.set_zz(v) if k is "zz" and v is not None else self.zz
-            self.set_lyzzztm(v) if k is "lyzzztm" and v is not None else self.lyzzztm
+            self.set_isbn(v) if k == "isbn" and v is not None else self.isbn
+            self.set_issn(v) if k == "issn" and v is not None else self.issn
+            self.set_isrc(v) if k == "isrc" and v is not None else self.isrc
+            self.set_ztm(v) if k == "ztm" and v is not None else self.ztm
+            self.set_zrz(v) if k == "zrz" and v is not None else self.zrz
+            self.set_cbs(v) if k == "cbs" and v is not None else self.cbs
+            self.set_cbd(v) if k == "cbd" and v is not None else self.cbd
+            self.set_cbrq(v) if k == "cbrq" and v is not None else self.cbrq
+            self.set_cbzq(v) if k == "cbzq" and v is not None else self.cbzq
+            self.set_fj(v) if k == "fj" and v is not None else self.fj
+            self.set_flh(v) if k == "flh" and v is not None else self.flh
+            self.set_tyskh(v) if k == "tyskh" and v is not None else self.tyskh
+            self.set_gndgh(v) if k == "gndgh" and v is not None else self.gndgh
+            self.set_gwdgh(v) if k == "gwdgh" and v is not None else self.gwdgh
+            self.set_smkzh(v) if k == "smkzh" and v is not None else self.smkzh
+            self.set_yz(v) if k == "yz" and v is not None else self.yz
+            self.set_ym(v) if k == "ym" and v is not None else self.ym
+            self.set_bc(v) if k == "bc" and v is not None else self.bc
+            self.set_jg(v) if k == "jg" and v is not None else self.jg
+            self.set_qkjg(v) if k == "qkjg" and v is not None else self.qkjg
+            self.set_cc(v) if k == "cc" and v is not None else self.cc
+            self.set_ybzlbs(v) if k == "ybzlbs" and v is not None else self.ybzlbs
+            self.set_ybxfz(v) if k == "ybxfz" and v is not None else self.ybxfz
+            self.set_ztc(v) if k == "ztc" and v is not None else self.ztc
+            self.set_zy(v) if k == "zy" and v is not None else self.zy
+            self.set_cbtm(v) if k == "cbtm" and v is not None else self.cbtm
+            self.set_cbzrz(v) if k == "cbzrz" and v is not None else self.cbzrz
+            self.set_ztmpy(v) if k == "ztmpy" and v is not None else self.ztmpy
+            self.set_zrzpy(v) if k == "zrzpy" and v is not None else self.zrzpy
+            self.set_fjm(v) if k == "fjm" and v is not None else self.fjm
+            self.set_ftm(v) if k == "ftm" and v is not None else self.ftm
+            self.set_fjh(v) if k == "fjh" and v is not None else self.fjh
+            self.set_bltm(v) if k == "bltm" and v is not None else self.bltm
+            self.set_qtzrz(v) if k == "qtzrz" and v is not None else self.qtzrz
+            self.set_bbysmsfz(v) if k == "bbysmsfz" and v is not None else self.bbysmsfz
+            self.set_blztm(v) if k == "blztm" and v is not None else self.blztm
+            self.set_fmtm(v) if k == "fmtm" and v is not None else self.fmtm
+            self.set_zz(v) if k == "zz" and v is not None else self.zz
+            self.set_lyzzztm(v) if k == "lyzzztm" and v is not None else self.lyzzztm
 
     def set_isbn(self, value):
         try:
@@ -437,14 +437,14 @@ class MARCModel(object):
 
 
 if __name__ == "__main__":
-    # aa = {"isbn": "111"}
-    # a = MARCModel(**aa)
+    aa = {"isbn": "111"}
+    a = MARCModel(**aa)
     # a.set_isbn('aaa')
     # # a.set_issn('aaa')
     # c = a.get_isbn()
     # d = a.get_issn()
     # print(c, d)
-    a = []
-    a[1] = 1
+    # a = []
+    # a[1] = 1
 
-    print(a)
+    print(a.get_isbn(), a.get_issn())
