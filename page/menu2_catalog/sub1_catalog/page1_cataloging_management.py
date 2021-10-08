@@ -5,8 +5,6 @@ from base.base_element import Element
 from utils.common_utils import check_param
 import logging, time
 
-ele = Element('base')
-
 
 # 编目-编目管理
 class CatalogingManagementPage(BasePage):
@@ -103,3 +101,6 @@ class CatalogingManagementPage(BasePage):
 
     def verify_display(self, path, param=None):
         return self.display((By.XPATH, check_param(path=path, param=param)))
+
+    def verify_enable(self, path, param=None):
+        return  self.enable((By.XPATH, check_param(path=path, param=param)))

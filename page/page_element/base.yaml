@@ -121,6 +121,16 @@
    - 编目-修改分编类型-筛选项: "//*[text()='分编类型：']/following-sibling::div/div/input"
    - 编目-修改分编类型-单选列表: "//*[text()='分编类型：']/ancestor::div[@class='el-dialog__wrapper']/following-sibling::div/div/div/ul/li/span[text()='{0}']"
    - 编目-修改分编类型-按钮: "//*[contains(@aria-label,'修改分编类型')]/div[3]/span/div[2]/button/span[text()='{0}']"
+   - MARC编辑-简单编目-书目信息输入: "//*[@title='{0}']/following-sibling::div/textarea"              # 左边的文本定位右边的输入框，比如ISBN、正题名
+   - MARC编辑-MARC编目-书目信息输入: ""
+   - MARC编辑-简单/MARC编目: "//div[@class='tabs']/div[text()='{0}']"                       # 输入 简单编目 ， MARC编目 （有空格）
+   - MARC编辑-左上单选列表: "//div[@class='{0}']//span[text()='{1}']/following-sibling::div[1]//input"    # 输入左边文本定位右边单选框，第一个值为：c-tmms，c-marcms；第二个值为：分编类型： 检索来源： 模板：
+   - MARC编辑-左上按钮: "//div[@class='c-marcms']//span[contains(text(),'{0}')]"
+   - MARC编辑-左上单选按钮: "//div[@class='c-marcms']//span[contains(text(),'字段帮助')]/preceding-sibling::span//input"
+   - MARC编辑-右下按钮: "//div[@class='editor__footer']//button/span[contains(text(),'{0}')]"
+   - MARC编辑-保存后-文本: "//span[text()='操作详情']/parent::label/following-sibling::div"
+   - MARC编辑-保存后-单选列表: "//ul/li[text()='{0}']"
+
  文献移送:
    - 编目-已交送列: "//div[contains(@class,'el-table__body-wrapper')]//tbody/tr[{0}]/td[7]"  #获取已经交送列的值
  编目统计:

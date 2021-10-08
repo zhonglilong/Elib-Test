@@ -12,14 +12,13 @@ ele = Element('base')
 # 页面基类
 class BasePage(BaseAction):
 
-    def input_text(self, path, content, param=None, itype="input", load='1'):
+    def input_text(self, path, content, param=None, itype="input"):
         """ 输入框输入值
         :param path: 传递 yaml文件中的 xpath名称
         :param param: 传递 xpath 参数（可以为None，str，list）
         :param content: 传递字符串，输入的内容
         :param itype: 传递字符串，区分输入类型，默认为input，分为
             直接输入（input）、单击后输入（clickinput）、双击后输入（clickinputs）、清除后输入（clearinput）
-        :param load: 组件间隔时间
         """
         if itype == "input":
             return self.input((
@@ -106,7 +105,7 @@ class BasePage(BaseAction):
         return self.check_element((By.XPATH, ele['弹窗']), atype='pop')
 
     def element_exist(self, path, param=None):
-        """ 判断是否存在
+        """ 判断element是否存在
         :return: True or False
         """
         TimeUtils().sleep(1)

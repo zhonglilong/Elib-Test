@@ -1,15 +1,17 @@
 # -*- coding:utf-8 -*-
 import logging
 import time
-
+from base.base_element import Element
 import pytest
 import allure
 from selenium.webdriver.common.by import By
-
 from page.menu2_catalog.sub1_catalog.page1_cataloging_management import CatalogingManagementPage
 from utils.common_utils import ramdon_val, check_download, clear_download
 from utils.driver_utils import DriverUtils
 from utils.time_utils import TimeUtils
+from model.marc_model import MARCModel
+
+model = Element("model", ytype='json')
 
 
 # 编目-编目管理 测试用例
@@ -377,9 +379,10 @@ class TestCatalogingManagement:
             else: pytest.fail('没有弹出/找到 修改分编类型 这个弹窗')
         else: pytest.skip('没有数据 或者 第一条数据已被勾选')
 
-    @pytest.mark.zll
+    @pytest.mark.reading
     @pytest.mark.parametrize("num", ["1", "2", "3", "4"])
-    def test_download_marc_utf8(self, num):
+    @pytest.mark.flaky(reruns=3)
+    def test_download(self, num):
         """ 测试 下载文件 """
         clear_download()
         if self.page.pagenum()[0] != 0:
@@ -388,6 +391,32 @@ class TestCatalogingManagement:
             time.sleep(2)
             self.page.click_btn(path='编目-更多/导出单选列表', param=num)
             assert check_download(f="书目信息", load='2')
+            assert self.page.sub_menu_alert()
             time.sleep(2)
-        else:
-            pytest.skip('没有数据')
+        else: pytest.skip('没有数据')
+
+    @pytest.mark.reading
+    def test_delete(self):
+        """ 测试 删除书目信息 功能 """
+        if self.page.pagenum()[0] != 0 and self.page.verify_enable(path='右上按钮', param='4') is False:
+            num = int(self.page.pagenum()[1])
+            self.page.click_btn(path='表格第一条数据')
+            assert self.page.verify_enable(path='右上按钮', param='4') is True
+            self.page.click_btn(path='右上按钮', param='4')
+            if self.page.pop_window_to_judge():
+                self.page.click_btn(path='删除确定/取消', param='2')
+                assert str(self.page.alert_exist(atype='greenAlert')).find("操作成功") is not -1
+                assert num == int(self.page.pagenum()[1]) + 1
+                assert self.page.sub_menu_alert()
+            else: pytest.fail('没有弹出/找到 删除 弹窗')
+        else: pytest.skip('没有数据')
+
+    @pytest.mark.parametrize("value", model["marc"])
+    @pytest.mark.zll
+    def test_marcEdit_add(self, value):
+        """ 测试 简单编目 新增书目 功能 """
+        d = MARCModel(**value)
+
+        self.page.click_btn(path='右上按钮', param='3')
+        time.sleep(1)
+        self.page.click_btn(path='MARC编辑-简单/MARC编目', param='简单编目')
