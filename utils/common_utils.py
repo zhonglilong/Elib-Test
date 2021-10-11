@@ -1,10 +1,10 @@
 # -*- coding:utf-8 -*-
 import logging
-import random
 import time
 
 from base.base_element import Element
 from utils.driver_utils import *
+from base.config import *
 
 ele = Element('base')
 
@@ -52,5 +52,16 @@ def clear_download():
     """ 清空文件夹FILE_PATH """
     for file in os.listdir(FILE_PATH):
         if len(file) > 0:
-            os.remove(FILE_PATH + "\\" + file)
+            os.remove(FILE_PATH + os.sep + file)
 
+
+def content_txt(path, target):
+    """ 获取指定文件名的txt文本内容 """
+    for root, dirs, files in os.walk(path):
+        for name in files:
+            if target == name:
+                with open(os.path.join(root, name), "r", encoding='utf-8') as f:
+                    return f.read()
+
+if __name__ == "__main__":
+    print(content_txt(BASE_DIR, 'marc.txt'))

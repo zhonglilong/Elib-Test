@@ -3,13 +3,12 @@ import logging
 import time
 from base.base_element import Element
 import pytest
-import allure
-from selenium.webdriver.common.by import By
 from page.menu2_catalog.sub1_catalog.page1_cataloging_management import CatalogingManagementPage
-from utils.common_utils import ramdon_val, check_download, clear_download
+from utils.common_utils import *
 from utils.driver_utils import DriverUtils
 from utils.time_utils import TimeUtils
 from model.marc_model import MARCModel
+from model.book_search_model import BookSearchModel
 
 model = Element("model", ytype='json')
 
@@ -46,23 +45,18 @@ class TestCatalogingManagement:
         assert self.page.sub_menu_alert()
         assert self.page.verify_filter(num=[1, 1, 1], label='placeholder') == libname
 
-    @pytest.mark.parametrize(
-        # ISBN、正题名、分类号、责任者、主题词、出版日期、语种、出版社、出版地、价格、其他责任者、其他责任者的正题名、ISRC、从编、题名、订购号、统一书刊号
-        "isbn, ztm, flh, zrz, ztc, cbrq, yz, cbs, cbd, jg, qtzrz, qtzrzdztm, isrc, cb, tm, dgh, tyskh", [
-            (9787, "故宫怪兽", "B81", "汤志伟", "传统工艺", 2019, "chi", "社会科学出版社", "中国", "99", "张保生", "1", "2", "3", "4", "5", "6"),
-            (5410, "秘密花园", "G12", "江畅", "民法", 2018, "eng", "新星出版社", "上海", "98", "1", "2", "3", "4", "5", "6", "7")
-        ])
+    @pytest.mark.parametrize("value", model["marcSearch"])
     @pytest.mark.reading
-    def test_select_bookmsg(self, isbn, ztm, flh, zrz, ztc, cbrq, yz, cbs, cbd, jg, qtzrz, qtzrzdztm, isrc, cb, tm, dgh, tyskh):
+    def test_select_bookmsg(self, value):
         """ 测试 书目信息的关键词查询 功能 """
-        bookmsg = {"ztm": ["正题名", ztm], "flh": ["分类号", flh], "zrz": ["责任者", zrz], "ztc": ["主题词", ztc], "cbrq": ["出版日期", cbrq], "yz": ["语种", yz],
-                   "cbs": ["出版社", cbs], "cbd": ["出版地", cbd], "jg": ["价格", jg], "qtzrz": ["其他责任者", qtzrz], "qtzrzdztm": ["其他责任者的正题名", qtzrzdztm],
-                   "isrc": ["ISRC", isrc], "cb": ["丛编", cb], "tm": ["题名", tm], "dgh": ["订购号", dgh], "tyskh": ["统一书刊号", tyskh], "isbn": ["ISBN", isbn]}
-        for k, v in bookmsg.items():
-            self.page.click_filter_list([1, 3, 1], str(v[0]))
-            time.sleep(1)
-
-            self.page.click_filter_input("请输入搜索关键词", str(v[1]))
+        d = BookSearchModel(**value)
+        for k, v in value.items():
+            try:
+                self.page.click_filter_list([1, 3, 1], str(d.get(k)[0]))
+                time.sleep(1)
+                self.page.click_filter_input("请输入搜索关键词", str(d.get(k)[1]))
+            except AttributeError: pass     # 每个馆marc字段不同，防止找不到报错
+            except IndexError: pass         # 如果没往list中添加值，d.get(k)[1]是不存在的，防止报错
             self.page.click_btn(path='查询按钮', param="查询")
 
             time.sleep(1)
@@ -70,18 +64,17 @@ class TestCatalogingManagement:
                 assert str(self.page.alert_exist(atype='yellowAlert')).find("暂无数据") is not -1
             assert self.page.sub_menu_alert()
 
-    @pytest.mark.parametrize(
-        # ISBN、正题名、分类号、责任者、主题词、出版日期、语种、出版社、出版地、价格、其他责任者、其他责任者的正题名、ISRC、从编、题名、订购号、统一书刊号
-        "isbn, ztm, flh, zrz, ztc, cbrq, yz, cbs, cbd, jg, qtzrz, qtzrzdztm, isrc, cb, tm, dgh, tyskh", [
-            (9787, "故宫怪兽", "B81", "汤志伟", "传统工艺", 2019, "chi", "社会科学出版社", "中国", "99", "张保生", "1", "2", "3", "4", "5", "6"),
-            (5410, "秘密花园", "G12", "江畅", "民法", 2018, "eng", "新星出版社", "上海", "98", "1", "2", "3", "4", "5", "6", "7")
-        ])
+    @pytest.mark.parametrize("value", model["marcSearch"])
     @pytest.mark.reading
-    def test_select_bookmsgs(self, isbn, ztm, flh, zrz, ztc, cbrq, yz, cbs, cbd, jg, qtzrz, qtzrzdztm, isrc, cb, tm, dgh, tyskh):
+    def test_select_bookmsgs(self, value):
         """ 测试 多个书目信息搜索框一起查询 功能 """
-        bookmsgs = {"msg1": ["责任者", zrz, "主题词", ztc, "出版日期", cbrq], "msg2": ["语种", yz, "出版社", cbs, "出版地", cbd],
-                    "msg3": ["价格", jg, "其他责任者", qtzrz, "其他责任者的正题名", qtzrzdztm], "msg4": ["ISRC", isrc, "丛编", cb, "题名", tm],
-                    "msg5": ["订购号", dgh, "统一书刊号", tyskh], "msg6": ["ISBN", isbn, "正题名", ztm, "分类号", flh]}
+        d = BookSearchModel(**value)
+        bookmsgs = {"msg1": ["责任者", d.get_zrz()[1], "主题词", d.get_ztc()[1], "出版日期", d.get_cbrq()[1]],
+                    "msg2": ["语种", d.get_yz()[1], "出版社", d.get_cbs()[1], "出版地", d.get_cbd()[1]],
+                    "msg3": ["价格", d.get_jg()[1], "其他责任者", d.get_qtzrz()[1], "其他责任者的正题名", d.get_qtzrzdztm()[1]],
+                    "msg4": ["ISRC", d.get_isrc()[1], "丛编", d.get_cb()[1], "题名", d.get_tm()[1]],
+                    "msg5": ["订购号", d.get_dgh()[1], "统一书刊号", d.get_tyskh()[1]],
+                    "msg6": ["ISBN", d.get_isbn()[1], "正题名", d.get_ztm()[1], "分类号", d.get_flh()[1]]}
         self.page.add_or_remove_filter(otype='add')
         self.page.add_or_remove_filter(otype='add')
         time.sleep(1)
@@ -89,8 +82,7 @@ class TestCatalogingManagement:
             try:
                 self.page.click_filter_list([1, 3, 1], str(v.pop(0)))
                 self.page.click_filter_list([1, 4, 1], str(v.pop(1)))
-                if v[2] is not None:
-                    self.page.click_filter_list([1, 5, 1], str(v.pop(2)))
+                self.page.click_filter_list([1, 5, 1], str(v.pop(2)))
                 time.sleep(1)
 
                 i = 0
@@ -412,11 +404,59 @@ class TestCatalogingManagement:
         else: pytest.skip('没有数据')
 
     @pytest.mark.parametrize("value", model["marc"])
-    @pytest.mark.zll
-    def test_marcEdit_add(self, value):
+    @pytest.mark.reading
+    def test_easyMarcEdit_add(self, value):
         """ 测试 简单编目 新增书目 功能 """
         d = MARCModel(**value)
 
+        self.page.click_btn(path='查询按钮', param='查询')
+        time.sleep(1)
+        num = int(self.page.pagenum()[1])
+
         self.page.click_btn(path='右上按钮', param='3')
         time.sleep(1)
-        self.page.click_btn(path='MARC编辑-简单/MARC编目', param='简单编目')
+        self.page.click_btn(path='MARC编辑-简单/MARC编目', param=' 简单编目 ')
+        for k, v in value.items():
+            try:
+                self.page.input_text(path='MARC编辑-简单编目-书目信息输入', param=d.get(k)[0], content=d.get(k)[1], itype='clearinput')
+            except AttributeError: pass     # 每个馆marc字段不同，防止找不到报错
+            except IndexError: pass         # 如果没往list中添加值，d.get(k)[1]是不存在的，防止报错
+        time.sleep(1)
+        self.page.click_btn(path='MARC编辑-右下按钮', param='保存(S)')
+        time.sleep(1)
+        assert num+1 == int(self.page.pagenum()[1])
+        assert str(self.page.alert_exist(atype='greenAlert')).find("操作成功") is not -1
+        assert self.page.sub_menu_alert()
+
+    @pytest.mark.reading
+    def test_hardMarcEdit_add(self, value):
+        """ 测试 MARC编目 新增书目 功能 """
+        self.page.click_btn(path='查询按钮', param='查询')
+        time.sleep(1)
+        num = int(self.page.pagenum()[1])
+
+        self.page.click_btn(path='右上按钮', param='3')
+        time.sleep(1)
+        self.page.click_btn(path='MARC编辑-简单/MARC编目', param=' MARC编目 ')
+        time.sleep(1)
+        self.page.click_btn(path='MARC编辑-左上按钮', param='粘贴网页MARC(G) ')
+        time.sleep(1)
+        self.page.input_text(path='MARC编辑-MARC编目-粘贴网页', content=content_txt(BASE_DIR, 'marc.txt'), itype='clickinputs')
+        time.sleep(1)
+        self.page.click_btn(path='MARC编辑-MARC编目-粘贴网页-确定/取消', param='确定 ')
+        time.sleep(1)
+        self.page.click_btn(path='MARC编辑-右下按钮', param='保存(S)')
+        time.sleep(1)
+        assert self.page.sub_menu_alert()
+        assert str(self.page.alert_exist(atype='greenAlert')).find("操作成功") is not -1
+        assert num + 1 == int(self.page.pagenum()[1])
+
+    @pytest.mark.reading
+    def test_marcEdit_add_cancel(self):
+        """ 测试 简单编目 取消 返回 编目管理 功能 """
+        self.page.click_btn(path='右上按钮', param='3')
+        time.sleep(1)
+        self.page.click_btn(path='MARC编辑-右下按钮', param='取消(Z)')
+        time.sleep(1)
+        assert self.page.verify_enable(path='查询按钮', param='查询')
+        assert self.page.sub_menu_alert()

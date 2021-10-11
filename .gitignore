@@ -1,9 +1,10 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
 # 自定义文件
-resources/report/*
-resources/log/*
-resources/picture/*
+*/report/*
+*/log/*
+*/picture/*
+*/file/*
 .idea
 
 # Byte-compiled / optimized / DLL files

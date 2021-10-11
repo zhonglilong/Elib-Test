@@ -39,8 +39,10 @@ class MARCModel(object):
     bbysmsfz = ['版本与书目史附注']
     blztm = ['并列正题名']
     fmtm = ['封面题名']
+    xgtmfz = ['相关题名附注']
+    nrfz = ['内容附注']
     zz = ['著者']
-    lyzzztm = ['另一作者正题名']
+    qtzrzdztm = ['其他责任者的正题名']
 
     def __init__(self, **kwargs):
         for k, v in kwargs.items():
@@ -81,8 +83,10 @@ class MARCModel(object):
             self.set_bbysmsfz(v) if k == "bbysmsfz" and v is not None else self.bbysmsfz
             self.set_blztm(v) if k == "blztm" and v is not None else self.blztm
             self.set_fmtm(v) if k == "fmtm" and v is not None else self.fmtm
+            self.set_xgtmfz(v) if k == "xgtmfz" and v is not None else self.xgtmfz
+            self.set_nrfz(v) if k == "nrfz" and v is not None else self.nrfz
             self.set_zz(v) if k == "zz" and v is not None else self.zz
-            self.set_lyzzztm(v) if k == "lyzzztm" and v is not None else self.lyzzztm
+            self.set_qtzrzdztm(v) if k == "qtzrzdztm" and v is not None else self.qtzrzdztm
 
     def set_isbn(self, value):
         try:
@@ -306,17 +310,29 @@ class MARCModel(object):
         except IndexError:
             self.fmtm.append(value)
 
+    def set_xgtmfz(self, value):
+        try:
+            self.xgtmfz[1] = value
+        except IndexError:
+            self.xgtmfz.append(value)
+
+    def set_nrfz(self, value):
+        try:
+            self.nrfz[1] = value
+        except IndexError:
+            self.nrfz.append(value)
+
     def set_zz(self, value):
         try:
             self.zz[1] = value
         except IndexError:
             self.zz.append(value)
 
-    def set_lyzzztm(self, value):
+    def set_qtzrzdztm(self, value):
         try:
-            self.lyzzztm[1] = value
+            self.qtzrzdztm[1] = value
         except IndexError:
-            self.lyzzztm.append(value)
+            self.qtzrzdztm.append(value)
 
     def get_isbn(self):
         return self.isbn
@@ -429,11 +445,32 @@ class MARCModel(object):
     def get_fmtm(self):
         return self.fmtm
 
+    def get_xgtmfz(self):
+        return self.xgtmfz
+
+    def get_nrfz(self):
+        return self.nrfz
+
     def get_zz(self):
         return self.zz
 
-    def get_lyzzztm(self):
-        return self.lyzzztm
+    def get_qtzrzdztm(self):
+        return self.qtzrzdztm
+
+    def get(self, param):
+        data = {
+            "isbn": self.get_isbn(), "issn": self.get_issn(), "isrc": self.get_isrc(), "ztm": self.get_ztm(),
+            "zrz": self.get_zrz(), "cbs": self.get_cbs(), "cbd": self.get_cbd(), "cbrq": self.get_cbrq(),
+            "cbzq": self.get_cbzq(), "fj": self.get_fj(), "flh": self.get_flh(), "tyskh": self.get_tyskh(),
+            "gndgh": self.get_gndgh(), "gwdgh": self.get_gwdgh(), "smkzh": self.get_smkzh(), "yz": self.get_yz(),
+            "ym": self.get_ym(), "bc": self.get_bc(), "jg": self.get_jg(), "qkjg": self.get_qkjg(), "cc": self.get_cc(),
+            "ybzlbs": self.get_ybzlbs(), "ybxfz": self.get_ybxfz(), "ztc": self.get_ztc(), "zy": self.get_zy(),
+            "cbtm": self.get_cbtm(), "cbzrz": self.get_cbzrz(), "ztmpy": self.get_ztmpy(), "zrzpy": self.get_zrzpy(),
+            "fjm": self.get_fjm(), "ftm": self.get_ftm(), "fjh": self.get_fjh(), "bltm": self.get_bltm(),
+            "qtzrz": self.get_qtzrz(), "bbysmsfz": self.get_bbysmsfz(), "blztm": self.get_blztm(), "fmtm": self.get_fmtm(),
+            "xgtmfz": self.get_xgtmfz(), "nrfz": self.get_nrfz(), "zz": self.get_zz(), "qtzrzdztm": self.get_qtzrzdztm()
+        }
+        return data[param]
 
 
 if __name__ == "__main__":
@@ -446,5 +483,6 @@ if __name__ == "__main__":
     # print(c, d)
     # a = []
     # a[1] = 1
-
+    print(a)
     print(a.get_isbn(), a.get_issn())
+    print(a.get("isbn")[1])

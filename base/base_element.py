@@ -49,3 +49,4 @@ if __name__ == '__main__':
     print(search['筛选项'])
     m = Element("model", ytype='json')
     print(m["marc"])
+    print(m["marcSearch-1"])
